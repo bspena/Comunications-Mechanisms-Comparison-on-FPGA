@@ -6,3 +6,4 @@
 
 ## Further References <a name="fref"></a>
 * []()
+* https://www.intel.com/content/www/us/en/developer/articles/containers/intel-oneapi-runtime-libraries.html#:~:text=The%20Intel%C2%AE%20oneAPI%20Runtime%20Libraries%20is%20a%20core,code%20reuse%20across%20hardware%20targets%E2%80%94CPUs%2C%20GPUs%2C%20and%20FPGAs

@@ -5,11 +5,11 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes i
 * Explore the undelying implementation of IO Pipes in the BSP's RTL.
 
 ## Table of Contents
-1. [oneAPI](doc/intro.md)
-    * [oneAPI Level Zero](doc/intro.md#ch_oneapi_lzero)
-    * [oneAPI Runtime](doc/intro.md#ch_oneapi_runtime)
-    * [oneAPI and SYCL](doc/intro.md#ch_sycl)
-    * [I/O Pipes](doc/intro.md#ch_iopipe)
+1. [oneAPI](doc/oneAPI.md)
+    * [oneAPI Level Zero](doc/oneAPI.md#ch_oneapi_lzero)
+    * [oneAPI Runtime](doc/oneAPI.md#ch_oneapi_runtime)
+    * [oneAPI and SYCL](doc/oneAPI.md#ch_sycl)
+    * [I/O Pipes](doc/oneAPI.md#ch_iopipe)
 1. [Environment Setup](doc/setup.md)
     * [Tools](doc/setup.md#tool)
 1. [Troubleshooting](doc/troubleshooting.md)

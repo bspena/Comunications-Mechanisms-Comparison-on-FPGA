@@ -31,9 +31,6 @@ This layer core APIs provide the lowest-level and fine-grain control over:
 ## oneAPI Runtime <a name="ch_oneapi_runtime"></a> (da aggiustare)
 `oneAPI runtime`, namely Accelerator Support Stack (ASP), basically is a BSP for a given board, supporting a subset of all the SYCL features.
 
-https://www.intel.com/content/www/us/en/developer/articles/containers/intel-oneapi-runtime-libraries.html#:~:text=The%20Intel%C2%AE%20oneAPI%20Runtime%20Libraries%20is%20a%20core,code%20reuse%20across%20hardware%20targets%E2%80%94CPUs%2C%20GPUs%2C%20and%20FPGAs
-
-
 ## oneAPI and SYCL <a name="ch_sycl"></a>
 oneAPI is the implementation of `SYCL`<sup>[[]](references.md#ref_sycl)</sup>, which is a cross-platform abstraction layer and an an evolution of `OpenCL`.
 
