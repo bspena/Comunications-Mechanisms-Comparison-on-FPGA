@@ -32,21 +32,18 @@ This layer core APIs provide the lowest-level and fine-grain control over:
 `oneAPI runtime`, namely Accelerator Support Stack (ASP), basically is a BSP for a given board, supporting a subset of all the SYCL features.
 
 ## oneAPI and SYCL <a name="ch_sycl"></a>
-oneAPI is the implementation of `SYCL`<sup>[[]](references.md#ref_sycl)</sup>, which is a cross-platform abstraction layer and an an evolution of `OpenCL`.
+oneAPI is the implementation of `SYCL`<sup>[[]](references.md#ref_sycl)</sup>, which is a cross-platform abstraction layer and an evolution of `OpenCL`.
 
-SYCL provides:
-* An abstraction to programm (through at least C++ 17) and use in a single application `heterogeneous devices` (CPUs, GPUs, and FPGAs).
-* Abstractions and APIs to find devices (e.g. CPUs, GPUs, FPGAs) on which code can be executed, and to manage data resources and code execution on those devices.
+SYCL provides an abstraction and APIs :
+* To programm `heterogeneous processors` (CPUs, GPUs, FPGAs, etc...) using `standard ISO C++` (at least C++ 17).
+* To find processors on which code can be executed.
+* To manage data resources and code execution on those processors.
+* To use those processors in a single application; so, in the same source file, are mixed both CPUs code (known as `host code`) and a accelerators code (known as `device code`).
 
+<p align="center">
+  <img src="img/" width="650">
+</p>
 
-Although optimized kernel code may differ across the architectures (since SYCL does not guarantee automatic and perfect performance portability across architectures), it provides a consistent language, APIs, and ecosystem in which to write and tune code for accelerator architectures. An application can coherently define variants of code optimized for architectures of interest, and can find and dispatch code to those architectures.
-
-SYCL uses generic programming with templates and generic lambda functions to enable higher-level application software to be cleanly coded with optimized acceleration of kernel code across an extensive range of acceleration backend APIs, such as OpenCL and CUDA.
-
-SYCL allows an application to mix both host code and device code together in the same source file
-
-
-for `Intel devices` and most of its runtime is built on top of `OpenCL hardware/software runtime`. 
 
 ## I/O Pipes <a name="ch_iopipe"></a> (da aggiustare)
 <sup>[[]](references.md#ref_iopipe)</sup>
