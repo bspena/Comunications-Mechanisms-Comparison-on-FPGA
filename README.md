@@ -6,13 +6,12 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes i
 
 ## Table of Contents
 1. [oneAPI](doc/oneAPI.md)
-    * [Introduction](doc/oneAPI.md#ch_intro)
     * [oneAPI Platform](doc/oneAPI.md#ch_oneapi_platform)
     * [Level Zero](doc/oneAPI.md#ch_oneapi_lzero)
     * [SYCL](doc/oneAPI.md#ch_sycl)
-1. [Intel oneAPI](doc/intel_oneAPI.md)
+1. [Intel oneAPI Base Toolkit](doc/intel_oneAPI.md)
     * [oneAPI ASP](doc/intel_oneAPI.md#ch_oneapi_asp)
-    * [I/O Pipes](doc/intel_oneAPI.md#ch_io_pipes)
+    * [I/O Pipes](doc/intel_oneAPI.md#ch_pipes)
 1. [Environment Setup](doc/setup.md)
     * [Tools](doc/setup.md#tool)
 1. [Troubleshooting](doc/troubleshooting.md)

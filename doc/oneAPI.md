@@ -1,6 +1,4 @@
 # oneAPI
-
-## Introduction <a name="ch_intro"></a>
 `oneAPI` is a multi-architecture cross-indutry open standard `programming model`<sup>[[1]](references.md#ref_oneapi)</sup> , which is based on `data parallelism` (the same computation is performed on each data element)<sup>[[2]](references.md#ref_oneapi_intro)</sup>. This programming model guarantees portability and performance across `heterogeneous processors and accelerators` (CPUs, GPUs, FPGAs, etc...), bringing all of them on a common ground.
 
 <p align="center">
@@ -16,7 +14,7 @@ oneAPI provides<sup>[[3]](references.md#ref_oneapi_sarch)</sup>:
 ## oneAPI Platform <a name="ch_oneapi_platform"></a>
 A `oneAPI platform`<sup>[[3]](references.md#ref_oneapi_sarch)</sup> contains on the hardware side:
 * `Host`: Tipically a multi-core CPU, which can be seen as a device by the software. 
-* `Devices`: One or more accelerators, each of them has an `command queue`. 
+* `Devices`: One or more accelerators, each of them has a `command queue`. 
 
 On the software side:
 * `Host Application`: It uses oneAPI and runs on the host.
@@ -45,14 +43,8 @@ Level Zero `core API` provides the lowest-level and fine-grain control over<sup>
 
 
 ## SYCL <a name="ch_sycl"></a>
-oneAPI is an implementation of `Khronos SYCL 2020 Specification` and `SYCL extensions` (to add more functionality)<sup>[[6]](references.md#ref_oneapi_sycl)</sup>. SYCL is a proramming launguage based on `ISO C++` and an evolution of `OpenCL`. 
-
-SYCL provides an abstraction and APIs<sup>[[6]](references.md#ref_oneapi_sycl)</sup><sup>[[7]](references.md#ref_sycl)</sup> :
-* To programm both CPUs and accelerator devices (using at least C++ 17).
+oneAPI is an implementation of `Khronos SYCL 2020 Specification` and `SYCL extensions` (to add more functionality)<sup>[[6]](references.md#ref_oneapi_sycl)</sup>. SYCL is a  royalty-free proramming launguage based on `ISO C++` and an evolution of `OpenCL`. It provides an abstraction and APIs<sup>[[6]](references.md#ref_oneapi_sycl)</sup><sup>[[7]](references.md#ref_sycl)</sup> :
+* To programm both CPUs and accelerator devices, using at least `C++ 17`.
 * To manage data resources.
 * To launch parallel code on the devices.
 * To mix both `host code` and `device code` in the same source file.
-
-<p align="center">
-  <img src="img/img_sycl_diagram.png" width="650">
-</p>
