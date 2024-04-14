@@ -8,4 +8,5 @@ Virtual machine running `Ubuntu 22.04 LTS` :
 ## Tools <a name="tool"></a>
 
 * OneAPI ASP
-* Intel oneAPI
+* Intel oneAPI BAse Toolkit 2024.0.1
+* PR-tree template from Intel OFS FIM release 2023.2 for N6001
