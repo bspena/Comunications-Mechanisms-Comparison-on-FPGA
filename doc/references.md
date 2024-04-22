@@ -19,5 +19,10 @@
 * [Intel oneAPI FPGA Handbook](https://www.intel.com/content/www/us/en/docs/oneapi-fpga-add-on/developer-guide/2024-0/intel-oneapi-fpga-handbook.html)
 * [AFU oneAPI ASP ofs_n60001_iopipes](https://github.com/OFS/oneapi-asp/blob/ofs-2023.2-1/n6001/hardware/ofs_n6001_iopipes/build/rtl/afu.sv)
 * https://github.com/OFS/ofs-platform-afu-bbb/blob/ofs-2023.2-1/plat_if_develop/ofs_plat_if/src/rtl/base_ifcs/avalon/ofs_plat_avalon_mem_if.sv
+* https://github.com/OFS/ofs.github.io/blob/main/docs/hw/n6001/doc_modules/links.md
 
+
+* https://github.com/OFS/ofs-platform-afu-bbb/blob/ofs-2023.2-1/plat_if_develop/ofs_plat_if/src/rtl/base_ifcs/avalon/ofs_plat_avalon_mem_if.sv
+* [kernel_mem_intf](https://github.com/OFS/oneapi-asp/blob/6038ffafdab051992f96b165e8c0fe6d1f3ede45/common/hardware/common/build/rtl/ofs_asp_interfaces.sv#L47)
+* [ofs_plat_hssi_channel_if](https://github.com/OFS/ofs-platform-afu-bbb/blob/master/plat_if_develop/ofs_plat_if/src/rtl/ifc_classes/hssi/native_axi_mac/ofs_plat_hssi_GROUP_channel_if.sv)
 
