@@ -57,14 +57,12 @@ Both ASP hardware components and kernels are placend in the [Accelerator Functio
 
 
 ## I/O Pipes <a name="ch_pipes"></a>
-A `pipe` is an `unidirectional FIFO data structure` that allows comunication between two `endpoints`, which can be a kernel or an external I/O on the FPGA<sup>[[]](references.md#ref_pipes)</sup>. This structure allows kernels that need to exchange data to run concurrently.
-
-There are three types of pipes:
+A `pipe` is an `unidirectional FIFO data structure` and allows comunication between two `endpoints`, an endpoint can be a kernel or an external I/O on the FPGA<sup>[[]](references.md#ref_pipes)</sup>. There are three types of pipes:
 * Kernel-Kernel
 * Kernel-I/O
 * I/O-Kernel
 
-Since the pipe is unidirectional, the data flows in a single direction. The `bidirectional comunication` is obtained through two pipes.
+Into a pipe the data flows in a single direction, so the `bidirectional comunication` is obtained through two pipes. Through the pipe, kernels that exchange data can run concurrently. 
 
 The communication takes place through `read and write operations`:
 * A kernel can read or write from the same pipe multiple times<sup>[[]](references.md#ref_res_pipes)</sup>.
