@@ -24,5 +24,4 @@
 
 * https://github.com/OFS/ofs-platform-afu-bbb/blob/ofs-2023.2-1/plat_if_develop/ofs_plat_if/src/rtl/base_ifcs/avalon/ofs_plat_avalon_mem_if.sv
 * [kernel_mem_intf](https://github.com/OFS/oneapi-asp/blob/6038ffafdab051992f96b165e8c0fe6d1f3ede45/common/hardware/common/build/rtl/ofs_asp_interfaces.sv#L47)
-* [ofs_plat_hssi_channel_if](https://github.com/OFS/ofs-platform-afu-bbb/blob/master/plat_if_develop/ofs_plat_if/src/rtl/ifc_classes/hssi/native_axi_mac/ofs_plat_hssi_GROUP_channel_if.sv)
 *  https://www.intel.com/content/www/us/en/docs/programmable/683091/20-1/memory-mapped-interface-signal-roles.html
