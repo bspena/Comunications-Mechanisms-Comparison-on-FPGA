@@ -16,3 +16,18 @@
 * `Green box`: Module added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
 * `Green arrow`: Signal added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
 * `Thick green arrow`: Interface added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
+
+
+## Info Moduli
+mem_if_vpt si occupa di tradurre gli indirizzi da virtuali a fisico (Virtual to Physical Translation - VTP)
+dma_top è un DMA, nulla di strano 
+board wrappa tutte le interfacce che non vedi nei sorgenti, in particolare i banchi di DDR on-board
+bsp_host_mem_if_mux inietta sul bus AVMM delle transazioni speciali che quando kernel_irq è alto. Queste transazioni vengono interpretate dall'host (Linux drivers) come un evento di interrupt vero e proprio
+avmm_wr_ack_gen ti ho già spiegato cosa fa
+il sincronizzatore non ha una funzione logica, serve solo a stabilizzare il segnale sul nuovo clock
+kernel_system è il l'hardware generato dalla descrizione in SYCL. Lo puoi vedere come un device con 4 interfacce
+una linea di interrupt (kernel_irq) in uscita
+un interfaccia AVMM slave CSR dove scrivere comandi e parametri (e.g. start, busy, pending interrupt, etc)
+un'interfaccia AVMM master di lettura/scrittura verso ogni banco DDR
+un'interfaccia AVMM master di lettura/scrittura verso la memoria host (Shared/Unified Virtual Memroy SVM/USM)
+questa non è abilitata nel design che stai analizzando tu

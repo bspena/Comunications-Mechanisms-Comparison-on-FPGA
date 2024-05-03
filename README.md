@@ -16,12 +16,10 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes f
 1. [Troubleshooting](doc/troubleshooting.md)
 1. [References](doc/references.md)
     * [Further References](doc/references.md#fref)
-
+        * [Documentation](doc/references.md#fref_doc)
+        * [SystemVerilog Modules/Interfaces](doc/references.md#fref_sv)
 
 
 # Cose da fare
-* Diagramma architetturale dei moduli:
-    * top-level module afu (https://github.com/OFS/oneapi-asp/blob/ofs-2023.2-1/n6001/hardware/ofs_n6001_iopipes/build/rtl/afu.sv)
-    * bsp_logic
-    * kernel_wrapper
-    * mem_if_vtp
+* Setup macchina virtuale
+* Valutare le differenze con la versione no-pipes. Diagrammi alla mano e valutando le differenza tra i vari file
