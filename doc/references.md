@@ -10,6 +10,8 @@
 1. <a id="ref_bsp"></a> [FPGA BSPs and Boards](https://www.intel.com/content/www/us/en/docs/oneapi/programming-guide/2023-0/fpga-bsps-and-boards.html)
 1. <a id="ref_pipes"></a> [Pipes Samples](https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/Features/pipes)
 1. <a id="ref_res_pipes"></a> [Restrictions of Pipes](https://www.intel.com/content/www/us/en/docs/oneapi-fpga-add-on/optimization-guide/2023-1/restrictions-of-pipes.html)
+1. <a id="ref_intel_install"></a> [Intel oneAPI Toolkits and Components Installation Guide for Linux* OS with Command LIne](https://www.intel.com/content/www/us/en/docs/oneapi/installation-guide-linux/2023-0/install-with-command-line.html)
+
 
 ## Further References <a name="fref"></a>
 ### Documentation <a name="fref_doc"></a>
