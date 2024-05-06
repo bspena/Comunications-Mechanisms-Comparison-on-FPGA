@@ -1,11 +1,11 @@
 # Architectural Diagram
 
 <p align="center">
-  <img src="img/base_arch_diagram.png" width="1000">
+  <img src="img/base_arch_diagram_pipes.png" width="1000">
 </p>
 
 <p align="center">
-  <img src="img/arch_diagram.png" width="1000">
+  <img src="img/arch_diagram_pipes.png" width="1000">
 </p>
 
 ## Diagram Legend <a name="ch_diagram_l"></a>
@@ -26,7 +26,7 @@
 * `kernel_wrapper`:
   * `avmm_pipeline_inst`: Pipeline bridge from the kernel to board.qsys. 
   * `kernel_system`;: Hardware generated from SYCL, it has four interfaces:
-    * putput interrupt line (kernel_irq).
+    * output interrupt line (kernel_irq).
     * AVMM slave CSR interface used to write parameters and commands (e.g. start, busy, pending interrupt, etc).
     * read/write AVMM master interface for each DDR memory bank.
     * read/write AVMM master interface for host memory (Shared/Unified Virtual Memroy SVM/USM).
@@ -36,3 +36,14 @@
 * `Slave/Agent/Sink`: It has waitrequest, readdatavalid, readdata, writeresponsevalid signals as output.
 * `to_sink/to_slave`: SystemVerilog mopdport identifier, used to identify the connection from source toward sink (the current module is the source).
 * `to_source/to_master`: SystemVerilog mopdport identifier, used to identify the connection from sink toward source (the current module is the sink).
+
+
+# n6001 vs n6001_iopipes
+* afu.sv
+  * Manca il modulo udp_offload_engine ed il relativo #ifdef 
+  * Nell'istanza del modulo kernel_wrapper, manca l'#ifdef con la macro INCLUDE_USM_SUPPORT
+* bsp_logic.sv / kernel_wrapper.sv
+  * Manca l'#ifdef con la macro INCLUDE_UDP_OFFLOAD_ENGINE
+
+
+
