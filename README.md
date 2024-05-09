@@ -25,9 +25,4 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes f
 
 
 # Cose da fare
-* Setup macchina virtuale
-* Valutare le differenze con la versione no-pipes, l'obiettivo è costruire una comprensione di quali sono i componenti hardware necessari per implementare le pipe.
-
-
-# Dubbi 
-* In https://ofs.github.io/ofs-2023.2/hw/common/user_guides/oneapi_asp/ug_oneapi_asp/#26-compile-and-run-oneapi-sample-applications, ogni bolta che eseguo un comando cmake il contenuto della cartella build viene sovrascritto ?
+* Analisi report esempi sulla pipe
