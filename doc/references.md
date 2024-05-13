@@ -21,6 +21,9 @@
 * [Intel oneAPI FPGA Handbook](https://www.intel.com/content/www/us/en/docs/oneapi-fpga-add-on/developer-guide/2024-0/intel-oneapi-fpga-handbook.html)
 * [OFS Doc Modules](https://github.com/OFS/ofs.github.io/blob/main/docs/hw/n6001/doc_modules/links.md)
 * [Avalon Memory Mapped Interface Signal Roles](https://www.intel.com/content/www/us/en/docs/programmable/683091/20-1/memory-mapped-interface-signal-roles.html)
+* https://www.intel.com/content/www/us/en/docs/programmable/683577/current/lab.html
+* https://www.intel.com/content/www/us/en/docs/programmable/683846/22-4/loop-speculation-speculated-iterations.html
+* https://www.intel.com/content/www/us/en/docs/programmable/683846/22-4/loop-interleaving-control-max-interleaving.html
 
 ### SystemVerilog Modules/Interfaces <a name="fref_sv"></a>
 * [afu.sv](https://github.com/OFS/oneapi-asp/blob/ofs-2023.2-1/n6001/hardware/ofs_n6001_iopipes/build/rtl/afu.sv)
