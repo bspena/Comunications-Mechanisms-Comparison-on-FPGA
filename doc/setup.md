@@ -35,10 +35,10 @@ mkdir build
 cd build
 cmake -DFPGA_DEVICE=full-path-to-oneapi-asp/platform-name:board_variant ..
 ```
-[!NOTE]
+>[!NOTE]
 > Some samples do not support targeting an explicit FPGA board variant and BSP. In order to build the program for Intel Agilex 7 device family
 ```bash
- cmake ..
+> cmake ..
 ```
 
 * Compile for emulation and generate report<sup>[[]](references.md#ref_oneapi_asp_get)</sup>:
