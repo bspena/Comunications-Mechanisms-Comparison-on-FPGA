@@ -33,8 +33,14 @@ source /opt/intel/oneapi/setvars.sh         # Set environment variables (on ever
 cd path-to-sample-location
 mkdir build
 cd build
-cmake -DFPGA_DEVICE=/home/spena/oneapi-asp/n6001:ofs_n6001_iopipes ..
+cmake -DFPGA_DEVICE=full-path-to-oneapi-asp/platform-name:board_variant ..
 ```
+[!Note]
+> Some samples do not support targeting an explicit FPGA board variant and BSP. In order to build the program for Intel Agilex 7 device family
+```bash
+ cmake ..
+```
+
 * Compile for emulation and generate report<sup>[[]](references.md#ref_oneapi_asp_get)</sup>:
 ```bash
 make fpga_emu       
