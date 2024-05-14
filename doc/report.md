@@ -6,18 +6,17 @@
 |Host Pipes |Two Pipes      |<ul><li>Host to device</li><li>Device to Host</li></ul>|8            | No
             
 ## System Viewer
-* Pipes Sample
+* Pipes Sample kernels: producer kernel on the left and consumer on the right
 <p style="display: flex; justify-content: center;">
   <img src="img/img_producer_kernel.png" width="550" style="margin-right: 20px;">
   <img src="img/img_consumer_kernel.png" width="550">
 </p>
 
 
-* Host Pipe Sample
+* Host Pipe Sample SubmitLoopBackKernel
 <p align="center">
   <img src="img/img_loopback_kernel.png" width="550">
 </p>
-
 
 
 ## Loop Analysis
