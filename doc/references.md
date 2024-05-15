@@ -15,18 +15,18 @@
 
 ## Further References <a name="fref"></a>
 ### Documentation <a name="fref_doc"></a>
-* [Sycl Refernce Guide](https://www.khronos.org/files/sycl/sycl-2020-reference-guide.pdf)
+* [SYCL 2020 Specification ](https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html)
 * [oneAPI DPC++ Compiler and Runtime architecture design](https://intel.github.io/llvm-docs/design/CompilerAndRuntimeDesign.html)
 * [Characteristics of Pipes](https://www.intel.com/content/www/us/en/docs/oneapi-fpga-add-on/optimization-guide/2023-1/characteristics-of-pipes.html)
 * [Intel oneAPI FPGA Handbook](https://www.intel.com/content/www/us/en/docs/oneapi-fpga-add-on/developer-guide/2024-0/intel-oneapi-fpga-handbook.html)
 * [OFS Doc Modules](https://github.com/OFS/ofs.github.io/blob/main/docs/hw/n6001/doc_modules/links.md)
 * [Avalon Memory Mapped Interface Signal Roles](https://www.intel.com/content/www/us/en/docs/programmable/683091/20-1/memory-mapped-interface-signal-roles.html)
-* https://www.intel.com/content/www/us/en/docs/programmable/683577/current/lab.html
-* https://www.intel.com/content/www/us/en/docs/programmable/683846/22-4/loop-speculation-speculated-iterations.html
-* https://www.intel.com/content/www/us/en/docs/programmable/683846/22-4/loop-interleaving-control-max-interleaving.html
 
 ### SystemVerilog Modules/Interfaces <a name="fref_sv"></a>
 * [afu.sv](https://github.com/OFS/oneapi-asp/blob/ofs-2023.2-1/n6001/hardware/ofs_n6001_iopipes/build/rtl/afu.sv)
 * [ofs_plat_avalon_mem_if.sv](https://github.com/OFS/ofs-platform-afu-bbb/blob/ofs-2023.2-1/plat_if_develop/ofs_plat_if/src/rtl/base_ifcs/avalon/ofs_plat_avalon_mem_if.sv)
 * [mpf_vtp_svc_ofs_avalon_mem_rdwr.sv](https://github.com/OPAE/intel-fpga-bbb/blob/ofs-2023.2-1/BBB_mpf_vtp/hw/rtl/svc_shims/mpf_vtp_svc_ofs_avalon_mem_rdwr.sv)
 * [mpf_vtp_translate_ofs_avalon_mem_rdwr.sv](https://github.com/OPAE/intel-fpga-bbb/blob/ofs-2023.2-1/BBB_mpf_vtp/hw/rtl/translate/mpf_vtp_translate_ofs_avalon_mem_rdwr.sv)
+
+
+* https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/Features/mem_channel

@@ -25,4 +25,18 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes f
 
 
 # Cose da fare
-* Analisi report esempi sulla pipe
+* Progettare gli esperimenti
+    * Confronto tra meccanismi di comunicazione tra kernel producer e consumer 
+        * Pipe
+        * Memoria device --> i dati sono inviati usando la memoria del device
+    * Fattori
+        * dimensioni del pacchetto
+    * Variabili di risposta
+        * latenza (numero di pacchetti) /throughput (numero di pacchetti/s)
+* Fare gli esperimenti
+* Vedere RTL generato ProducerConsumerPipedId come sono implementate le interfacce (producer,consumer e pipe) e sviluppare un diagramma 
+
+
+* tipo pacchetto con un solo parametro (array) --> volta per volta posso ridefinire
+* 2/3 dimenioni 
+
