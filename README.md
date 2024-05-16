@@ -17,6 +17,8 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes f
     * [Standards](doc/arch_diagram.md#ch_standards)
 1. [Environment Setup](doc/setup.md)
     * [Tools](doc/setup.md#ch_tools)
+    * [oneAPI Samples](doc/setup.md#ch_samples)
+1. [Script in Detail](script/README.md)
 1. [Troubleshooting](doc/troubleshooting.md)
 1. [References](doc/references.md)
     * [Further References](doc/references.md#fref)
