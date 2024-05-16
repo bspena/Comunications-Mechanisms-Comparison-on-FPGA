@@ -12,14 +12,12 @@
 `oneAPI` is a multi-architecture cross-indutry open standard `programming model`<sup>[[2]](references.md#ref_oneapi)</sup> , which guarantees portability and performance across `heterogeneous architectures` (CPUs, GPUs, FPGAs, etc...).
 
 A oneAPI platform<sup>[[]](references.md#ref_oneapi_arch)</sup> includes:
-* `Host`: Tipically a multi-core CPU, which can be seen as a device by the software. 
-* `Devices`: One or more accelerators, each of them has a `command queue`. 
+* `Host`: Tipically a multi-core CPU. It runs the `host Application`.
+* `Devices`: One or more accelerators, each of them has a `command queue`. A device runs a `function Object` (or `kernel`), which contains a function definition and its related variables. In order to run a kernel on the device, the host application submit a command group, with the kernel, to the device's command queue.
 
-Each of the previous sections runs its own program:
-* `Host Application`: It uses oneAPI and runs on the host.
-* `Function Object` (or `kernel`): It contains a function definition and its related variables. In order to run a kernel on the device, the host application submit a command group, with the kernel, to the device's command queue. 
+oneAPI is an implementation of `Khronos SYCL 2020 Specification`<sup>[[]](references.md#ref_oneapi_sycl)</sup>, which is a royalty-free proramming launguage based on `ISO C++` and an evolution of `OpenCL`<sup>[[]](references.md#ref_sycl)</sup>.
 
-oneAPI is an implementation of `Khronos SYCL 2020 Specification`<sup>[[]](references.md#ref_oneapi_sycl)</sup>. SYCL is a royalty-free proramming launguage based on `ISO C++` and an evolution of `OpenCL`<sup>[[]](references.md#ref_sycl)</sup>. It provides an abstraction and APIs:
+`SYCL` provides an abstraction and APIs:
 * To programm both CPUs and accelerator devices, using at least `C++ 17`.
 * To manage data resources.
 * To launch parallel code on the devices.
@@ -30,7 +28,6 @@ oneAPI is an implementation of `Khronos SYCL 2020 Specification`<sup>[[]](refere
 The Base Kit provides tow different development flows<sup>[[]](references.md#ref_fpga_dev)</sup><sup>[[]](references.md#ref_fpga_dev_flow)</sup>:
 * `FPGA Acceleration Flow (Full-Stack flow)`: Generates the `multiarchitecture binary` (known as `fat binary`). Tha fat binary contains both host and device code (also known as `SYCL kernel`), some aspects of the device code depends on the [Board Support Package (BSP)](#glos_bsp). The full-stack flow is undertaken by setting an FPGA acceleration board as compilation target in Intel oneAPI DPC++/C++ Compiler.
 * `SYCL High-Level Synthesis Flow (HLS Flow or IP Authoring Flow)`: Translates the device code into `RTL IP core` and uses the host code as the testbench for the emulation and simulation flows. The RTL IP core has to be intagrated into the design through Intel Quartus Prime Platform Designer. The FPGA capabilities do not depend on the BSP, but the programmer has to manage more section of the IP design than when generating a fat binary. The IP Authoring Flow is undertaken by setting a supported Intel FPGA device family as e compilation target in Intel oneAPI DPC++/C++ Compiler.
-
 
 <p align="center">
   <img src="img/img_oneapi_fpga_flow.png" width="300">
@@ -57,7 +54,7 @@ Both ASP hardware components and kernels are placend in the [Accelerator Functio
 
 
 ## I/O Pipes <a name="ch_pipes"></a>
-A `pipe` is an `unidirectional FIFO data structure` and allows comunication between two `endpoints`, an endpoint can be a kernel or an external I/O on the FPGA<sup>[[]](references.md#ref_pipes)</sup>. There are three types of pipes:
+A `pipe` is an `unidirectional FIFO data structure` and allows comunication between two `endpoints`, an endpoint can be a kernel or an external I/O on the FPGA<sup>[[]](references.md#ref_pipes_sample)</sup>. There are three types of pipes:
 * Kernel-Kernel
 * Kernel-I/O
 * I/O-Kernel
@@ -65,8 +62,8 @@ A `pipe` is an `unidirectional FIFO data structure` and allows comunication betw
 Into a pipe the data flows in a single direction, so the `bidirectional comunication` is obtained through two pipes. Through the pipe, kernels that exchange data can run concurrently. 
 
 The communication takes place through `read and write operations`:
-* A kernel can read or write from the same pipe multiple times<sup>[[]](references.md#ref_res_pipes)</sup>.
-* Multiple kernels cannot read or write from the same pipe<sup>[[]](references.md#ref_res_pipes)</sup>.
+* A kernel can read or write from the same pipe multiple times<sup>[[]](references.md#ref_restrictions_pipes)</sup>.
+* Multiple kernels cannot read or write from the same pipe<sup>[[]](references.md#ref_restrictions_pipes)</sup>.
 
 A read/write operation can be:
 * `Blocking`: It may not return immediately but are always successful.
