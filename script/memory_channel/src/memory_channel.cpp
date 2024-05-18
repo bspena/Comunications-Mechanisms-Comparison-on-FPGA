@@ -1,5 +1,6 @@
 #include <iomanip>
 #include <iostream>
+#include <fstream>
 #include <numeric>
 #include <vector>
 
@@ -14,11 +15,13 @@ using namespace sycl;
 class ProducerTutorial;
 class ConsumerTutorial;
 
-// The Producer kernel reads data from input buffer and writes it to common buffer 
-event Producer(queue &q, buffer<int, 1> &input_buffer, buffer<int, 1> &common_buffer) {                   // event is used for task syncronization
+// The Producer kernel reads data from input buffer and writes it to common buffer
+// event is used for task syncronization
+event Producer(queue &q, buffer<int, 1> &input_buffer,int *package) {
   std::cout << "Enqueuing producer...\n";
 
-  // Submit the command group. Handler object define task operations
+  // Submit the command group. 
+  // Handler object define task operations
   auto e = q.submit([&](handler &h) {                                                                     
 
     // Accessor provides read-only access to input buffer
@@ -26,13 +29,17 @@ event Producer(queue &q, buffer<int, 1> &input_buffer, buffer<int, 1> &common_bu
     
     size_t num_elements = input_buffer.size();
 
-    // Accessor provides read-only access to common buffer
-    accessor common_accessor(common_buffer, h, write_only, no_init);
+    // Accessor provides write_only access to common buffer
+    //accessor common_accessor(common_buffer, h, write_only, no_init);
+
+    //int* package = sycl::malloc_device<int>(num_elements, q);
 
     // Is executed only one instance of the kernel
     h.single_task<ProducerTutorial>([=]() {
       for (size_t i = 0; i < num_elements; ++i) {
-        common_accessor[i]=input_accessor[i];
+        //ProducerToConsumerPipe::write(input_accessor[i]);
+        //int* package = sycl::malloc_device<int>(num_elements, q);
+        package[i]=input_accessor[i];
       }
     });
   });
@@ -46,25 +53,29 @@ event Producer(queue &q, buffer<int, 1> &input_buffer, buffer<int, 1> &common_bu
 // Simple work done by the Consumer kernel
 int ConsumerWork(int i) { return i * i; }
 
-
 // The Consumer kernel reads data from common buffer, performs some work 
 // and writes the results to an output buffer
-event Consumer(queue &q, buffer<int, 1> &out_buf, buffer<int, 1> &common_buffer) {
+event Consumer(queue &q, buffer<int, 1> &out_buf, int *package) {
   std::cout << "Enqueuing consumer...\n";
 
   auto e = q.submit([&](handler &h) {
 
-    // Gestisce l'accesso in sola scrittura al buffer di uscita
+    // Accessor provides write_only access to output buffer
     accessor out_accessor(out_buf, h, write_only, no_init);
     size_t num_elements = out_buf.size();
 
-    // Gestisce l'accesso in sola lettura dal buffer comune tra producer e consumer
-    accessor common_accessor(common_buffer, h, read_only);
+    // Accessor provides read-only access to common buffer
+    //accessor common_accessor(common_buf, h, read_only);
 
     h.single_task<ConsumerTutorial>([=]() {
       for (size_t i = 0; i < num_elements; ++i) {
+        // read the input from the pipe
         //int input = common_accessor[i];
-        int answer = ConsumerWork(common_accessor[i]);
+
+        // do work on the input
+        int answer = ConsumerWork(package[i]);
+
+        // write the result to the output buffer (to global memory)
         out_accessor[i] = answer;
       }
     });
@@ -128,6 +139,7 @@ int main(int argc, char *argv[]) {
     queue q(selector, fpga_tools::exception_handler, props);
 
     auto device = q.get_device();
+    //auto context = q.get_context();
 
     std::cout << "Running on device: "
               << device.get_info<sycl::info::device::name>().c_str()
@@ -137,14 +149,30 @@ int main(int argc, char *argv[]) {
     buffer producer_buffer(producer_input);
     buffer consumer_buffer(consumer_output);
 
-    // Common buffer used to transfer data from  producer to consumer kernel.
+    // Common buffer used to transfer data from producer to consumer kernel.
     // It works in burst-interleaved manner
-    buffer common_buffer(prod_cons);
+    //buffer common_buffer(prod_cons);
     //buffer<int> common_buffer(&prod_cons[0],array_size);
 
+    // Allocate memory on the device
+    //1) Specifying array dimension and the syclQueue
+    int* package = sycl::malloc_device<int>(array_size, q);
+    
+    //2) Specifying array dimension and the syclDevice and sysclContext
+    //int* package = sycl::malloc_device<int>(array_size, device,context);
+    
+    //3) Specifying total byte dimension of the array and the syclQueue
+    //int* package = static_cast<int*>(sycl::malloc_device(array_size * sizeof(int),q));
+
     // Run the two kernels concurrently
-    producer_event = Producer(q, producer_buffer, common_buffer);
-    consumer_event = Consumer(q, consumer_buffer, common_buffer);
+    producer_event = Producer(q, producer_buffer, package);
+    consumer_event = Consumer(q, consumer_buffer, package);
+    //producer_event = Producer(q, producer_buffer);
+    //consumer_event = Consumer(q, consumer_buffer, common_buffer);
+
+    // Free USM
+    sycl::free(package,q);
+    //sycl::free(package,context);
 
   } catch (exception const &e) {
     // Catches exceptions in the host code
@@ -209,6 +237,14 @@ int main(int argc, char *argv[]) {
   std::cout << "\tDesign Duration: " << total_time_ms << " ms\n";
   std::cout << "\tDesign Throughput: " << throughput_mbs << " MB/s\n";
   std::cout << "\n";
+
+  std::ofstream test_result;
+  
+  // Open file test_result.txt in append mode
+  test_result.open("test_result.txt",std::ios::app);
+
+  // Write data into the file
+  test_result << throughput_mbs;
 
   // Verify the result
   for (size_t i = 0; i < array_size; i++) {

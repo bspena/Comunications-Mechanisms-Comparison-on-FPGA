@@ -27,6 +27,9 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes f
 
 
 # Cose da fare
+* Inserire inserimento risultati nel file test_result.csv anche nell'esempio pipe
+    * Gestire path del file test_result.csv con i risulatati, facendo passando il path all'eseguibile
+
 * Progettare gli esperimenti
     * Confronto tra meccanismi di comunicazione tra kernel producer e consumer 
         * Pipe
@@ -36,6 +39,7 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes f
     * Variabili di risposta
         * latenza (numero di pacchetti) /throughput (numero di pacchetti/s)
 * Fare gli esperimenti
+
 * Vedere nell'RTL generato (ProducerConsumerPipedId) come sono implementate le interfacce (producer,consumer e pipe) e sviluppare un diagramma 
 
 ## Note
