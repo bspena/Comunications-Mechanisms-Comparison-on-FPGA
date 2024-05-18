@@ -238,14 +238,6 @@ int main(int argc, char *argv[]) {
   std::cout << "\tDesign Throughput: " << throughput_mbs << " MB/s\n";
   std::cout << "\n";
 
-  std::ofstream test_result;
-  
-  // Open file test_result.txt in append mode
-  test_result.open("test_result.txt",std::ios::app);
-
-  // Write data into the file
-  test_result << throughput_mbs;
-
   // Verify the result
   for (size_t i = 0; i < array_size; i++) {
     if (consumer_output[i] != ConsumerWork(producer_input[i])) {
@@ -257,5 +249,14 @@ int main(int argc, char *argv[]) {
     }
   }
   std::cout << "PASSED: The results are correct\n";
+
+  // Open file test_result.txt in append mode
+  std::ofstream test_result;
+  test_result.open("test_result.csv",std::ios::app);
+
+  // Write data into the file
+  std::cout << "Save results into test_result.csv" << "\n";
+  test_result << throughput_mbs << "\n";
+
   return 0;
 }
