@@ -14,6 +14,9 @@
 1. <a id="ref_oneapi_asp_get"></a> [oneAPI Accelerator Support Package (ASP): Getting Started User Guide](https://ofs.github.io/ofs-2023.2/hw/common/user_guides/oneapi_asp/ug_oneapi_asp/)
 1. <a id="ref_mem_channels_sample"></a> [Global Memory Channels](https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/Features/mem_channel)
 
+* https://www.intel.com/content/www/us/en/docs/oneapi/optimization-guide-gpu/2023-1/unified-shared-memory-allocations.html
+* https://www.intel.com/content/www/us/en/docs/oneapi/optimization-guide-gpu/2023-0/buffer-accessor-modes.html
+
 
 ## Further References <a name="fref"></a>
 ### Documentation <a name="fref_doc"></a>
@@ -23,6 +26,10 @@
 * [Intel oneAPI FPGA Handbook](https://www.intel.com/content/www/us/en/docs/oneapi-fpga-add-on/developer-guide/2024-0/intel-oneapi-fpga-handbook.html)
 * [OFS Doc Modules](https://github.com/OFS/ofs.github.io/blob/main/docs/hw/n6001/doc_modules/links.md)
 * [Avalon Memory Mapped Interface Signal Roles](https://www.intel.com/content/www/us/en/docs/programmable/683091/20-1/memory-mapped-interface-signal-roles.html)
+* https://github.com/oneapi-src/oneAPI-samples/tree/master/DirectProgramming/C++SYCL_FPGA/Tutorials/DesignPatterns/zero_copy_data_transfer
+* https://github.com/oneapi-src/oneAPI-samples/blob/ccd57a1ff0245bf7b09c2a0b84fa35bce9412d88/DirectProgramming/C%2B%2BSYCL_FPGA/ReferenceDesigns/qri/src/qri.hpp#L72
+* https://github.com/oneapi-src/oneAPI-samples/blob/ccd57a1ff0245bf7b09c2a0b84fa35bce9412d88/DirectProgramming/C%2B%2BSYCL_FPGA/ReferenceDesigns/matmul/src/matmul.hpp#L71
+* https://github.com/pvelesko/SYCL_Tutorials/blob/master/USM.md
 
 ### SystemVerilog Modules/Interfaces <a name="fref_sv"></a>
 * [afu.sv](https://github.com/OFS/oneapi-asp/blob/ofs-2023.2-1/n6001/hardware/ofs_n6001_iopipes/build/rtl/afu.sv)

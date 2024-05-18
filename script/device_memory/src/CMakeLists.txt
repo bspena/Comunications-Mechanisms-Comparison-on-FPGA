@@ -1,5 +1,5 @@
-set(SOURCE_FILE device_memory.cpp)
-set(TARGET_NAME device_memory)
+set(SOURCE_FILE memory_channel.cpp)
+set(TARGET_NAME memory_channel)
 set(EMULATOR_TARGET ${TARGET_NAME}.fpga_emu)
 set(SIMULATOR_TARGET ${TARGET_NAME}.fpga_sim)
 set(FPGA_TARGET ${TARGET_NAME}.fpga)
@@ -35,10 +35,10 @@ set(HARDWARE_LINK_FLAGS "-fsycl -fintelfpga -Xshardware -Xstarget=${FPGA_DEVICE}
 ### FPGA Emulator
 ###############################################################################
 # To compile in a single command:
-#    icpx -fsycl -fintelfpga -DFPGA_EMULATOR device_memory.cpp -o device_memory.fpga_emu
+#    icpx -fsycl -fintelfpga -DFPGA_EMULATOR memory_channel.cpp -o memory_channel.fpga_emu
 # CMake executes:
-#    [compile] icpx -fsycl -fintelfpga -DFPGA_EMULATOR -o device_memory.cpp.o -c device_memory.cpp
-#    [link]    icpx -fsycl -fintelfpga device_memory.cpp.o -o device_memory.fpga_emu
+#    [compile] icpx -fsycl -fintelfpga -DFPGA_EMULATOR -o memory_channel.cpp.o -c memory_channel.cpp
+#    [link]    icpx -fsycl -fintelfpga memory_channel.cpp.o -o memory_channel.fpga_emu
 add_executable(${EMULATOR_TARGET} ${SOURCE_FILE})
 target_include_directories(${EMULATOR_TARGET} PRIVATE ../../../../include)
 set_target_properties(${EMULATOR_TARGET} PROPERTIES COMPILE_FLAGS "${EMULATOR_COMPILE_FLAGS}")
@@ -49,7 +49,7 @@ add_custom_target(fpga_emu DEPENDS ${EMULATOR_TARGET})
 ### Generate Report
 ###############################################################################
 # To compile manually:
-#   icpx -fsycl -fintelfpga -Xshardware -Xstarget=<FPGA_DEVICE> -fsycl-link=early device_memory.cpp -o device_memory_report.a
+#   icpx -fsycl -fintelfpga -Xshardware -Xstarget=<FPGA_DEVICE> -fsycl-link=early memory_channel.cpp -o memory_channel_report.a
 set(FPGA_EARLY_IMAGE ${TARGET_NAME}_report.a)
 # The compile output is not an executable, but an intermediate compilation result unique to SYCL.
 add_executable(${FPGA_EARLY_IMAGE} ${SOURCE_FILE})
@@ -63,10 +63,10 @@ set_target_properties(${FPGA_EARLY_IMAGE} PROPERTIES LINK_FLAGS "${HARDWARE_LINK
 ### FPGA Simulator
 ###############################################################################
 # To compile in a single command:
-#   icpx -fsycl -fintelfpga -Xssimulation -DFPGA_SIMULATOR -Xstarget=<FPGA_DEVICE> device_memory.cpp -o device_memory.fpga
+#   icpx -fsycl -fintelfpga -Xssimulation -DFPGA_SIMULATOR -Xstarget=<FPGA_DEVICE> memory_channel.cpp -o memory_channel.fpga
 # CMake executes:
-#   [compile] icpx -fsycl -fintelfpga -Xssimulation -DFPGA_SIMULATOR -o device_memory.cpp.o -c device_memory.cpp
-#   [link]    icpx -fsycl -fintelfpga -Xssimulation -Xstarget=<FPGA_DEVICE> device_memory.cpp.o -o device_memory.fpga
+#   [compile] icpx -fsycl -fintelfpga -Xssimulation -DFPGA_SIMULATOR -o memory_channel.cpp.o -c memory_channel.cpp
+#   [link]    icpx -fsycl -fintelfpga -Xssimulation -Xstarget=<FPGA_DEVICE> memory_channel.cpp.o -o memory_channel.fpga
 add_executable(${SIMULATOR_TARGET} EXCLUDE_FROM_ALL ${SOURCE_FILE})
 target_include_directories(${SIMULATOR_TARGET} PRIVATE ../../../../include)
 add_custom_target(fpga_sim DEPENDS ${SIMULATOR_TARGET})
@@ -77,10 +77,10 @@ set_target_properties(${SIMULATOR_TARGET} PROPERTIES LINK_FLAGS "${SIMULATOR_LIN
 ### FPGA Hardware
 ###############################################################################
 # To compile in a single command:
-#   icpx -fsycl -fintelfpga -Xshardware -Xstarget=<FPGA_DEVICE> device_memory.cpp -o device_memory.fpga
+#   icpx -fsycl -fintelfpga -Xshardware -Xstarget=<FPGA_DEVICE> memory_channel.cpp -o memory_channel.fpga
 # CMake executes:
-#   [compile] icpx -fsycl -fintelfpga -o device_memory.cpp.o -c device_memory.cpp
-#   [link]    icpx -fsycl -fintelfpga -Xshardware -Xstarget=<FPGA_DEVICE> device_memory.cpp.o -o device_memory.fpga
+#   [compile] icpx -fsycl -fintelfpga -o memory_channel.cpp.o -c memory_channel.cpp
+#   [link]    icpx -fsycl -fintelfpga -Xshardware -Xstarget=<FPGA_DEVICE> memory_channel.cpp.o -o memory_channel.fpga
 add_executable(${FPGA_TARGET} EXCLUDE_FROM_ALL ${SOURCE_FILE})
 target_include_directories(${FPGA_TARGET} PRIVATE ../../../../include)
 add_custom_target(fpga DEPENDS ${FPGA_TARGET})

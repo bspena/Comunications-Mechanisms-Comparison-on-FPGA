@@ -22,7 +22,9 @@ git clone --branch ofs-2023.2-1 https://github.com/OFS/oneapi-asp.git
 * [Download](https://github.com/OFS/ofs-agx7-pcie-attach/releases/download/ofs-2023.2-1/pr_template-n6001.tar.gz)
 
 ### Python Modules
-
+* Python 3.10.12
+* pip 22.0.2
+* pandas 2.2.2
 
 ## oneAPI Samples <a name="ch_samples"></a>
 * Clone samples repository<sup>[[]](references.md#ref_oneapi_asp_get)</sup>:

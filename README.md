@@ -36,9 +36,11 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes f
     * Variabili di risposta
         * latenza (numero di pacchetti) /throughput (numero di pacchetti/s)
 * Fare gli esperimenti
-* Vedere RTL generato ProducerConsumerPipedId come sono implementate le interfacce (producer,consumer e pipe) e sviluppare un diagramma 
+* Vedere nell'RTL generato (ProducerConsumerPipedId) come sono implementate le interfacce (producer,consumer e pipe) e sviluppare un diagramma 
 
-
+## Note
 * tipo pacchetto con un solo parametro (array) --> volta per volta posso ridefinire
-* 2/3 dimenioni 
-
+    * 2/3 dimenioni
+* malloc_device per allocare alloca il buffer
+    * buffer condiviso tra i due kernel
+* Esempio paragrafo 4.8 (https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html#_device_allocation_functions)
