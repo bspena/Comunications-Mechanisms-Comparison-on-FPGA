@@ -26,6 +26,11 @@ git clone --branch ofs-2023.2-1 https://github.com/OFS/oneapi-asp.git
 * pip 22.0.2
 * pandas 2.2.2
 
+### CMake
+```bash
+sudo apt install cmake
+```
+
 ## oneAPI Samples <a name="ch_samples"></a>
 * Clone samples repository<sup>[[]](references.md#ref_oneapi_asp_get)</sup>:
 ```bash

@@ -1,9 +1,10 @@
 import pandas
+import os
 import oneapi_test_config as config
 
-###########################
+######################
 # 0. Debug utilities #
-###########################
+######################
 
 # Check if columns names in test list file are equal to columns names in test_list_columns tuple
 def assert_config():
@@ -33,6 +34,10 @@ def initTest():
     return df_test_list
 
 
-###########################
-# 2. System Configuration #
-###########################
+####################################
+# 2. Build and compile the program #
+####################################
+
+# Build and compile the program
+def buildAndCompile():
+    os.system('./system_build.sh') 

@@ -10,11 +10,10 @@ if __name__=='__main__':
     print("[STEP 1] Initialize Test")
     #df_test_list = utils.initTest()
 
-    #2. Configure the build system and compile (?)
-    print("[STEP 2] Configure the build system and compile")
-    
-    # source /opt/intel/oneapi/setvars.sh
-    #env = subprocess.run('source /opt/intel/oneapi/setvars.sh',shell = True ,capture_output=True)
+    #2. Build and compile the program
+    print("[STEP 2] Build and compile the program")
+    ### Use subprocess ?????
+    utils.buildAndCompile()                                 
     
     #for i,row in df_test_list.iterrows():
         #print(i)
