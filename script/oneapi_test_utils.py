@@ -41,8 +41,8 @@ def initTest():
 
 # Build and compile:
 def buildAndCompile():
-    build_pipe_sample           = './system_build.sh ' + config.path_pipes_sample
-    build_memory_channel_sample = './system_build.sh ' + config.path_memory_channel_sample
+    build_pipe_sample           = './system_build.sh ' + config.path_pipes_sample + ' pipes'
+    build_memory_channel_sample = './system_build.sh ' + config.path_memory_channel_sample + ' memory_channel'
     
     #print(build_pipe_sample)
 
