@@ -14,8 +14,8 @@ test_result_columns = ('throughput',)
 #######################################
 # Path to oneAPI samples #
 #######################################
-path_pipes_sample = '/home/$(whoami)/'
-path_device_memory_sample = '/home/$(whoami)/'
+path_pipes_sample = '/home/spena/oneAPI-samples/DirectProgramming/C++SYCL_FPGA/Tutorials/Features/pipes'
+path_memory_channel_sample = '/home/spena/oneAPI-samples/DirectProgramming/C++SYCL_FPGA/Tutorials/Features/memory_channel'
 
 
 
