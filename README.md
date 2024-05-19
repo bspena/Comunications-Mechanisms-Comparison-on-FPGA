@@ -27,9 +27,7 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes f
 
 
 # Cose da fare
-* Inserire inserimento risultati nel file test_result.csv anche nell'esempio pipe
-    * Gestire path del file test_result.csv con i risulatati, facendo passando il path all'eseguibile
-
+* Caricare esempio pipes
 * Progettare gli esperimenti
     * Confronto tra meccanismi di comunicazione tra kernel producer e consumer 
         * Pipe

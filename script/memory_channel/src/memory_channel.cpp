@@ -250,12 +250,12 @@ int main(int argc, char *argv[]) {
   }
   std::cout << "PASSED: The results are correct\n";
 
-  // Open file test_result.txt in append mode
+  // Open file test_result_memory_channel.csv in append mode
   std::ofstream test_result;
-  test_result.open("test_result.csv",std::ios::app);
+  test_result.open("test_result_memory_channel.csv",std::ios::app);
 
   // Write data into the file
-  std::cout << "Save results into test_result.csv" << "\n";
+  std::cout << "Save results into test_result_memory_channel.csv" << "\n";
   test_result << throughput_mbs << "\n";
 
   return 0;
