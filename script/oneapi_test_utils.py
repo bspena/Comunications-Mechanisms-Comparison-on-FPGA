@@ -35,31 +35,48 @@ def initTest():
     return test_list_df
 
 
-####################################
-# 2. Build and compile the program #
-####################################
-
-# Build and compile:
-def buildAndCompile():
-    pipes_sample_cmd          = ( config.build_script + ' ' + config.samples_names[0] + ' ' + 
+################################
+# 2. Build and compile samples #
+################################
+def buildCompileSamples():
+    # Create commands
+    pipes_sample_cmd          = ( config.build_script + ' ' + config.path_setvars + ' ' + 
                                     config.path_pipes_sample + ' ' + config.path_asp + ' ' + 
                                     config.board_variant )
-    memory_channel_sample_cmd = ( config.build_script + ' ' + config.samples_names[1] + ' ' + 
+    memory_channel_sample_cmd = ( config.build_script + ' ' + config.path_setvars + ' ' + 
                                     config.path_memory_channel_sample + ' ' + config.path_asp + ' ' + 
                                     config.board_variant )
 
-    # Pipes sample
+    # Run build script
+    print('     [BUILD PIPES SAMPLE]\n')
     subprocess.run(pipes_sample_cmd, shell=True, executable="/bin/bash")
 
-    # Memory Channel sample
+    print('     [BUILD MEMORY CHANNEL SAMPLE]\n')
     subprocess.run(memory_channel_sample_cmd, shell = True, executable="/bin/bash")
+
+
+##################
+# 3. Run samples #
+##################
+def runSamples():
+    # Create commands
+    pipes_sample_cmd          = ( config.run_script + ' ' + config.path_setvars + ' ' + 
+                                    config.path_pipes_sample + ' ' + config.samples_names[0] )
+    memory_channel_sample_cmd = ( config.run_script + ' ' + config.path_setvars + ' ' + 
+                                    config.path_memory_channel_sample + ' ' + config.samples_names[1] )
+
+    print('     [RUN PIPES SAMPLE]\n')
+    subprocess.run(pipes_sample_cmd, shell=True, executable="/bin/bash")
+
+    print('     [RUN MEMORY CHANNEL SAMPLE]\n')
+    subprocess.run(memory_channel_sample_cmd, shell = True, executable="/bin/bash")
+
 
 
 #######################################
 # 4. Saves result in test_results.csv #
 #######################################
 def savesResults():
-
     # Read results from samples csv files
     pipes_df = pandas.read_csv(config.path_pipes_t_result, names = [config.test_result_columns[0]])
     memory_channel_df = pandas.read_csv(config.path_memory_channel_t_result, names = [config.test_result_columns[1]])

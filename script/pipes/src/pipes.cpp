@@ -37,7 +37,7 @@ event Producer(queue &q, buffer<int, 1> &input_buffer) {
     size_t num_elements = input_buffer.size();
 
     // Is executed only one instance of the kernel
-    h.single_task<ProducerTutorial>([=]() {
+    h.single_task<ProducerTutorial>([=]() [[intel::kernel_args_restrict]]{
       for (size_t i = 0; i < num_elements; ++i) {
         ProducerToConsumerPipe::write(input_accessor[i]);
       }
@@ -62,8 +62,8 @@ event Consumer(queue &q, buffer<int, 1> &out_buf) {
     accessor out_accessor(out_buf, h, write_only, no_init);
     size_t num_elements = out_buf.size();
 
-    h.single_task<ConsumerTutorial>([=]() {
-      for (size_t i = 0; i < num_elements; ++i) {
+    h.single_task<ConsumerTutorial>([=]() [[intel::kernel_args_restrict]]{
+      for (size_t i = 0; i < num_elements; ++i){
         // read the input from the pipe
         int input = ProducerToConsumerPipe::read();
 

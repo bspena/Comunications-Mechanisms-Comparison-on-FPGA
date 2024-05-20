@@ -35,7 +35,7 @@ event Producer(queue &q, buffer<int, 1> &input_buffer,int *package) {
     //int* package = sycl::malloc_device<int>(num_elements, q);
 
     // Is executed only one instance of the kernel
-    h.single_task<ProducerTutorial>([=]() {
+    h.single_task<ProducerTutorial>([=]() [[intel::kernel_args_restrict]]{
       for (size_t i = 0; i < num_elements; ++i) {
         //ProducerToConsumerPipe::write(input_accessor[i]);
         //int* package = sycl::malloc_device<int>(num_elements, q);
@@ -46,9 +46,6 @@ event Producer(queue &q, buffer<int, 1> &input_buffer,int *package) {
 
   return e;
 }
-
-// intel::kernel_args_restrict --> provide more time for the instructions to complete and getting better instruction scheduling
-
 
 // Simple work done by the Consumer kernel
 int ConsumerWork(int i) { return i * i; }
@@ -67,7 +64,7 @@ event Consumer(queue &q, buffer<int, 1> &out_buf, int *package) {
     // Accessor provides read-only access to common buffer
     //accessor common_accessor(common_buf, h, read_only);
 
-    h.single_task<ConsumerTutorial>([=]() {
+    h.single_task<ConsumerTutorial>([=]() [[intel::kernel_args_restrict]]{
       for (size_t i = 0; i < num_elements; ++i) {
         // read the input from the pipe
         //int input = common_accessor[i];
