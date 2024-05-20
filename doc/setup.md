@@ -55,4 +55,4 @@ cmake -DFPGA_DEVICE=full-path-to-oneapi-asp/platform-name:board_variant ..
 make fpga_emu       
 make report
 ```
-* To read the report, open `report.html` (with Mozilla Firefox) located in the `path-to-sample-locationbuild/pipes_report.prj/reports` 
+* To read the report, open `report.html` (with Mozilla Firefox) located in the `path-to-sample-locationbuild/pipes_report.prj/reports`                
