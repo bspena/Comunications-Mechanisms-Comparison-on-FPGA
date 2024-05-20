@@ -10,8 +10,8 @@ if __name__=='__main__':
     print("[STEP 1]: Initialize Test")
     #df_test_list = utils.initTest()
 
-    #2. Build and compile the program
-    print("[STEP 2]: Build and compile: ")
+    #2. Build and compile the samples
+    print("[STEP 2]: Build and compile")
     utils.buildAndCompile()                                 
     
     #for i,row in df_test_list.iterrows():
@@ -19,4 +19,6 @@ if __name__=='__main__':
 
         #3. Response variables measurement
 
-    #4. Save response variabiles in test_result.csv
+    #4. Save results in test_result.csv
+    print("[STEP 4]: Saves results ")
+    utils.savesResults()

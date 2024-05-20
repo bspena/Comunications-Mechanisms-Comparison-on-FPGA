@@ -22,17 +22,17 @@ def assert_config():
 def initTest():
     
     # Read test_list.csv (number of test x indipendet factors) and create the dataframe
-    df_test_list = pandas.read_csv(config.path_test_list)
+    test_list_df = pandas.read_csv(config.path_test_list)
 
     # Create custom indeces
     tests_number = []
-    for i in range(1,len(df_test_list.index)+1):
+    for i in range(1,len(test_list_df.index)+1):
         string = 'Test' + str(i)
         tests_number.append(string)
 
-    df_test_list.index = tests_number
+    test_list_df.index = tests_number
 
-    return df_test_list
+    return test_list_df
 
 
 ####################################
@@ -41,15 +41,45 @@ def initTest():
 
 # Build and compile:
 def buildAndCompile():
-    build_pipe_sample           = './system_build.sh ' + config.path_pipes_sample + ' pipes'
-    build_memory_channel_sample = './system_build.sh ' + config.path_memory_channel_sample + ' memory_channel'
-    
-    #print(build_pipe_sample)
+    pipes_sample_cmd          = ( config.build_script + ' ' + config.samples_names[0] + ' ' + 
+                                    config.path_pipes_sample + ' ' + config.path_asp + ' ' + 
+                                    config.board_variant )
+    memory_channel_sample_cmd = ( config.build_script + ' ' + config.samples_names[1] + ' ' + 
+                                    config.path_memory_channel_sample + ' ' + config.path_asp + ' ' + 
+                                    config.board_variant )
 
-    #1) Pipes sample
-    print(" 1) Pipes samples")
-    subprocess.run(build_pipe_sample, shell=True, executable="/bin/bash")
+    # Pipes sample
+    subprocess.run(pipes_sample_cmd, shell=True, executable="/bin/bash")
 
-    #2) Memory channel samples
-    #print(" 2) Memory channel samples")
-    subprocess.run(build_memory_channel_sample, shell = True, executable="/bin/bash")
+    # Memory Channel sample
+    subprocess.run(memory_channel_sample_cmd, shell = True, executable="/bin/bash")
+
+
+#######################################
+# 4. Saves result in test_results.csv #
+#######################################
+def savesResults():
+
+    # Read results from samples csv files
+    pipes_df = pandas.read_csv(config.path_pipes_t_result, names = [config.test_result_columns[0]])
+    memory_channel_df = pandas.read_csv(config.path_memory_channel_t_result, names = [config.test_result_columns[1]])
+
+    # Concatenate pandas objects along a particular axis
+    test_result_df = pandas.concat([pipes_df, memory_channel_df], axis=1)
+
+    # Create custom indeces
+    tests_number = []
+    for i in range(1,len(test_result_df.index)+1):
+        string = 'Test' + str(i)
+        tests_number.append(string)
+
+    test_result_df.index = tests_number   
+
+
+    # Write to csv 
+    test_result_df.to_csv(config.path_test_result,index= False)
+
+    # Remove samples csv files
+    #os.remove(config.path_pipes_t_result)
+    #os.remove(config.path_memory_channel_t_result)
+

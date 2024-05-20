@@ -13,7 +13,7 @@
 1. <a id="ref_intel_install"></a> [Intel oneAPI Toolkits and Components Installation Guide for Linux* OS with Command LIne](https://www.intel.com/content/www/us/en/docs/oneapi/installation-guide-linux/2023-0/install-with-command-line.html)
 1. <a id="ref_oneapi_asp_get"></a> [oneAPI Accelerator Support Package (ASP): Getting Started User Guide](https://ofs.github.io/ofs-2023.2/hw/common/user_guides/oneapi_asp/ug_oneapi_asp/)
 1. <a id="ref_mem_channels_sample"></a> [Global Memory Channels](https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/Features/mem_channel)
-
+* https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C++SYCL_FPGA/Tutorials/Features/kernel_args_restrict
 * https://www.intel.com/content/www/us/en/docs/oneapi/optimization-guide-gpu/2023-1/unified-shared-memory-allocations.html
 * https://www.intel.com/content/www/us/en/docs/oneapi/optimization-guide-gpu/2023-0/buffer-accessor-modes.html
 
