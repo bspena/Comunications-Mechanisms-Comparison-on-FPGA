@@ -22,17 +22,17 @@ def assert_config():
 def initTest():
     
     # Read test_list.csv (number of test x indipendet factors) and create the dataframe
-    test_list_df = pandas.read_csv(config.path_test_list)
+    df_test_list = pandas.read_csv(config.path_test_list)
 
     # Create custom indeces
     tests_number = []
-    for i in range(1,len(test_list_df.index)+1):
+    for i in range(1,len(df_test_list.index)+1):
         string = 'Test' + str(i)
         tests_number.append(string)
 
-    test_list_df.index = tests_number
+    df_test_list.index = tests_number
 
-    return test_list_df
+    return df_test_list
 
 
 ################################
@@ -48,28 +48,33 @@ def buildCompileSamples():
                                     config.board_variant )
 
     # Run build script
-    print('     [BUILD PIPES SAMPLE]\n')
+    print('[INFO] Build pipes sample')
     subprocess.run(pipes_sample_cmd, shell=True, executable="/bin/bash")
+    print('\n')
 
-    print('     [BUILD MEMORY CHANNEL SAMPLE]\n')
+    print('[INFO] Build memory_channel sample')
     subprocess.run(memory_channel_sample_cmd, shell = True, executable="/bin/bash")
 
 
 ##################
 # 3. Run samples #
 ##################
-def runSamples():
+def runSamples(row):
     # Create commands
     pipes_sample_cmd          = ( config.run_script + ' ' + config.path_setvars + ' ' + 
-                                    config.path_pipes_sample + ' ' + config.samples_names[0] )
+                                config.path_pipes_sample + ' ' + config.samples_names[0] + ' ' + 
+                                str(row['array_size']) )
     memory_channel_sample_cmd = ( config.run_script + ' ' + config.path_setvars + ' ' + 
-                                    config.path_memory_channel_sample + ' ' + config.samples_names[1] )
+                                config.path_memory_channel_sample + ' ' + config.samples_names[1] + ' ' + 
+                                str(row['array_size']) )
 
-    print('     [RUN PIPES SAMPLE]\n')
+    print('[INFO] Run pipes sample')
     subprocess.run(pipes_sample_cmd, shell=True, executable="/bin/bash")
+    print('\n')
 
-    print('     [RUN MEMORY CHANNEL SAMPLE]\n')
+    print('[INFO] Run memory_channel sample')
     subprocess.run(memory_channel_sample_cmd, shell = True, executable="/bin/bash")
+    print('\n')
 
 
 

@@ -15,11 +15,15 @@ if __name__=='__main__':
     utils.buildCompileSamples()                                 
     
     for i,row in df_test_list.iterrows():
-        print('#####'+ i + '#####')
+        print("##########################")
+        print("[INFO] Running test n. " + i.split('Test')[1] + "/" + str(df_test_list.shape[0]) )
+        print("##########################")
         
+        #print(row['array_size'])
+
         #3. Run samples
         print("[STEP 3]: Run samples")
-        utils.runSamples()
+        utils.runSamples(row)
 
     #4. Save results in test_result.csv
     print("[STEP 4]: Saves results")

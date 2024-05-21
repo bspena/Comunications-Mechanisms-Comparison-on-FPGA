@@ -22,9 +22,9 @@ test_list_columns = ('array_size',)
 test_result_columns = ('pipes_throughput','memory_channel_throughput')
 
 
-##########
-# oneAPI #
-##########
+################
+# Intel oneAPI #
+################
 # Path to bash script used to set environment variables
 path_setvars = '/opt/intel/oneapi/setvars.sh'
 

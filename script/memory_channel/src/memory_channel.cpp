@@ -15,8 +15,7 @@ using namespace sycl;
 class ProducerTutorial;
 class ConsumerTutorial;
 
-// The Producer kernel reads data from input buffer and writes it to common buffer
-// event is used for task syncronization
+// The Producer kernel reads data from input buffer and writes it to device memory
 event Producer(queue &q, buffer<int, 1> &input_buffer,int *package) {
   std::cout << "Enqueuing producer...\n";
 
@@ -29,16 +28,9 @@ event Producer(queue &q, buffer<int, 1> &input_buffer,int *package) {
     
     size_t num_elements = input_buffer.size();
 
-    // Accessor provides write_only access to common buffer
-    //accessor common_accessor(common_buffer, h, write_only, no_init);
-
-    //int* package = sycl::malloc_device<int>(num_elements, q);
-
     // Is executed only one instance of the kernel
     h.single_task<ProducerTutorial>([=]() [[intel::kernel_args_restrict]]{
       for (size_t i = 0; i < num_elements; ++i) {
-        //ProducerToConsumerPipe::write(input_accessor[i]);
-        //int* package = sycl::malloc_device<int>(num_elements, q);
         package[i]=input_accessor[i];
       }
     });
@@ -50,7 +42,7 @@ event Producer(queue &q, buffer<int, 1> &input_buffer,int *package) {
 // Simple work done by the Consumer kernel
 int ConsumerWork(int i) { return i * i; }
 
-// The Consumer kernel reads data from common buffer, performs some work 
+// The Consumer kernel reads data from device memory, performs some work 
 // and writes the results to an output buffer
 event Consumer(queue &q, buffer<int, 1> &out_buf, int *package) {
   std::cout << "Enqueuing consumer...\n";
@@ -61,13 +53,8 @@ event Consumer(queue &q, buffer<int, 1> &out_buf, int *package) {
     accessor out_accessor(out_buf, h, write_only, no_init);
     size_t num_elements = out_buf.size();
 
-    // Accessor provides read-only access to common buffer
-    //accessor common_accessor(common_buf, h, read_only);
-
     h.single_task<ConsumerTutorial>([=]() [[intel::kernel_args_restrict]]{
       for (size_t i = 0; i < num_elements; ++i) {
-        // read the input from the pipe
-        //int input = common_accessor[i];
 
         // do work on the input
         int answer = ConsumerWork(package[i]);
@@ -105,11 +92,9 @@ int main(int argc, char *argv[]) {
 
   std::cout << "Input Array Size: " << array_size << "\n";
 
-  // Arrays for SYCL producer (or input), common and consumer (or output) buffer
+  // Arrays for SYCL producer (or input) and consumer (or output) buffer
   std::vector<int> producer_input(array_size, -1);
   std::vector<int> consumer_output(array_size, -1);
-  std::vector<int> prod_cons(array_size, -1);
-  //int prod_cons[array_size];
 
   // Initialize the input data with random numbers smaller than 46340.
   // Any number larger than this will have integer overflow when squared.
@@ -126,6 +111,7 @@ int main(int argc, char *argv[]) {
   auto selector = sycl::ext::intel::fpga_emulator_selector_v;
 #endif
 
+  // event is used for task syncronization
   event producer_event, consumer_event;
 
   try {
@@ -146,11 +132,6 @@ int main(int argc, char *argv[]) {
     buffer producer_buffer(producer_input);
     buffer consumer_buffer(consumer_output);
 
-    // Common buffer used to transfer data from producer to consumer kernel.
-    // It works in burst-interleaved manner
-    //buffer common_buffer(prod_cons);
-    //buffer<int> common_buffer(&prod_cons[0],array_size);
-
     // Allocate memory on the device
     //1) Specifying array dimension and the syclQueue
     int* package = sycl::malloc_device<int>(array_size, q);
@@ -164,8 +145,6 @@ int main(int argc, char *argv[]) {
     // Run the two kernels concurrently
     producer_event = Producer(q, producer_buffer, package);
     consumer_event = Consumer(q, consumer_buffer, package);
-    //producer_event = Producer(q, producer_buffer);
-    //consumer_event = Consumer(q, consumer_buffer, common_buffer);
 
     // Free USM
     sycl::free(package,q);
