@@ -27,7 +27,7 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes f
 
 
 # Cose da fare
-* Ripulire codice esempio memory_channel
+* Estrarre design duration dagli esempi
 * Progettare gli esperimenti
     * Confronto tra meccanismi di comunicazione tra kernel producer e consumer 
         * Pipe

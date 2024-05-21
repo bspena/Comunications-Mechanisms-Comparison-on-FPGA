@@ -16,6 +16,7 @@
 * https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C++SYCL_FPGA/Tutorials/Features/kernel_args_restrict
 * https://www.intel.com/content/www/us/en/docs/oneapi/optimization-guide-gpu/2023-1/unified-shared-memory-allocations.html
 * https://www.intel.com/content/www/us/en/docs/oneapi/optimization-guide-gpu/2023-0/buffer-accessor-modes.html
+* https://github.com/oneapi-src/oneAPI-samples/tree/ccd57a1ff0245bf7b09c2a0b84fa35bce9412d88/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/DesignPatterns/explicit_data_movement
 
 
 ## Further References <a name="fref"></a>
@@ -30,6 +31,8 @@
 * https://github.com/oneapi-src/oneAPI-samples/blob/ccd57a1ff0245bf7b09c2a0b84fa35bce9412d88/DirectProgramming/C%2B%2BSYCL_FPGA/ReferenceDesigns/qri/src/qri.hpp#L72
 * https://github.com/oneapi-src/oneAPI-samples/blob/ccd57a1ff0245bf7b09c2a0b84fa35bce9412d88/DirectProgramming/C%2B%2BSYCL_FPGA/ReferenceDesigns/matmul/src/matmul.hpp#L71
 * https://github.com/pvelesko/SYCL_Tutorials/blob/master/USM.md
+* https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C++SYCL_FPGA/Tutorials/Features/memory_attributes
+
 
 ### SystemVerilog Modules/Interfaces <a name="fref_sv"></a>
 * [afu.sv](https://github.com/OFS/oneapi-asp/blob/ofs-2023.2-1/n6001/hardware/ofs_n6001_iopipes/build/rtl/afu.sv)
