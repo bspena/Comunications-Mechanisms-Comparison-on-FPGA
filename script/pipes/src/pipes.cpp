@@ -227,7 +227,7 @@ int main(int argc, char *argv[]) {
 
   // Write data into the file
   std::cout << "Save results into test_result_pipes.csv" << "\n";
-  test_result << throughput_mbs << "\n";
+   test_result << total_time_ms << "," << throughput_mbs << "\n";
 
   return 0;
 }

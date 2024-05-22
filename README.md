@@ -27,7 +27,7 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes f
 
 
 # Cose da fare
-* Estrarre design duration dagli esempi
+* Modificare nome cartella script --> project (?)
 * Progettare gli esperimenti
     * Confronto tra meccanismi di comunicazione tra kernel producer e consumer 
         * Pipe
