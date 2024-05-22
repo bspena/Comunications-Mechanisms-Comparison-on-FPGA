@@ -8,6 +8,7 @@
 </p>
 
 
+
 ## oneAPI <a name="ch_oneapi"></a>
 `oneAPI` is a multi-architecture cross-indutry open standard `programming model`<sup>[[2]](references.md#ref_oneapi)</sup> , which guarantees portability and performance across `heterogeneous architectures` (CPUs, GPUs, FPGAs, etc...).
 
@@ -24,18 +25,9 @@ oneAPI is an implementation of `Khronos SYCL 2020 Specification`<sup>[[]](refere
 * To mix both `host code (executed on the host)` and `device code (executed on the device)` in the same source file<sup>[[]](references.md#ref_oneapi_sycl)</sup>.
 
 
-## Intel oneAPI FPGA Development Flows <a name="ch_fpga_flow"></a>
-The Base Kit provides tow different development flows<sup>[[]](references.md#ref_fpga_dev)</sup><sup>[[]](references.md#ref_fpga_dev_flow)</sup>:
-* `FPGA Acceleration Flow (Full-Stack flow)`: Generates the `multiarchitecture binary` (known as `fat binary`). Tha fat binary contains both host and device code (also known as `SYCL kernel`), some aspects of the device code depends on the [Board Support Package (BSP)](#glos_bsp). The full-stack flow is undertaken by setting an FPGA acceleration board as compilation target in Intel oneAPI DPC++/C++ Compiler.
-* `SYCL High-Level Synthesis Flow (HLS Flow or IP Authoring Flow)`: Translates the device code into `RTL IP core` and uses the host code as the testbench for the emulation and simulation flows. The RTL IP core has to be intagrated into the design through Intel Quartus Prime Platform Designer. The FPGA capabilities do not depend on the BSP, but the programmer has to manage more section of the IP design than when generating a fat binary. The IP Authoring Flow is undertaken by setting a supported Intel FPGA device family as e compilation target in Intel oneAPI DPC++/C++ Compiler.
-
-<p align="center">
-  <img src="img/img_oneapi_fpga_flow.png" width="300">
-</p>
-
 
 ## Intel oneAPI ASP <a name="ch_oneapi_asp"></a>
-`oneAPI Accelerator Support Package (ASP)`<sup>[[]](references.md#ref_oneapi_asp_ref)</sup> is used to ensure communication between [hardware circuit](#glos_hardware_cir) with the oneAPI runtime and FPGA board peripherals. It is equivalent to a `BSP`.
+`oneAPI Accelerator Support Package (ASP)`<sup>[[]](references.md#ref_oneapi_asp_ref)</sup> is used to ensure communication between [hardware circuit](#glos_hardware_cir) with the oneAPI runtime and FPGA board peripherals. It is equivalent to a [Board Support Package (BSP)](#glos_bsp).
 
 ASP is comprised of:
 * `Hardware Components`: Enable the hardware circuit to communicate with the host processor. The hardware components are divided into:
@@ -53,7 +45,8 @@ Both ASP hardware components and kernels are placend in the [Accelerator Functio
 </p>
 
 
-## I/O Pipes <a name="ch_pipes"></a>
+
+## Pipes <a name="ch_pipes"></a>
 A `pipe` is an `unidirectional FIFO data structure` and allows comunication between two `endpoints`, an endpoint can be a kernel or an external I/O on the FPGA<sup>[[]](references.md#ref_pipes_sample)</sup>. There are three types of pipes:
 * Kernel-Kernel
 * Kernel-I/O
@@ -61,11 +54,7 @@ A `pipe` is an `unidirectional FIFO data structure` and allows comunication betw
 
 Into a pipe the data flows in a single direction, so the `bidirectional comunication` is obtained through two pipes. Through the pipe, kernels that exchange data can run concurrently. 
 
-The communication takes place through `read and write operations`:
-* A kernel can read or write from the same pipe multiple times<sup>[[]](references.md#ref_restrictions_pipes)</sup>.
-* Multiple kernels cannot read or write from the same pipe<sup>[[]](references.md#ref_restrictions_pipes)</sup>.
-
-A read/write operation can be:
+The communication takes place through `read and write operations`, they can be:
 * `Blocking`: It may not return immediately but are always successful.
 * `Non-blocking`: It takes an extra boolean parameter that is set to true if the operation happened successfull
 
@@ -74,6 +63,11 @@ The `n` consecutive writes (without performing any reads) is defined by a `confi
 * With a non-blocking operation, it returns immediately (boolean parameter is set to false), the write does not have an effect.
 
 The same goes for a read performed with an empty pipe.
+
+
+## Unified Shared Memory (USM) <a name="ch_usm"></a>
+* USM (vedi paragrafo 4.8 https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html#_device_allocation_functions)
+    * Explicit copy is needed to transfer data 
 
 
 ## Glossary <a name="ch_glossary"></a>

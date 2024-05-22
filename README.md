@@ -1,15 +1,22 @@
-# I/O Pipes for SYCL Kernels on Intel FPGAs oneAPI ASP
-This project aims at analysing and evaluating the implementation of `I/O Pipes for SYCL Kernels on Intel FPGAs oneAPI ASP` and it is devided into three steps:
-* Setup a local environment.
-* Run a I/O Pipes example in emulation.
-* Explore the undelying implementation of IO Pipes in the BSP's RTL.
+# Comparison between two comunication mechanisms used to transfer data between SYCL kernels on Intel FPGAs
+The project aims at analysing and evaluating the implementation of `two comunication mechanisms` used to transfer data between `SYCL kernels on Intel FPGAs`, targeting the `oneAPI Accelerator Support Package (ASP)`. The comunication mechanisms are:
+* `Pipe` which implements pipe abstraction.
+* `Unified Shared Memory (USM) device allocation` explicit data movement to and from the FPGA DDR.
+
+## Repository Structure 
+The project has the following strcuture:
+* `doc folder`: Contains the project documentation
+* `impl floder`: Contains all the source files
+    * `pipes`: cpp source files with the pipe abstraction 
+    * `memory_channel`: cpp source files with USM allocations
+    * `python script`: python source files which manages the test automatization
 
 ## Table of Contents
 1. [Intel oneAPI Base Toolkit](doc/intel_oneAPI.md)
     * [oneAPI](doc/intel_oneAPI.md#ch_oneapi)
-    * [Intel oneAPI FPGA Development Flows](doc/intel_oneAPI.md#ch_fpga_flow)
     * [Intel oneAPI ASP](doc/intel_oneAPI.md#ch_oneapi_asp)
-    * [I/O Pipes](doc/intel_oneAPI.md#ch_pipes)
+    * [Pipes](doc/intel_oneAPI.md#ch_pipes)
+    * [Unified Shared Memory (USM)](doc/intel_oneAPI.md#ch_usm)
     * [Glossary](doc/intel_oneAPI.md#ch_glossary)
 1. [Architectural Diagram](doc/arch_diagram.md)
     * [Diagram Legend](doc/arch_diagram.md#ch_diagram_l)
@@ -18,7 +25,7 @@ This project aims at analysing and evaluating the implementation of `I/O Pipes f
 1. [Environment Setup](doc/setup.md)
     * [Tools](doc/setup.md#ch_tools)
     * [oneAPI Samples](doc/setup.md#ch_samples)
-1. [Script in Detail](script/README.md)
+1. [Implementation in Detail](script/README.md)
 1. [Troubleshooting](doc/troubleshooting.md)
 1. [References](doc/references.md)
     * [Further References](doc/references.md#fref)

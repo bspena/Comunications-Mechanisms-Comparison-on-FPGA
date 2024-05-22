@@ -152,9 +152,6 @@ int main(int argc, char *argv[]) {
     int *out_host_ptr = sycl::malloc_device<int>(
         array_size, q,
         sycl::ext::intel::experimental::property::usm::buffer_location(0));
-  
-    // Event to copy host's input data to device memory
-    //auto host_to_device =  q.memcpy(in_ptr, producer_input.data(), array_size * sizeof(int));
 
     // Run the two kernels concurrently
     producer_event = Producer(q, in_host_ptr, out_host_ptr, array_size,producer_input);

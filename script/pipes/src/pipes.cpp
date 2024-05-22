@@ -36,7 +36,7 @@ event Producer(queue &q, buffer<int, 1> &input_buffer) {
     accessor input_accessor(input_buffer, h, read_only);
     size_t num_elements = input_buffer.size();
 
-    // Is executed only one instance of the kernel
+    // Only one instance of the kernel is executed
     h.single_task<ProducerTutorial>([=]() [[intel::kernel_args_restrict]]{
       for (size_t i = 0; i < num_elements; ++i) {
         ProducerToConsumerPipe::write(input_accessor[i]);

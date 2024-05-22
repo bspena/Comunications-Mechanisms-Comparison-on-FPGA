@@ -1,17 +1,5 @@
-# Script in Detail
-
-* USM (vedi paragrafo 4.8 https://registry.khronos.org/SYCL/specs/sycl-2020/html/sycl-2020.html#_device_allocation_functions)
-    * Explicit copy is needed to transfer data 
+# Implementation in Detail
 
 * ofs_n6001_iopipes: DMA-based ASP that supports local memory, host memory, and HSSI/IO Pipes interfaces for the kernel system.
 
 * [[intel::kernel_args_restrict]] kernel attribute, which should be applied anytime you can guarantee that kernel arguments do not alias. This attribute enables more aggressive compiler optimizations and often improves kernel performance on FPGA.
-
-
-## Script Structure <a name="script_struc"></a>
-The Test Cases Script has 5 different files :
-* `oneapi_test.py` : Python "main" script.
-* `oneapi_test_utils.py` : Python file which holds the functions implementations.
-* `oneapi_test_config.py` : Python file which holds the variables needed by the script.
-* `system_build.sh` : Bash script which holds the line commnds to stop and start the hadoop cluster.
-* `test_list.csv` : CSV file which holds the configuration paramters.
