@@ -83,9 +83,11 @@ def runSamples(row):
 #######################################
 def savesResults():
     # Read results from samples csv files
-    pipes_df = pandas.read_csv(config.path_pipes_t_result, names = [config.test_result_columns[0]])
-    memory_channel_df = pandas.read_csv(config.path_memory_channel_t_result, names = [config.test_result_columns[1]])
-
+    pipes_df = pandas.read_csv(config.path_pipes_t_result, 
+                               names = [config.test_result_columns[0],config.test_result_columns[1]])
+    memory_channel_df = pandas.read_csv(config.path_memory_channel_t_result, 
+                                names = [config.test_result_columns[2],config.test_result_columns[3]])
+    
     # Concatenate pandas objects along a particular axis
     test_result_df = pandas.concat([pipes_df, memory_channel_df], axis=1)
 

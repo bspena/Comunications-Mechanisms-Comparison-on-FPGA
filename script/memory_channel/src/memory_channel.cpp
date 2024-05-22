@@ -15,111 +15,74 @@ using namespace sycl;
 class ProducerTutorial;
 class ConsumerTutorial;
 
-// The Producer kernel reads data from input buffer and writes it to device memory
-//event Producer(queue &q, buffer<int, 1> &input_buffer,int *package) {
-event Producer(queue &q, int* in_ptr, int * out_ptr,size_t array_size,std::vector<int> &producer_input) {
+// The producer function copy host's data to device memory
+event Producer(queue &q, int* in_host_ptr, int * out_host_ptr,size_t array_size,std::vector<int> &producer_input) {
   std::cout << "Enqueuing producer...\n";
 
+  // Event to copy host's data to device memory
+  auto host_to_device =  q.memcpy(in_host_ptr, producer_input.data(), array_size * sizeof(int));
 
-      std::cout << "[ProducerKenrnel] vector in " << std::endl;
-      for (size_t i = 0; i < array_size; ++i) {
-       std::cout << producer_input[i] << std::endl;
-      }
-    
-  auto copy =  q.memcpy(in_ptr, producer_input.data(), array_size * sizeof(int));
+  // Crate the command group to issue commands to the queue
+  // The handler object define task operations
+  auto kernel_event = q.submit([&](handler &h) {                                                                     
 
-  // Submit the command group. 
-  // Handler object define task operations
-  auto e = q.submit([&](handler &h) {                                                                     
+    // The event of the copy of host's data must complete before command
+    // group is executed
+    h.depends_on(host_to_device);
 
-    // wait for the copy to finish
-    h.depends_on(copy);
-
-    // Accessor provides read-only access to input buffer
-    //accessor input_accessor(input_buffer, h, read_only);
-    
-    //size_t num_elements = input_buffer.size();
-
-    // Is executed only one instance of the kernel
+    // Only one instance of the kernel is executed 
     h.single_task<ProducerTutorial>([=]() [[intel::kernel_args_restrict]]{
 
-      sycl::device_ptr<int> in_ptr_d(in_ptr);
-      sycl::device_ptr<int> out_ptr_d(out_ptr);
+      // Create device pointers to access to the device memory
+      sycl::device_ptr<int> in_d_ptr(in_host_ptr);
+      sycl::device_ptr<int> out_d_ptr(out_host_ptr);
 
       for (size_t i = 0; i < array_size; ++i) {
-        out_ptr[i]=in_ptr[i];
+        out_d_ptr[i]=in_d_ptr[i];
       }
     });
   });
 
-  //sycl::free(in_ptr, q);
-  //sycl::free(out_ptr, q);
-
-  return e;
+  return kernel_event;
 }
 
-// Simple work done by the Consumer kernel
+// Simple work done by the consumer kernel
 int ConsumerWork(int i) { return i * i; }
 
-// The Consumer kernel reads data from device memory, performs some work 
-// and writes the results to an output buffer
-//event Consumer(queue &q, buffer<int, 1> &out_buf, int *package) {
-event Consumer(queue &q, int* in_ptr, int * out_ptr, size_t array_size,std::vector<int> &consumer_output) {
+// The consumer kernel reads data from device memory, performs some work 
+// and copies the results back to host memory
+event Consumer(queue &q, int* in_host_ptr, int * out_host_ptr, size_t array_size,std::vector<int> &consumer_output) {
   std::cout << "Enqueuing consumer...\n";
 
-  /*  int *in_ptr = sycl::malloc_device<int>(
-      array_size, q,
-      sycl::ext::intel::experimental::property::usm::buffer_location(0));
-  int *out_ptr = sycl::malloc_device<int>(
-      array_size, q,
-      sycl::ext::intel::experimental::property::usm::buffer_location(0));*/
-
-  auto e = q.submit([&](handler &h) {
-
-    // Accessor provides write_only access to output buffer
-    //accessor out_accessor(out_buf, h, write_only, no_init);
-    //size_t num_elements = out_buf.size();
+  auto kernel_event = q.submit([&](handler &h) {
 
     h.single_task<ConsumerTutorial>([=]() [[intel::kernel_args_restrict]]{
 
-      sycl::device_ptr<int> in_ptr_d(in_ptr);
-      sycl::device_ptr<int> out_ptr_d(out_ptr);
-
+      // Create device pointers to access to the device memory
+      sycl::device_ptr<int> in_d_ptr(in_host_ptr);
+      sycl::device_ptr<int> out_d_ptr(out_host_ptr);
 
       for (size_t i = 0; i < array_size; ++i) {
-
-        // do work on the input
-        out_ptr[i] = ConsumerWork(in_ptr_d[i]);
-
-        //out_ptr_d[i] = in_ptr_d[i] + 1;
-
-        // write the result to the output buffer (to global memory)
-        //out_accessor[i] = answer;
+        // Do work on the input
+        out_d_ptr[i] = ConsumerWork(in_d_ptr[i]);
       }
     });
   });
 
-        // copy output data back from device to host
-  auto copy_device_to_host_event = q.submit([&](handler &h) {
-    // we cannot copy the output data from the device's to the host's memory
-    // until the computation kernel has finished
-    // wait for kernel to finish
-    h.depends_on(e);
-    h.memcpy(consumer_output.data(), out_ptr, array_size * sizeof(int));
+  // Create a command group
+  auto device_to_host = q.submit([&](handler &h) {
+
+    // The kernel must complete before command group is executed
+    h.depends_on(kernel_event);
+
+    // Copy output data back from device to host
+    h.memcpy(consumer_output.data(), out_host_ptr, array_size * sizeof(int));
   });
 
-    // wait for copy back to finish
-  copy_device_to_host_event.wait();
+  // wait for copy back to finish
+  device_to_host.wait();
 
-  std::cout << "[Consumer Kernel] vector out " << std::endl;
-      for (size_t i = 0; i < array_size; ++i) {
-       std::cout << consumer_output[i] << std::endl;
-      }
-
-  /*sycl::free(in_ptr, q);
-  sycl::free(out_ptr, q);*/
-
-  return e;
+  return kernel_event;
 }
 
 int main(int argc, char *argv[]) {
@@ -146,7 +109,7 @@ int main(int argc, char *argv[]) {
 
   std::cout << "Input Array Size: " << array_size << "\n";
 
-  // Arrays for SYCL producer (or input) and consumer (or output) buffer
+  // Input and output array
   std::vector<int> producer_input(array_size, -1);
   std::vector<int> consumer_output(array_size, -1);
 
@@ -156,11 +119,6 @@ int main(int argc, char *argv[]) {
   for (size_t i = 0; i < array_size; i++) {
     producer_input[i] = rand() % max_val;
   }
-
-    std::cout << "[Main] vector in " << std::endl;
-      for (size_t i = 0; i < array_size; ++i) {
-       std::cout << producer_input[i] << std::endl;
-      }
 
 #if FPGA_SIMULATOR
   auto selector = sycl::ext::intel::fpga_simulator_selector_v;
@@ -181,50 +139,30 @@ int main(int argc, char *argv[]) {
     queue q(selector, fpga_tools::exception_handler, props);
 
     auto device = q.get_device();
-    //auto context = q.get_context();
 
     std::cout << "Running on device: "
               << device.get_info<sycl::info::device::name>().c_str()
               << std::endl;
 
-    // create the producer (or input) and consumer (or output) buffers
-    //buffer producer_buffer(producer_input);
-    //buffer consumer_buffer(consumer_output);
-
-  int *in_ptr = sycl::malloc_device<int>(
-      array_size, q,
-      sycl::ext::intel::experimental::property::usm::buffer_location(0));
-  int *out_ptr = sycl::malloc_device<int>(
-      array_size, q,
-      sycl::ext::intel::experimental::property::usm::buffer_location(0));
-
-  //auto copy =  q.memcpy(in_ptr, producer_input.data(), array_size * sizeof(int));
-
-    // Allocate memory on the device
-    //1) Specifying array dimension and the syclQueue
-    //int* package = sycl::malloc_device<int>(array_size, q);
-    
-    //2) Specifying array dimension and the syclDevice and sysclContext
-    //int* package = sycl::malloc_device<int>(array_size, device,context);
-    
-    //3) Specifying total byte dimension of the array and the syclQueue
-    //int* package = static_cast<int*>(sycl::malloc_device(array_size * sizeof(int),q));
+    // Allocate memory on the device specifying the same buffer location
+    // int_ptr and out_ptr are host pointers
+    int *in_host_ptr = sycl::malloc_device<int>(
+        array_size, q,
+        sycl::ext::intel::experimental::property::usm::buffer_location(0));
+    int *out_host_ptr = sycl::malloc_device<int>(
+        array_size, q,
+        sycl::ext::intel::experimental::property::usm::buffer_location(0));
+  
+    // Event to copy host's input data to device memory
+    //auto host_to_device =  q.memcpy(in_ptr, producer_input.data(), array_size * sizeof(int));
 
     // Run the two kernels concurrently
-    producer_event = Producer(q, in_ptr, out_ptr, array_size,producer_input);
-    consumer_event = Consumer(q, in_ptr, out_ptr, array_size,consumer_output);
-    //producer_event = Producer(q, producer_buffer, package);
-    //consumer_event = Consumer(q, consumer_buffer, package);
-
-      std::cout << "[Main] vector out " << std::endl;
-      for (size_t i = 0; i < array_size; ++i) {
-       std::cout << consumer_output[i] << std::endl;
-      }
+    producer_event = Producer(q, in_host_ptr, out_host_ptr, array_size,producer_input);
+    consumer_event = Consumer(q, in_host_ptr, out_host_ptr, array_size,consumer_output);
 
     // Free USM
-    sycl::free(in_ptr,q);
-    sycl::free(out_ptr,q);
-    //sycl::free(package,context);
+    sycl::free(in_host_ptr,q);
+    sycl::free(out_host_ptr,q);
 
   } catch (exception const &e) {
     // Catches exceptions in the host code

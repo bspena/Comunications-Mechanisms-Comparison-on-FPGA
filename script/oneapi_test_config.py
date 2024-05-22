@@ -19,7 +19,7 @@ path_test_result = os.getcwd() + '/test_result.csv'
 # Independent factors (Test list file columns) 
 test_list_columns = ('array_size',)
 # Response Variables (Test result file columns) 
-test_result_columns = ('pipes_throughput','memory_channel_throughput')
+test_result_columns = ('pipes_latency','pipes_throughput','memory_channel_latency','memory_channel_throughput')
 
 
 ################
