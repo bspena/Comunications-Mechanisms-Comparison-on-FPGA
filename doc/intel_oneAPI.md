@@ -40,7 +40,7 @@ Both ASP hardware components and kernels are placend in the `Accelerator Functio
 
 
 ## Pipes <a name="ch_pipes"></a>
-A `pipe` is an `unidirectional FIFO data structure` and allows comunication between two `endpoints`, an endpoint can be a kernel or an external I/O on the FPGA<sup>[[9]](references.md#ref_pipes_sample)</sup>. There are three types of pipes:
+A `pipe`<sup>[[9]](references.md#ref_pipes_sample)</sup> is an `unidirectional FIFO data structure` and allows comunication between two `endpoints`, an endpoint can be a kernel or an external I/O on the FPGA. There are three types of pipes:
 * Kernel-Kernel
 * Kernel-I/O
 * I/O-Kernel
@@ -59,9 +59,9 @@ The same goes for a read performed with an empty pipe.
 
 
 ## Unified Shared Memory Allocation <a name="ch_usm"></a>
-The `Unified Shared Memory (USM)` provides a C/C++ pointer-based memory management interfaces in SYCL, which is an alternative to the to the `buffer and accessor SYCL constructs` (also known as `implic data movement`, where the parallel runtime manages data movement and synchronization between kernels). 
+The `Unified Shared Memory (USM)`<sup>[[10]](references.md#ref_explicit_sample)</sup> provides a C/C++ pointer-based memory management interfaces in SYCL, which is an alternative to the to the `buffer and accessor SYCL constructs` (also known as `implic data movement`, where the parallel runtime manages data movement and synchronization between kernels). 
 
-USM provides three types of allocations<sup>[[10]](references.md#ref_explicit_sample)</sup>:
+USM provides three types of allocations:
 * `Device allocation`: Allocates device memory through `malloc_device` and is only accessible from the device.
 * `Host allocation`: Allocates host memory through `malloc_host`. The pointer given to the FPGA actually lives in the host DDR, but the BSP implements the necessary functionalities to be able to read directly in this memory.
 * `Shared allocation`: Allocates shared memory through `malloc_shared`. The memory can live on the host or on the FPGA and may be moved at runtime between the host and device depending on the memory access pattern.
@@ -73,7 +73,7 @@ With USM allocation, the programmer explicitly:
 
 ## Intel oneAPI FPGA Development Flows <a name="ch_fpga_flow"></a>
 The Base Kit provides tow different development flows<sup>[[11]](references.md#ref_fpga_dev)</sup><sup>[[12]](references.md#ref_fpga_dev_flow)</sup>:
-* `FPGA Acceleration Flow (Full-Stack flow)`: Generates the `multiarchitecture binary` (known as `fat binary`). Tha fat binary contains both host and device code (also known as `SYCL kernel`), some aspects of the device code depends on the [Board Support Package (BSP)](#glos_bsp). The full-stack flow is undertaken by setting an FPGA acceleration board as compilation target in Intel oneAPI DPC++/C++ Compiler.
+* `FPGA Acceleration Flow (Full-Stack flow)`: Generates the `multiarchitecture binary` (known as `fat binary`). Tha fat binary contains both host and device code (also known as `SYCL kernel`), some aspects of the device code depends on the (BSP). The full-stack flow is undertaken by setting an FPGA acceleration board as compilation target in Intel oneAPI DPC++/C++ Compiler.
 * `SYCL High-Level Synthesis Flow (HLS Flow or IP Authoring Flow)`: Translates the device code into `RTL IP core` and uses the host code as the testbench for the emulation and simulation flows. The RTL IP core has to be intagrated into the design through Intel Quartus Prime Platform Designer. The FPGA capabilities do not depend on the BSP, but the programmer has to manage more section of the IP design than when generating a fat binary. The IP Authoring Flow is undertaken by setting a supported Intel FPGA device family as e compilation target in Intel oneAPI DPC++/C++ Compiler.
 
 <p align="center">
