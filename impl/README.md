@@ -1,8 +1,8 @@
 # Implementation in Detail
 
 ## Project Structure <a name="ch_pr_struct"></a>
-* `pipes folder`: cpp source files with the pipe abstraction <sup>[[]](../doc/references.md#ref_pipes_sample)</sup>
-* `memory_channel folder`: cpp source files with USM allocations <sup>[[]](../doc/references.md#ref_explicit_sample)</sup>
+* `pipes folder`: cpp source files with the [pipe abstraction](../doc/intel_oneAPI.md#ch_pipes)
+* `memory_channel folder`: cpp source files with [USM allocations](../doc/intel_oneAPI.md#ch_usm)
 * `python script folder`: python and bash source files needed for test automatization
     * `oneapi_test.py`: python main source file
     * `oneapi_test_utils.py`: python source file with the functions implementations
