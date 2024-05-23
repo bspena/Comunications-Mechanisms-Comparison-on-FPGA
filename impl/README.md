@@ -1,5 +1,40 @@
 # Implementation in Detail
 
-* ofs_n6001_iopipes: DMA-based ASP that supports local memory, host memory, and HSSI/IO Pipes interfaces for the kernel system.
+## Project Structure <a name="ch_pr_struct"></a>
+* `pipes folder`: cpp source files with the pipe abstraction <sup>[[]](../doc/references.md#ref_pipes_sample)</sup>
+* `memory_channel folder`: cpp source files with USM allocations <sup>[[]](../doc/references.md#ref_explicit_sample)</sup>
+* `python script folder`: python and bash source files needed for test automatization
+    * `oneapi_test.py`: python main source file
+    * `oneapi_test_utils.py`: python source file with the functions implementations
+    * `oneapi_test_config.py`: python main source file which holds the configuration variables
+    * `sample_build.sh`: bash script to build and compile the sample
+    * `sample_run.sh`: bash script to run the sample
 
-* [[intel::kernel_args_restrict]] kernel attribute, which should be applied anytime you can guarantee that kernel arguments do not alias. This attribute enables more aggressive compiler optimizations and often improves kernel performance on FPGA.
+## Control Flow <a name="ch_flow_control"></a>
+```mermaid
+stateDiagram-v2
+    s1: Check enviroment and user configuration
+    s2: Initialize Test
+    s3: Build and compile samples
+    s4: Run samples
+    s5: Saves results
+        
+        [*] --> s1
+        s1 --> s2
+        s2 --> s3
+        s3 --> s4
+        s4 --> s5
+```
+
+
+## How to Run <a name="ch_run"></a>
+* Set indipendent factors in `test_list.csv` file.
+* Starts the `oneapi_test.py` script.
+```bash
+$ python3 oneapi_test.py
+```
+* Reads response variables from `test_result.csv` file.
+
+<p align="center">
+  <img src="../doc/img/test_flow.png" width="600">
+</p>

@@ -37,6 +37,9 @@ event Producer(queue &q, buffer<int, 1> &input_buffer) {
     size_t num_elements = input_buffer.size();
 
     // Only one instance of the kernel is executed
+    // intel::kernel_args_restrict is a kernel attribute, which should be applied anytime you can guarantee 
+    // that kernel arguments do not alias. This attribute enables more aggressive compiler optimizations 
+    // and often improves kernel performance on FPGA.
     h.single_task<ProducerTutorial>([=]() [[intel::kernel_args_restrict]]{
       for (size_t i = 0; i < num_elements; ++i) {
         ProducerToConsumerPipe::write(input_accessor[i]);

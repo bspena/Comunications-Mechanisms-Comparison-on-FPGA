@@ -47,7 +47,7 @@ def buildCompileSamples():
                                     config.path_memory_channel_sample + ' ' + config.path_asp + ' ' + 
                                     config.board_variant )
 
-    # Run build script
+    # Run sample_build.sh
     print('[INFO] Build pipes sample')
     subprocess.run(pipes_sample_cmd, shell=True, executable="/bin/bash")
     print('\n')
@@ -68,6 +68,7 @@ def runSamples(row):
                                 config.path_memory_channel_sample + ' ' + config.samples_names[1] + ' ' + 
                                 str(row['array_size']) )
 
+    # Run sample_run.sh
     print('[INFO] Run pipes sample')
     subprocess.run(pipes_sample_cmd, shell=True, executable="/bin/bash")
     print('\n')
@@ -98,7 +99,6 @@ def savesResults():
         tests_number.append(string)
 
     test_result_df.index = tests_number   
-
 
     # Write to csv 
     test_result_df.to_csv(config.path_test_result,index= False)

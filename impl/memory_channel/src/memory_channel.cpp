@@ -31,6 +31,9 @@ event Producer(queue &q, int* in_host_ptr, int * out_host_ptr,size_t array_size,
     h.depends_on(host_to_device);
 
     // Only one instance of the kernel is executed 
+    // intel::kernel_args_restrict is a kernel attribute, which should be applied anytime you can guarantee 
+    // that kernel arguments do not alias. This attribute enables more aggressive compiler optimizations 
+    // and often improves kernel performance on FPGA.
     h.single_task<ProducerTutorial>([=]() [[intel::kernel_args_restrict]]{
 
       // Create device pointers to access to the device memory

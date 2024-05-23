@@ -1,36 +1,39 @@
 # Comparison between two comunication mechanisms used to transfer data between SYCL kernels on Intel FPGAs
-The project aims at analysing and evaluating the implementation of `two comunication mechanisms` used to transfer data between `SYCL kernels on Intel FPGAs`, targeting the `oneAPI Accelerator Support Package (ASP)`. The comunication mechanisms are:
+The project aims at analysing and evaluating the implementation of `two comunication mechanisms` used to transfer data between `SYCL kernels on Intel FPGAs`, targeting the `oneAPI Accelerator Support Package (ASP)`. The project performs different test cases: given `indipendent factors`, it measures the `response variables`.
+
+The comunication mechanisms are:
 * `Pipe` which implements pipe abstraction.
 * `Unified Shared Memory (USM) device allocation` explicit data movement to and from the FPGA DDR.
+
+Instead, the ASP variant is `ofs_n6001_usm_iopipes`<sup>[[1]](doc/references.md#ref_asp)</sup> that supports both shared virtual memory between host and device and pipes interfaces for the kernel system.
+
 
 ## Repository Structure 
 The project has the following strcuture:
 * `doc folder`: Contains the project documentation
 * `impl floder`: Contains all the source files
-    * `pipes`: cpp source files with the pipe abstraction 
-    * `memory_channel`: cpp source files with USM allocations
-    * `python script`: python source files which manages the test automatization
 
 ## Table of Contents
 1. [Intel oneAPI Base Toolkit](doc/intel_oneAPI.md)
     * [oneAPI](doc/intel_oneAPI.md#ch_oneapi)
     * [Intel oneAPI ASP](doc/intel_oneAPI.md#ch_oneapi_asp)
     * [Pipes](doc/intel_oneAPI.md#ch_pipes)
-    * [Unified Shared Memory (USM)](doc/intel_oneAPI.md#ch_usm)
-    * [Glossary](doc/intel_oneAPI.md#ch_glossary)
+    * [Unified Shared Memory Device Allocation](doc/intel_oneAPI.md#ch_usm)
+    * [Intel oneAPI FPGA Development Flows](doc/intel_oneAPI.md#ch_fpga_flow)
 1. [Architectural Diagram](doc/arch_diagram.md)
     * [Diagram Legend](doc/arch_diagram.md#ch_diagram_l)
     * [Modules Description](doc/arch_diagram.md#ch_modules)
     * [Standards](doc/arch_diagram.md#ch_standards)
 1. [Environment Setup](doc/setup.md)
     * [Tools](doc/setup.md#ch_tools)
-    * [oneAPI Samples](doc/setup.md#ch_samples)
-1. [Implementation in Detail](script/README.md)
+    * [Manage oneAPI Samples](doc/setup.md#ch_samples)
+1. [Implementation in Detail](impl/README.md)
+    * [Project Structure](impl/README.md#ch_pr_struct)
+    * [How to Run](impl/README.md#ch_run)
+    * [Control Flow](impl/README.md#ch_flow_control)
 1. [Troubleshooting](doc/troubleshooting.md)
 1. [References](doc/references.md)
     * [Further References](doc/references.md#fref)
-        * [Documentation](doc/references.md#fref_doc)
-        * [SystemVerilog Modules/Interfaces](doc/references.md#fref_sv)
 
 
 # Cose da fare

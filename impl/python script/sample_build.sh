@@ -14,7 +14,7 @@ echo "[INFO] Configure the build"
 cd $2
 mkdir build 
 cd build 
-cmake  -DFPGA_DEVICE=$3:$4 ..
+cmake .. -DFPGA_DEVICE=$3:$4
 
 #### NOTE ####
 # Some samples do not support targeting an explicit FPGA board variant and BSP, so use
@@ -22,6 +22,8 @@ cmake  -DFPGA_DEVICE=$3:$4 ..
 ############à
 
 
-echo "[INFO] Compiling for emulation"
+echo "[INFO] Compiling"
+# Compiling for emulation
 make fpga_emu
-
+# Compiling for FPGA hardware
+#make fpga

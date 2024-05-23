@@ -1,6 +1,5 @@
 import os
 
-
 ###########
 # Generic #
 ###########
@@ -35,7 +34,7 @@ path_setvars = '/opt/intel/oneapi/setvars.sh'
 # Path to ASP
 path_asp = '/home/spena/oneapi-asp/n6001'
 # Board Variant
-board_variant = 'ofs_n6001_iopipes'
+board_variant = 'ofs_n6001_usm_iopipes'
 
 
 ###################
@@ -47,7 +46,7 @@ samples_names = ('pipes','memory_channel')
 path_samples                = '/home/spena/oneAPI-samples/DirectProgramming/C++SYCL_FPGA/Tutorials/Features'
 path_pipes_sample           = path_samples + '/' + samples_names[0]
 path_memory_channel_sample  = path_samples + '/' + samples_names[1]
-# Path to csv files with samples results
+# Path to csv files with tests results
 path_pipes_t_result             = path_samples + '/' + samples_names[0] + '/build/test_result_pipes.csv'
 path_memory_channel_t_result    = path_samples + '/' + samples_names[1] + '/build/test_result_memory_channel.csv'
 

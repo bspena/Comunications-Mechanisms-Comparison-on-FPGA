@@ -15,3 +15,4 @@ cd build
 
 echo "[INFO] Run sample"
 ./$3.fpga_emu $4
+#./$3.fpga $4
