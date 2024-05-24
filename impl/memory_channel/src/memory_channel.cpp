@@ -30,7 +30,7 @@ event Producer(queue &q, int* in_host_ptr, int * out_host_ptr,size_t array_size,
     // group is executed
     h.depends_on(host_to_device);
 
-    // Only one instance of the kernel is executed 
+    // Only one instance of the kernel is executed
     // intel::kernel_args_restrict is a kernel attribute, which should be applied anytime you can guarantee 
     // that kernel arguments do not alias. This attribute enables more aggressive compiler optimizations 
     // and often improves kernel performance on FPGA.
@@ -143,6 +143,13 @@ int main(int argc, char *argv[]) {
 
     auto device = q.get_device();
 
+    // Make sure the device supports USM device allocations
+    if (!device.get_info<sycl::info::device::usm_device_allocations>()) {
+      std::cerr << "ERROR: The selected device does not support USM device"
+                << " allocations\n";
+      return 1;
+    }
+
     std::cout << "Running on device: "
               << device.get_info<sycl::info::device::name>().c_str()
               << std::endl;
@@ -155,7 +162,7 @@ int main(int argc, char *argv[]) {
     int *out_host_ptr = sycl::malloc_device<int>(
         array_size, q,
         sycl::ext::intel::experimental::property::usm::buffer_location(0));
-
+  
     // Run the two kernels concurrently
     producer_event = Producer(q, in_host_ptr, out_host_ptr, array_size,producer_input);
     consumer_event = Consumer(q, in_host_ptr, out_host_ptr, array_size,consumer_output);
