@@ -16,10 +16,10 @@ if __name__=='__main__':
         print("[INFO] Running test n. " + i.split('Test')[1] + "/" + str(test_list_df.shape[0]) )
         print("##########################")
         
-        #3. Run samples
+        #2. Run samples
         print('[STEP 2]: Run ' +  str(row['sample_name']) + ' sample')
         utils.runSamples(row)
 
-    #4. Save results in test_result.csv
+    #3. Save results in test_result.csv
     print('[STEP 3]: Save results')
     utils.savesResults(test_list_df.at['Test1','sample_name'])
