@@ -36,10 +36,7 @@ event Producer(queue &q, buffer<int, 1> &input_buffer) {
     accessor input_accessor(input_buffer, h, read_only);
     size_t num_elements = input_buffer.size();
 
-    // Only one instance of the kernel is executed
-    // intel::kernel_args_restrict is a kernel attribute, which should be applied anytime you can guarantee 
-    // that kernel arguments do not alias. This attribute enables more aggressive compiler optimizations 
-    // and often improves kernel performance on FPGA.
+    // Is executed only one instance of the kernel
     h.single_task<ProducerTutorial>([=]() [[intel::kernel_args_restrict]]{
       for (size_t i = 0; i < num_elements; ++i) {
         ProducerToConsumerPipe::write(input_accessor[i]);
@@ -224,13 +221,10 @@ int main(int argc, char *argv[]) {
   }
   std::cout << "PASSED: The results are correct\n";
 
-  // Open file test_result_pipes.csv in append mode
+  // Open file csv in append mode and saves results
   std::ofstream test_result;
-  test_result.open("test_result_pipes.csv",std::ios::app);
-
-  // Write data into the file
-  std::cout << "Save results into test_result_pipes.csv" << "\n";
-   test_result << total_time_ms << "," << throughput_mbs << "\n";
+  test_result.open("pipes_test_result.csv",std::ios::app);
+  test_result << array_size << "," << total_time_ms << "," << throughput_mbs << "\n";
 
   return 0;
 }

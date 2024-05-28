@@ -20,7 +20,7 @@ event Producer(queue &q, int* in_host_ptr, int * out_host_ptr,size_t array_size,
   std::cout << "Enqueuing producer...\n";
 
   // Event to copy host's data to device memory
-  auto host_to_device =  q.memcpy(in_host_ptr, producer_input.data(), array_size * sizeof(int));
+  auto host_to_device = q.memcpy(in_host_ptr, producer_input.data(), array_size * sizeof(int));
 
   // Crate the command group to issue commands to the queue
   // The handler object define task operations
@@ -30,16 +30,14 @@ event Producer(queue &q, int* in_host_ptr, int * out_host_ptr,size_t array_size,
     // group is executed
     h.depends_on(host_to_device);
 
-    // Only one instance of the kernel is executed
-    // intel::kernel_args_restrict is a kernel attribute, which should be applied anytime you can guarantee 
-    // that kernel arguments do not alias. This attribute enables more aggressive compiler optimizations 
-    // and often improves kernel performance on FPGA.
+    // Only one instance of the kernel is executed 
     h.single_task<ProducerTutorial>([=]() [[intel::kernel_args_restrict]]{
 
       // Create device pointers to access to the device memory
       sycl::device_ptr<int> in_d_ptr(in_host_ptr);
       sycl::device_ptr<int> out_d_ptr(out_host_ptr);
-
+  
+      #pragma unroll
       for (size_t i = 0; i < array_size; ++i) {
         out_d_ptr[i]=in_d_ptr[i];
       }
@@ -65,25 +63,36 @@ event Consumer(queue &q, int* in_host_ptr, int * out_host_ptr, size_t array_size
       sycl::device_ptr<int> in_d_ptr(in_host_ptr);
       sycl::device_ptr<int> out_d_ptr(out_host_ptr);
 
+      #pragma unroll
       for (size_t i = 0; i < array_size; ++i) {
         // Do work on the input
         out_d_ptr[i] = ConsumerWork(in_d_ptr[i]);
       }
     });
+    
   });
 
+  // The kernel must complete before command group is executed 
+  kernel_event.wait();
+
+  // Copy output data back from device to host
+  q.memcpy(consumer_output.data(), out_host_ptr, array_size * sizeof(int));
+
+
+  // Metteer la memycopy fuorì
+
   // Create a command group
-  auto device_to_host = q.submit([&](handler &h) {
+  /*q.submit([&](handler &h) {
 
     // The kernel must complete before command group is executed
     h.depends_on(kernel_event);
 
     // Copy output data back from device to host
     h.memcpy(consumer_output.data(), out_host_ptr, array_size * sizeof(int));
-  });
+  }).wait();*/
 
   // wait for copy back to finish
-  device_to_host.wait();
+  //device_to_host.wait();
 
   return kernel_event;
 }
@@ -116,6 +125,8 @@ int main(int argc, char *argv[]) {
   std::vector<int> producer_input(array_size, -1);
   std::vector<int> consumer_output(array_size, -1);
 
+  //uint8_t --> vector vedere costruttore
+
   // Initialize the input data with random numbers smaller than 46340.
   // Any number larger than this will have integer overflow when squared.
   constexpr int max_val = 46340;
@@ -142,13 +153,6 @@ int main(int argc, char *argv[]) {
     queue q(selector, fpga_tools::exception_handler, props);
 
     auto device = q.get_device();
-
-    // Make sure the device supports USM device allocations
-    if (!device.get_info<sycl::info::device::usm_device_allocations>()) {
-      std::cerr << "ERROR: The selected device does not support USM device"
-                << " allocations\n";
-      return 1;
-    }
 
     std::cout << "Running on device: "
               << device.get_info<sycl::info::device::name>().c_str()
@@ -247,13 +251,10 @@ int main(int argc, char *argv[]) {
   }
   std::cout << "PASSED: The results are correct\n";
 
-  // Open file test_result_memory_channel.csv in append mode
+  // Open file csv in append mode and saves result
   std::ofstream test_result;
-  test_result.open("test_result_memory_channel.csv",std::ios::app);
-
-  // Write data into the file
-  std::cout << "Save results into test_result_memory_channel.csv" << "\n";
-  test_result << total_time_ms << "," << throughput_mbs << "\n";
+  test_result.open("memory_channel_test_result.csv",std::ios::app);
+  test_result << array_size << "," << total_time_ms << "," << throughput_mbs << "\n";
 
   return 0;
 }

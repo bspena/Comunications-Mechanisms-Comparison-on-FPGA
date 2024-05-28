@@ -37,20 +37,22 @@ The project has the following strcuture:
 
 
 # Cose da fare
+* Aggiustare memory_channel
+    * commento per pragma unroll
+    * revisione vector
+    * "auto event" ???
+
 * Progettare gli esperimenti
     * Confronto tra meccanismi di comunicazione tra kernel producer e consumer 
         * Pipe
         * Memoria device --> i dati sono inviati usando la memoria del device
     * Fattori
-        * dimensioni del pacchetto
+        * dimensioni del pacchetto (per pipes e memory_channel): 2^0,....,2^15
+        * nmero di ripetizioni : 10
     * Variabili di risposta
-        * latenza (numero di pacchetti) /throughput (numero di pacchetti/s)
+        * latenza (numero di pacchetti)
+        * throughput (numero di pacchetti/s)
+
 * Fare gli esperimenti
 
 * Vedere nell'RTL generato (ProducerConsumerPipedId) come sono implementate le interfacce (producer,consumer e pipe) e sviluppare un diagramma 
-
-## Note
-* tipo pacchetto con un solo parametro (array) --> volta per volta posso ridefinire
-    * 2/3 dimenioni
-* malloc_device per allocare alloca il buffer
-    * buffer condiviso tra i due kernel

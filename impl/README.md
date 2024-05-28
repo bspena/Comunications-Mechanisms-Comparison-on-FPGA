@@ -29,9 +29,17 @@ stateDiagram-v2
 
 ## How to Run <a name="ch_run"></a>
 * Set indipendent factors in `test_list.csv` file.
+* Set environment variables
+```bash
+  source full/path/to/setvars.sh 
+```
+* run build script
+```bash
+  ./sample_build.sh full/path/to/sample full/path/to/asp/asp_version board_variant
+```
 * Starts the `oneapi_test.py` script.
 ```bash
-$ python3 oneapi_test.py
+  python3 oneapi_test.py
 ```
 * Reads response variables from `test_result.csv` file.
 
