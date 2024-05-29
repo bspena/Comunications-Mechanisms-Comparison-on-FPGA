@@ -1,5 +1,8 @@
 # Implementation in Detail
 
+* https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C++SYCL_FPGA/Tutorials/Features/loop_unroll
+
+
 ## Project Structure <a name="ch_pr_struct"></a>
 * `pipes folder`: cpp source files with the [pipe abstraction](../doc/intel_oneAPI.md#ch_pipes)
 * `memory_channel folder`: cpp source files with [USM allocations](../doc/intel_oneAPI.md#ch_usm)

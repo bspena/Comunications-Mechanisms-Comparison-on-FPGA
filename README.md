@@ -37,11 +37,6 @@ The project has the following strcuture:
 
 
 # Cose da fare
-* Aggiustare memory_channel
-    * commento per pragma unroll
-    * revisione vector
-    * "auto event" ???
-
 * Progettare gli esperimenti
     * Confronto tra meccanismi di comunicazione tra kernel producer e consumer 
         * Pipe

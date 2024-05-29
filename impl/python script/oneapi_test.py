@@ -1,5 +1,4 @@
 import oneapi_test_utils as utils
-import os
 
 if __name__=='__main__':
 

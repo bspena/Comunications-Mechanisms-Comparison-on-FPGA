@@ -34,9 +34,11 @@ event Producer(queue &q, int* in_host_ptr, int * out_host_ptr,size_t array_size,
     h.single_task<ProducerTutorial>([=]() [[intel::kernel_args_restrict]]{
 
       // Create device pointers to access to the device memory
-      sycl::device_ptr<int> in_d_ptr(in_host_ptr);
-      sycl::device_ptr<int> out_d_ptr(out_host_ptr);
+      device_ptr<int> in_d_ptr(in_host_ptr);
+      device_ptr<int> out_d_ptr(out_host_ptr);
   
+      // Using a compiler optimization to unroll the loop and
+      // generate multiple copies of the loop body parallelizing the executio
       #pragma unroll
       for (size_t i = 0; i < array_size; ++i) {
         out_d_ptr[i]=in_d_ptr[i];
@@ -55,13 +57,14 @@ int ConsumerWork(int i) { return i * i; }
 event Consumer(queue &q, int* in_host_ptr, int * out_host_ptr, size_t array_size,std::vector<int> &consumer_output) {
   std::cout << "Enqueuing consumer...\n";
 
+  // auto is the placeholder type
   auto kernel_event = q.submit([&](handler &h) {
 
     h.single_task<ConsumerTutorial>([=]() [[intel::kernel_args_restrict]]{
 
       // Create device pointers to access to the device memory
-      sycl::device_ptr<int> in_d_ptr(in_host_ptr);
-      sycl::device_ptr<int> out_d_ptr(out_host_ptr);
+      device_ptr<int> in_d_ptr(in_host_ptr);
+      device_ptr<int> out_d_ptr(out_host_ptr);
 
       #pragma unroll
       for (size_t i = 0; i < array_size; ++i) {
@@ -69,7 +72,6 @@ event Consumer(queue &q, int* in_host_ptr, int * out_host_ptr, size_t array_size
         out_d_ptr[i] = ConsumerWork(in_d_ptr[i]);
       }
     });
-    
   });
 
   // The kernel must complete before command group is executed 
@@ -77,22 +79,6 @@ event Consumer(queue &q, int* in_host_ptr, int * out_host_ptr, size_t array_size
 
   // Copy output data back from device to host
   q.memcpy(consumer_output.data(), out_host_ptr, array_size * sizeof(int));
-
-
-  // Metteer la memycopy fuorì
-
-  // Create a command group
-  /*q.submit([&](handler &h) {
-
-    // The kernel must complete before command group is executed
-    h.depends_on(kernel_event);
-
-    // Copy output data back from device to host
-    h.memcpy(consumer_output.data(), out_host_ptr, array_size * sizeof(int));
-  }).wait();*/
-
-  // wait for copy back to finish
-  //device_to_host.wait();
 
   return kernel_event;
 }
@@ -122,10 +108,9 @@ int main(int argc, char *argv[]) {
   std::cout << "Input Array Size: " << array_size << "\n";
 
   // Input and output array
+  // datatype uint8_t
   std::vector<int> producer_input(array_size, -1);
   std::vector<int> consumer_output(array_size, -1);
-
-  //uint8_t --> vector vedere costruttore
 
   // Initialize the input data with random numbers smaller than 46340.
   // Any number larger than this will have integer overflow when squared.
@@ -172,8 +157,8 @@ int main(int argc, char *argv[]) {
     consumer_event = Consumer(q, in_host_ptr, out_host_ptr, array_size,consumer_output);
 
     // Free USM
-    sycl::free(in_host_ptr,q);
-    sycl::free(out_host_ptr,q);
+    free(in_host_ptr,q);
+    free(out_host_ptr,q);
 
   } catch (exception const &e) {
     // Catches exceptions in the host code
