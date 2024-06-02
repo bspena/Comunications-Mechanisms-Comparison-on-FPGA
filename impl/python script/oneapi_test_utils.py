@@ -24,9 +24,11 @@ def initTest():
     # Read test_list.csv (number of test x indipendet factors) and create the dataframe
     test_list_df = pandas.read_csv(config.test_list_path)
 
-    # Expand by the number of repetition
-    for i in range(1,config.test_list_num_repetitions):
-        test_list_df = pandas.concat([test_list_df, test_list_df], ignore_index=True)
+# Expand by the number of repetition
+    #for i in range(1,config.test_list_num_repetitions):
+    #    test_list_df = pandas.concat([test_list_df, test_list_df], ignore_index=True)
+
+    test_list_df = pandas.concat([test_list_df]*config.test_list_num_repetitions, ignore_index=True)
 
     # Reshuffle for randomness
     test_list_df = test_list_df.sample(frac=1).reset_index(drop=True)
