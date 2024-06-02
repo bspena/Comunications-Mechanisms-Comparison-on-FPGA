@@ -8,7 +8,9 @@ Each sample implemente thw comunication between `SYCL Producer and Consumer kern
 * `kernel_args_restrict attribute`<sup>[[15]](../doc/references.md#ref_karg_sample)</sup> to improve kernel performance by enabling more aggressive compiler optimizations.
 
 
-The ASP variant targetted is `ofs_n6001_usm_iopipes`<sup>[[16]](doc/references.md#ref_asp)</sup> which supports both shared virtual memory between host and device and pipes interfaces for the kernel system.
+The ASP targetted is:
+* `n6001 platform`
+* `ofs_n6001_usm_iopipes variant`<sup>[[16]](doc/references.md#ref_asp)</sup> which supports both shared virtual memory between host and device and pipes interfaces for the kernel system.
 
 ## Control Flow <a name="ch_flow_control"></a>
 ```mermaid
