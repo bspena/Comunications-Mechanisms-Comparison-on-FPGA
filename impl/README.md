@@ -1,17 +1,14 @@
 # Implementation in Detail
+Given `indipendent factors`, the script performs teste cases in order to measures `response variables` of two samples:
+* `pipes`: which implements [pipe abstraction](../doc/intel_oneAPI.md#ch_pipes).
+* `memory_channel`: which implements [USM device allocations](../doc/intel_oneAPI.md#ch_usm).
 
-* https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C++SYCL_FPGA/Tutorials/Features/loop_unroll
+Each sample implemente thw comunication between `SYCL Producer and Consumer kernels`. Each kernel uses:
+* `loop unrolling mechanism`<sup>[[14]](../doc/references.md#ref_lunroll_sample)</sup> to increase program parallelism by duplicating the compute logic within a loop and to improve throughput.
+* `kernel_args_restrict attribute`<sup>[[15]](../doc/references.md#ref_karg_sample)</sup> to improve kernel performance by enabling more aggressive compiler optimizations.
 
 
-## Project Structure <a name="ch_pr_struct"></a>
-* `pipes folder`: cpp source files with the [pipe abstraction](../doc/intel_oneAPI.md#ch_pipes)
-* `memory_channel folder`: cpp source files with [USM allocations](../doc/intel_oneAPI.md#ch_usm)
-* `python script folder`: python and bash source files needed for test automatization
-    * `oneapi_test.py`: python main source file
-    * `oneapi_test_utils.py`: python source file with the functions implementations
-    * `oneapi_test_config.py`: python main source file which holds the configuration variables
-    * `sample_build.sh`: bash script to build and compile the sample
-    * `sample_run.sh`: bash script to run the sample
+The ASP variant targetted is `ofs_n6001_usm_iopipes`<sup>[[16]](doc/references.md#ref_asp)</sup> which supports both shared virtual memory between host and device and pipes interfaces for the kernel system.
 
 ## Control Flow <a name="ch_flow_control"></a>
 ```mermaid
@@ -31,20 +28,21 @@ stateDiagram-v2
 
 
 ## How to Run <a name="ch_run"></a>
-* Set indipendent factors in `test_list.csv` file.
+* Set sample name and indipendent factors in `test_list.csv`.
+* Set configuration variables in `oneapi_test_config.py`. 
 * Set environment variables
 ```bash
   source full/path/to/setvars.sh 
 ```
-* run build script
+* Run `oneapi_sample_build.sh` to build the program
 ```bash
-  ./sample_build.sh full/path/to/sample full/path/to/asp/asp_version board_variant
+  ./oneapi_sample_build.sh full/path/to/sample full/path/to/asp/version asp_version asp_variant
 ```
-* Starts the `oneapi_test.py` script.
+* Run `oneapi_test.py` to start test cases
 ```bash
   python3 oneapi_test.py
 ```
-* Reads response variables from `test_result.csv` file.
+* Reads response variables from `samplename_test_result.csv` file.
 
 <p align="center">
   <img src="../doc/img/test_flow.png" width="600">

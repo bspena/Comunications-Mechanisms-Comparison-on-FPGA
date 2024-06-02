@@ -1,0 +1,17 @@
+sample_name,array_size
+pipes,1
+pipes,2
+pipes,4
+pipes,8
+pipes,16
+pipes,32
+pipes,64
+pipes,128
+pipes,256
+pipes,512
+pipes,1024
+pipes,2048
+pipes,4096
+pipes,8192
+pipes,16384
+pipes,32768

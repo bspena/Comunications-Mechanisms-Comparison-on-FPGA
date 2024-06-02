@@ -1,17 +1,14 @@
 # Comparison between two comunication mechanisms used to transfer data between SYCL kernels on Intel FPGAs
-The project aims at analysing and evaluating the implementation of `two comunication mechanisms` used to transfer data between `SYCL kernels on Intel FPGAs`, targeting the `oneAPI Accelerator Support Package (ASP)`. The project performs different test cases: given `indipendent factors`, it measures the `response variables`.
+The project aims at analysing and evaluating the implementation of `two comunication mechanisms`:
+* `Pipe`
+* `Unified Shared Memory (USM) device allocation`
 
-The comunication mechanisms are:
-* `Pipe` which implements pipe abstraction.
-* `Unified Shared Memory (USM) device allocation` explicit data movement to and from the FPGA DDR.
-
-Instead, the ASP variant is `ofs_n6001_usm_iopipes`<sup>[[1]](doc/references.md#ref_asp)</sup> that supports both shared virtual memory between host and device and pipes interfaces for the kernel system.
-
+used to transfer data between `SYCL kernels on Intel FPGAs`, targeting the `oneAPI Accelerator Support Package (ASP)`.
 
 ## Repository Structure 
 The project has the following strcuture:
 * `doc folder`: Contains the project documentation
-* `impl floder`: Contains all the source files
+* `impl floder`: Contains the project source files
 
 ## Table of Contents
 1. [Intel oneAPI Base Toolkit](doc/intel_oneAPI.md)
@@ -50,4 +47,4 @@ The project has the following strcuture:
 
 * Fare gli esperimenti
 
-* Vedere nell'RTL generato (ProducerConsumerPipedId) come sono implementate le interfacce (producer,consumer e pipe) e sviluppare un diagramma 
+* Vedere nell'RTL generato (ProducerConsumerPipedId) come sono implementate le interfacce (producer,consumer e pipe) e sviluppare un diagramma

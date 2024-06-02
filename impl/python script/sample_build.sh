@@ -20,6 +20,6 @@ cmake .. -DFPGA_DEVICE=$2:$3
 
 echo "[INFO] Compile the design"
 # Compiling for emulation
-make fpga_emu
+#make fpga_emu
 # Compiling for FPGA hardware
-#make fpga
+make fpga
