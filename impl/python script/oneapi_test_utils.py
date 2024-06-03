@@ -25,9 +25,6 @@ def initTest():
     test_list_df = pandas.read_csv(config.test_list_path)
 
     # Expand by the number of repetition
-    #for i in range(1,config.test_list_num_repetitions):
-    #    test_list_df = pandas.concat([test_list_df, test_list_df], ignore_index=True)
-
     test_list_df = pandas.concat([test_list_df]*config.test_list_num_repetitions, ignore_index=True)
 
     # Reshuffle for randomness
@@ -49,10 +46,10 @@ def initTest():
 ##################
 def runSamples(row):
 
-    # Create bash command to run ./sample.fpga_emu
+    # Create bash command to run ./sample.fpga.emu
     #bash_command = (config.sample_path + '/' + str(row['sample_name']) + '/build/' + 
     #               str(row['sample_name']) + '.fpga_emu ' + str(row['array_size']))
-
+    
     # Create bash command to run ./sample.fpga
     bash_command = (config.sample_path + '/' + str(row['sample_name']) + '/build/' + 
                    str(row['sample_name']) + '.fpga ' + str(row['array_size']))
@@ -64,23 +61,20 @@ def runSamples(row):
 #######################################
 # 3. Saves result in test_results.csv #
 #######################################
-def savesResults(sample_name):
+def savesResults():
         
-    # Create test_result.csv path
-    test_result_path = os.getcwd() + '/' + sample_name + '_test_result.csv'
+    # Define tsamples csv files paths
+    pipes_path = os.getcwd() + '/' + config.sample_names[0] + '_test_result.csv'
+    memchannel_path = os.getcwd() + '/' + config.sample_names[1] + '_test_result.csv'
 
     # Read results from samples csv files
-    test_result_df = pandas.read_csv(test_result_path, names = [config.test_result_columns[0],
+    pipes_df = pandas.read_csv(pipes_path, names = [config.test_result_columns[0],
+                                    config.test_result_columns[1],config.test_result_columns[2]])
+    
+    memchannel_df = pandas.read_csv(memchannel_path, names = [config.test_result_columns[0],
                                     config.test_result_columns[1],config.test_result_columns[2]])
 
-    # Create custom indeces
-    tests_number = []
-    for i in range(1,len(test_result_df.index)+1):
-        string = 'Test' + str(i)
-        tests_number.append(string)
-
-    test_result_df.index = tests_number   
-
     # Write to csv 
-    test_result_df.to_csv(test_result_path,index= False)
+    pipes_df.to_csv(pipes_path,index= False)
+    memchannel_df.to_csv(memchannel_path,index= False)
 

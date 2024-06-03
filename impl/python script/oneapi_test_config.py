@@ -1,13 +1,5 @@
 import os
 
-
-###########
-# Generic #
-###########
-# Bash script to build samples
-build_script = './sample_build.sh'
-
-
 #######################################
 # Test configuration and result files #
 #######################################
@@ -18,11 +10,13 @@ test_list_columns = ('sample_name','array_size')
 # Test result file columns 
 test_result_columns = ('array_size','latency','throughput')
 # Number of repetitions for each test
-test_list_num_repetitions = 10
+test_list_num_repetitions = 3
 
 
 ###################
 # oneAPI samples #
 ##################
+# Sample names
+sample_names = ['pipes','memory_channel']
 # Path to samples
 sample_path = '/home/spena/oneAPI-samples/DirectProgramming/C++SYCL_FPGA/Tutorials/Features'

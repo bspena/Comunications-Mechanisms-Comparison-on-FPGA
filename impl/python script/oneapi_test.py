@@ -21,4 +21,4 @@ if __name__=='__main__':
 
     #3. Save results in test_result.csv
     print('[STEP 3]: Save results')
-    utils.savesResults(test_list_df.at['Test1','sample_name'])
+    utils.savesResults()
