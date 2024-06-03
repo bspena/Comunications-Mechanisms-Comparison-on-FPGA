@@ -1,5 +1,5 @@
 # Implementation in Detail
-Given `indipendent factors`, the script performs teste cases in order to measures `response variables` of two samples:
+Given `indipendent factors`, the python script performs test cases in order to measures `response variables` of two samples:
 * `pipes`: which implements [pipe abstraction](../doc/intel_oneAPI.md#ch_pipes).
 * `memory_channel`: which implements [USM device allocations](../doc/intel_oneAPI.md#ch_usm).
 
@@ -12,20 +12,18 @@ The ASP targetted is:
 * `n6001 platform`
 * `ofs_n6001_usm_iopipes variant`<sup>[[16]](doc/references.md#ref_asp)</sup> which supports both shared virtual memory between host and device and pipes interfaces for the kernel system.
 
-## Control Flow <a name="ch_flow_control"></a>
+## Python Script Control Flow <a name="ch_flow_control"></a>
 ```mermaid
 stateDiagram-v2
     s1: Check enviroment and user configuration
     s2: Initialize Test
-    s3: Build and compile samples
-    s4: Run samples
-    s5: Saves results
+    s3: Run samples
+    s4: Saves results
         
         [*] --> s1
         s1 --> s2
         s2 --> s3
         s3 --> s4
-        s4 --> s5
 ```
 
 

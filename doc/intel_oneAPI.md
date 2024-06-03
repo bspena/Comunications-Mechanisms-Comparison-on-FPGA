@@ -31,7 +31,7 @@ ASP is comprised of:
   * `Memory Mapped Device (MMD) Layer`: Used by the host and oneAPI runtime to communicate with the oneAPI kernel and other oneAPI ASP hardware registers.
   * `oneAPI ASP Utilities`: Used to setup and diagnose the board.
 
-Both ASP hardware components and kernels are placend in the `Accelerator Functional Unit (AFU) region`. The AFU is an hardware accelerator implemented in FPGA logic which offloads a computational operation for an application from the CPU to improve performance.
+Both ASP hardware components and kernels are placend in the `Accelerator Functional Unit (AFU) region`. The AFU is an hardware accelerator implemented in FPGA logic which offloads a computational operation for an application from the CPU to improve performance. In turn, the AFU is part of `Open FPGA Stack (OFS)`, a modular collection of hardware platform components, open source software, and broad ecosystem support. The OFS provides a standard and scalable model for AFU and software developers to optimize and reuse their designs.
 
 <p align="center">
   <img src="img/img_HLD_IntelOFS_Model.png" width="550">

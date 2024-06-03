@@ -2,7 +2,7 @@
 1. <a id="ref_base_kit"></a> [Intel oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html)
 1. <a id="ref_oneapi"></a> [Why oneAPI?](https://www.oneapi.io/)
 1. <a id="ref_oneapi_arch"></a> [oneAPI Software Architecture](https://spec.oneapi.io/versions/latest/architecture.html)
-1. <a id="ref_oneapi_sycl"></a> [SYCL](https://spec.oneapi.io/versions/latest/elements/sycl/source/index.html)
+1. <a id="ref_oneapi_sycl"></a> [SYCL - oneAPI Specification](https://spec.oneapi.io/versions/latest/elements/sycl/source/index.html)
 1. <a id="ref_sycl"></a> [What is SYCL?](https://www.khronos.org/sycl/)
 1. <a id="ref_oneapi_asp_ref"></a> [oneAPI Accelerator Support Package(ASP) Reference Manual: Open FPGA Stack](https://ofs.github.io/ofs-2023.2/hw/common/reference_manual/oneapi_asp/oneapi_asp_ref_mnl/#14-introduction-to-oneapi-on-open-fpga-stackofs)
 1. <a id="ref_bsp"></a> [FPGA BSPs and Boards](https://www.intel.com/content/www/us/en/docs/oneapi/programming-guide/2023-0/fpga-bsps-and-boards.html)

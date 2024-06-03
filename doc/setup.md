@@ -7,7 +7,7 @@ Virtual machine running `Ubuntu 22.04 LTS` :
 
 ## Tools <a name="ch_tools"></a>
 ### Intel oneAPI BAse Toolkit 2024.0.1
-* [Download l_BaseKit_p_2024.0.1.46.sh](https://registrationcenter-download.intel.com/akdlm/IRC_NAS/163da6e4-56eb-4948-aba3-debcec61c064/l_BaseKit_p_2024.0.1.46.sh)
+* [Download](https://registrationcenter-download.intel.com/akdlm/IRC_NAS/163da6e4-56eb-4948-aba3-debcec61c064/l_BaseKit_p_2024.0.1.46.sh)
 * Install<sup>[[12]](references.md#ref_intel_install)</sup>:
 ```bash
 sudo sh ./l_BaseKit_p_2024.0.1.46.sh -a --silent --eula accept
