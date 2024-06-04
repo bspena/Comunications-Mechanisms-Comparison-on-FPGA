@@ -63,7 +63,7 @@ def runSamples(row):
 #######################################
 def savesResults():
         
-    # Define tsamples csv files paths
+    # Define samples csv files paths
     pipes_path = os.getcwd() + '/' + config.sample_names[0] + '_test_result.csv'
     memchannel_path = os.getcwd() + '/' + config.sample_names[1] + '_test_result.csv'
 

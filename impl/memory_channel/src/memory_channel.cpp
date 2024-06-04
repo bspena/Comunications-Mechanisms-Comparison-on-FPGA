@@ -37,8 +37,7 @@ event Producer(queue &q, int* in_host_ptr, int * out_host_ptr,size_t array_size,
       device_ptr<int> in_d_ptr(in_host_ptr);
       device_ptr<int> out_d_ptr(out_host_ptr);
   
-      // Using a compiler optimization to unroll the loop and
-      // generate multiple copies of the loop body parallelizing the executio
+      // Loop unrolling mechanism using to increase program parallelism
       #pragma unroll
       for (size_t i = 0; i < array_size; ++i) {
         out_d_ptr[i]=in_d_ptr[i];
