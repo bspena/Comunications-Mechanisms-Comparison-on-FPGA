@@ -27,5 +27,5 @@ mkdir build
 cd build 
 cmake .. -DFPGA_DEVICE=$2:$3
 
-echo "[INFO] Compile the design for pipes sample"
+echo "[INFO] Compile the design for memory_channel sample"
 make fpga
