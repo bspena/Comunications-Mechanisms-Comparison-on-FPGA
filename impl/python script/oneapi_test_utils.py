@@ -46,10 +46,6 @@ def initTest():
 ##################
 def runSamples(row):
 
-    # Create bash command to run ./sample.fpga.emu
-    #bash_command = (config.sample_path + '/' + str(row['sample_name']) + '/build/' + 
-    #               str(row['sample_name']) + '.fpga_emu ' + str(row['array_size']))
-    
     # Create bash command to run ./sample.fpga
     bash_command = (config.sample_path + '/' + str(row['sample_name']) + '/build/' + 
                    str(row['sample_name']) + '.fpga ' + str(row['array_size']))
