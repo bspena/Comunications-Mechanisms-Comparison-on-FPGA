@@ -36,7 +36,7 @@ stateDiagram-v2
 ```
 * Run `oneapi_sample_build.sh` to build the program
 ```bash
-  ./oneapi_sample_build.sh full/path/to/sample full/path/to/asp/version asp_version asp_variant
+  ./oneapi_sample_build.sh full/path/to/sample full/path/to/asp/version asp_variant
 ```
 * Run `oneapi_test.py` to start test cases
 ```bash
