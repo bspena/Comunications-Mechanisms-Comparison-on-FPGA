@@ -36,7 +36,7 @@ stateDiagram-v2
 ```
 * Run `oneapi_sample_build.sh` to build the program
 ```bash
-  ./oneapi_sample_build.sh full/path/to/samples/location full/path/to/asp/n6001 ofs_n6001_usm_iopipes
+  ./oneapi_sample_build.sh full/path/to/samples/directory full/path/to/asp/n6001 ofs_n6001_usm_iopipes
 ```
 * Run `oneapi_test.py` to start test cases
 ```bash
