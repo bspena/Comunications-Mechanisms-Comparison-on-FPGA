@@ -12,40 +12,16 @@
 using namespace sycl;
 
 // Forward declare the kernel names in the global scope (reduces name mangling in the optimization reports)
-class ProducerTutorial;
 class ConsumerTutorial;
 
-// The producer function copy host's data to device memory
-event Producer(queue &q, int* in_host_ptr, int * out_host_ptr,size_t array_size,std::vector<int> &producer_input) {
+// The producer function copy data from host memory to device memory
+event Producer(queue &q, std::vector<int> &producer_input, int* device_buffer, size_t array_size) {
   std::cout << "Enqueuing producer...\n";
 
-  // Event to copy host's data to device memory
-  auto host_to_device = q.memcpy(in_host_ptr, producer_input.data(), array_size * sizeof(int));
+  // auto is the placeholder type
+  auto host_to_device = q.memcpy(device_buffer, producer_input.data(), array_size * sizeof(int));
 
-  // Crate the command group to issue commands to the queue
-  // The handler object define task operations
-  auto kernel_event = q.submit([&](handler &h) {                                                                     
-
-    // The event of the copy of host's data must complete before command
-    // group is executed
-    h.depends_on(host_to_device);
-
-    // Only one instance of the kernel is executed 
-    h.single_task<ProducerTutorial>([=]() [[intel::kernel_args_restrict]]{
-
-      // Create device pointers to access to the device memory
-      device_ptr<int> in_d_ptr(in_host_ptr);
-      device_ptr<int> out_d_ptr(out_host_ptr);
-  
-      // Loop unrolling mechanism using to increase program parallelism
-      #pragma unroll
-      for (size_t i = 0; i < array_size; ++i) {
-        out_d_ptr[i]=in_d_ptr[i];
-      }
-    });
-  });
-
-  return kernel_event;
+  return host_to_device;
 }
 
 // Simple work done by the consumer kernel
@@ -53,31 +29,28 @@ int ConsumerWork(int i) { return i * i; }
 
 // The consumer kernel reads data from device memory, performs some work 
 // and copies the results back to host memory
-event Consumer(queue &q, int* in_host_ptr, int * out_host_ptr, size_t array_size,std::vector<int> &consumer_output) {
+event Consumer(queue &q, std::vector<int> &consumer_output, int* device_buffer, event producer_event, size_t array_size) {  
   std::cout << "Enqueuing consumer...\n";
 
-  // auto is the placeholder type
   auto kernel_event = q.submit([&](handler &h) {
+
+    // Wait until producer kerne
+    h.depends_on(producer_event);
 
     h.single_task<ConsumerTutorial>([=]() [[intel::kernel_args_restrict]]{
 
-      // Create device pointers to access to the device memory
-      device_ptr<int> in_d_ptr(in_host_ptr);
-      device_ptr<int> out_d_ptr(out_host_ptr);
-
+      // Loop unrolling mechanism using to increase program parallelism
       #pragma unroll
       for (size_t i = 0; i < array_size; ++i) {
         // Do work on the input
-        out_d_ptr[i] = ConsumerWork(in_d_ptr[i]);
+        device_buffer[i] = ConsumerWork(device_buffer[i]);
       }
     });
   });
 
-  // The kernel must complete before command group is executed 
+  // The kernel must complete before copy back to hsto memory is executed 
   kernel_event.wait();
-
-  // Copy output data back from device to host
-  q.memcpy(consumer_output.data(), out_host_ptr, array_size * sizeof(int));
+  q.memcpy(consumer_output.data(), device_buffer, array_size * sizeof(int));
 
   return kernel_event;
 }
@@ -106,8 +79,6 @@ int main(int argc, char *argv[]) {
 
   std::cout << "Input Array Size: " << array_size << "\n";
 
-  // Input and output array
-  // datatype uint8_t
   std::vector<int> producer_input(array_size, -1);
   std::vector<int> consumer_output(array_size, -1);
 
@@ -142,22 +113,15 @@ int main(int argc, char *argv[]) {
               << device.get_info<sycl::info::device::name>().c_str()
               << std::endl;
 
-    // Allocate memory on the device specifying the same buffer location
-    // int_ptr and out_ptr are host pointers
-    int *in_host_ptr = sycl::malloc_device<int>(
-        array_size, q,
-        sycl::ext::intel::experimental::property::usm::buffer_location(0));
-    int *out_host_ptr = sycl::malloc_device<int>(
-        array_size, q,
-        sycl::ext::intel::experimental::property::usm::buffer_location(0));
-  
+    // Allocate device memory
+    int* device_buffer = malloc_device<int>(array_size,q);
+ 
     // Run the two kernels concurrently
-    producer_event = Producer(q, in_host_ptr, out_host_ptr, array_size,producer_input);
-    consumer_event = Consumer(q, in_host_ptr, out_host_ptr, array_size,consumer_output);
+    producer_event = Producer(q, producer_input, device_buffer, array_size);
+    consumer_event = Consumer(q, consumer_output, device_buffer, producer_event, array_size);
 
     // Free USM
-    free(in_host_ptr,q);
-    free(out_host_ptr,q);
+    free(device_buffer,q);
 
   } catch (exception const &e) {
     // Catches exceptions in the host code
