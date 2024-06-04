@@ -4,7 +4,7 @@ import os
 # Test configuration and result files #
 #######################################
 # Path to test_list and test_resut
-test_list_path = os.getcwd() + '/test_list.csv'
+test_list_path = os.getcwd() + '/test_list_r.csv'
 # Test list file columns
 test_list_columns = ('sample_name','array_size')
 # Test result file columns 
