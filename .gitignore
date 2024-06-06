@@ -1,0 +1,7 @@
+__pycache__
+*.prj
+*.fpga_emu
+*.fpga_sim
+*.fpga
+build/
+.vscode/
