@@ -1,0 +1,7 @@
+sample_name,array_size
+pipes,1024
+pipes,1048576
+pipes,16777216
+memory_channel,1024
+memory_channel,1048576
+memory_channel,16777216
