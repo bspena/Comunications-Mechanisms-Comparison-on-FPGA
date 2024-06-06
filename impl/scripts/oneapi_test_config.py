@@ -16,7 +16,7 @@ test_list_num_repetitions = 5
 # Plot parameters #
 ###################
 # x-axis valus
-x_values = [1024,4096,8192,16384,65536,262144,1048576,2097152,8388608,]
+x_values = [1024,4096,8192,16384,65536,262144,1048576,2097152,8388608,33554432]
 # Axis Labels
 x_label = 'Array Size (B)'
 y_label_latency = 'Latency (ms)'
