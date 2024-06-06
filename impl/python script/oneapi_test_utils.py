@@ -122,8 +122,8 @@ def latencies_plot(pipes_df,memchannel_df):
     latency_memch = find_measurements_ct(memchannel_df, config.test_result_columns[1], config.number_if)
 
     # Line Plots Latencies
-    fig, ax = plt.subplots(2,1,figsize=(12,6))
-    plt.suptitle(config.latency_plot_title,size=20)
+    fig, ax = plt.subplots(2, 1, figsize=(12,6))
+    plt.suptitle(config.latency_plot_title, size=20)
 
     # Plot the values
     line_plot(ax[0], config.x_values, latency_pipes,    '',          config.y_label_latency, config.legend_label_pipes)
@@ -146,16 +146,16 @@ def throughputs_plot(pipes_df,memchannel_df):
 
 
     # Line Plots Throughputs
-    fig, ax_throughput = plt.subplots(2,1,figsize=(12,6))
-    plt.suptitle(config.throughputs_plot_title,size=20)
+    fig, ax = plt.subplots(2, 1, figsize=(12,6))
+    plt.suptitle(config.throughputs_plot_title, size=20)
 
     # Plot the values
-    line_plot(ax_throughput[0], config.x_values, throughput_pipes,    '',           config.y_label_throughput, config.legend_label_pipes)
-    line_plot(ax_throughput[1], config.x_values, throughput_memch,  config.x_label, config.y_label_throughput, config.legend_label_memch)
+    line_plot(ax[0], config.x_values, throughput_pipes,    '',           config.y_label_throughput, config.legend_label_pipes)
+    line_plot(ax[1], config.x_values, throughput_memch,  config.x_label, config.y_label_throughput, config.legend_label_memch)
 
     # Show the legend
-    ax_throughput[0].legend()
-    ax_throughput[1].legend()
+    ax[0].legend()
+    ax[1].legend()
 
     # Save plot as figure
     fig.savefig('cmp_throughputs.png')
@@ -171,10 +171,10 @@ def savesRusults():
     memchannel_df = memchannel_df.sort_values(by=['array_size'])
 
     # Plot latencies values
-    latencies_plot(pipes_df,memchannel_df)
+    latencies_plot(pipes_df, memchannel_df)
 
     # Plot throughputs values
-    throughputs_plot(pipes_df,memchannel_df)
+    throughputs_plot(pipes_df, memchannel_df)
 
     # Show plots
     #plt.show()
