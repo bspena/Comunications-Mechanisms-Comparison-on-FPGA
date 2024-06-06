@@ -69,15 +69,19 @@ def find_results():
     memchannel_path =   os.getcwd() + '/' + config.sample_names[1] + '_test_result.csv'
 
     # Read results from samples csv files
-    pipes_df = pandas.read_csv(pipes_path, names = [config.test_result_columns[0],
-                                    config.test_result_columns[1],config.test_result_columns[2]])
-    
-    memchannel_df = pandas.read_csv(memchannel_path, names = [config.test_result_columns[0],
-                                    config.test_result_columns[1],config.test_result_columns[2]])
+    pipes_df = pandas.read_csv(pipes_path)
+    memchannel_df = pandas.read_csv(memchannel_path)
 
-    # Write back to csv 
-    pipes_df.to_csv(pipes_path,index= False)
-    memchannel_df.to_csv(memchannel_path,index= False)
+    if pipes_df.columns[0] != 'array_size':
+        pipes_df = pandas.read_csv(pipes_path, names = [config.test_result_columns[0],
+                                        config.test_result_columns[1],config.test_result_columns[2]])
+    
+        memchannel_df = pandas.read_csv(memchannel_path, names = [config.test_result_columns[0],
+                                        config.test_result_columns[1],config.test_result_columns[2]])
+
+        # Write back to csv 
+        pipes_df.to_csv(pipes_path,index= False)
+        memchannel_df.to_csv(memchannel_path,index= False)
 
     return pipes_df,memchannel_df
 
