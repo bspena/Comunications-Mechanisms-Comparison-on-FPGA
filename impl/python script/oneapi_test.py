@@ -20,5 +20,5 @@ if __name__=='__main__':
         utils.runSamples(row)
 
     #3. Save results in test_result.csv
-    print('[STEP 3]: Save results')
-    utils.savesResults()
+    print('[STEP 3]: Save and plot the results')
+    utils.savesRusults()
