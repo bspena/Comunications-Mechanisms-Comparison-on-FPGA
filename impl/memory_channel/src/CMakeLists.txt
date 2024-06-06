@@ -40,7 +40,7 @@ set(HARDWARE_LINK_FLAGS "-fsycl -fintelfpga -Xshardware -Xstarget=${FPGA_DEVICE}
 #    [compile] icpx -fsycl -fintelfpga -DFPGA_EMULATOR -o memory_channel.cpp.o -c memory_channel.cpp
 #    [link]    icpx -fsycl -fintelfpga memory_channel.cpp.o -o memory_channel.fpga_emu
 add_executable(${EMULATOR_TARGET} ${SOURCE_FILE})
-target_include_directories(${EMULATOR_TARGET} PRIVATE ../../../../include)
+target_include_directories(${EMULATOR_TARGET} PRIVATE $ENV{ONEAPI_SAMPLES_INCLUDE} )
 set_target_properties(${EMULATOR_TARGET} PROPERTIES COMPILE_FLAGS "${EMULATOR_COMPILE_FLAGS}")
 set_target_properties(${EMULATOR_TARGET} PROPERTIES LINK_FLAGS "${EMULATOR_LINK_FLAGS}")
 add_custom_target(fpga_emu DEPENDS ${EMULATOR_TARGET})
@@ -53,7 +53,7 @@ add_custom_target(fpga_emu DEPENDS ${EMULATOR_TARGET})
 set(FPGA_EARLY_IMAGE ${TARGET_NAME}_report.a)
 # The compile output is not an executable, but an intermediate compilation result unique to SYCL.
 add_executable(${FPGA_EARLY_IMAGE} ${SOURCE_FILE})
-target_include_directories(${FPGA_EARLY_IMAGE} PRIVATE ../../../../include)
+target_include_directories(${FPGA_EARLY_IMAGE} PRIVATE $ENV{ONEAPI_SAMPLES_INCLUDE} )
 add_custom_target(report DEPENDS ${FPGA_EARLY_IMAGE})
 set_target_properties(${FPGA_EARLY_IMAGE} PROPERTIES COMPILE_FLAGS "${HARDWARE_COMPILE_FLAGS}")
 set_target_properties(${FPGA_EARLY_IMAGE} PROPERTIES LINK_FLAGS "${HARDWARE_LINK_FLAGS} -fsycl-link=early")
@@ -68,7 +68,7 @@ set_target_properties(${FPGA_EARLY_IMAGE} PROPERTIES LINK_FLAGS "${HARDWARE_LINK
 #   [compile] icpx -fsycl -fintelfpga -Xssimulation -DFPGA_SIMULATOR -o memory_channel.cpp.o -c memory_channel.cpp
 #   [link]    icpx -fsycl -fintelfpga -Xssimulation -Xstarget=<FPGA_DEVICE> memory_channel.cpp.o -o memory_channel.fpga
 add_executable(${SIMULATOR_TARGET} EXCLUDE_FROM_ALL ${SOURCE_FILE})
-target_include_directories(${SIMULATOR_TARGET} PRIVATE ../../../../include)
+target_include_directories(${SIMULATOR_TARGET} PRIVATE $ENV{ONEAPI_SAMPLES_INCLUDE} )
 add_custom_target(fpga_sim DEPENDS ${SIMULATOR_TARGET})
 set_target_properties(${SIMULATOR_TARGET} PROPERTIES COMPILE_FLAGS "${SIMULATOR_COMPILE_FLAGS}")
 set_target_properties(${SIMULATOR_TARGET} PROPERTIES LINK_FLAGS "${SIMULATOR_LINK_FLAGS}")
@@ -82,7 +82,7 @@ set_target_properties(${SIMULATOR_TARGET} PROPERTIES LINK_FLAGS "${SIMULATOR_LIN
 #   [compile] icpx -fsycl -fintelfpga -o memory_channel.cpp.o -c memory_channel.cpp
 #   [link]    icpx -fsycl -fintelfpga -Xshardware -Xstarget=<FPGA_DEVICE> memory_channel.cpp.o -o memory_channel.fpga
 add_executable(${FPGA_TARGET} EXCLUDE_FROM_ALL ${SOURCE_FILE})
-target_include_directories(${FPGA_TARGET} PRIVATE ../../../../include)
+target_include_directories(${FPGA_TARGET} PRIVATE $ENV{ONEAPI_SAMPLES_INCLUDE} )
 add_custom_target(fpga DEPENDS ${FPGA_TARGET})
 set_target_properties(${FPGA_TARGET} PROPERTIES COMPILE_FLAGS "${HARDWARE_COMPILE_FLAGS}")
 set_target_properties(${FPGA_TARGET} PROPERTIES LINK_FLAGS "${HARDWARE_LINK_FLAGS} -reuse-exe=${CMAKE_BINARY_DIR}/${FPGA_TARGET}")
