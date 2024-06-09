@@ -179,6 +179,3 @@ def savesRusults():
 
     # Plot throughputs values
     throughputs_plot(pipes_df, memchannel_df)
-
-    # Show plot
-    #plt.show()
