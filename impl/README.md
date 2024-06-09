@@ -17,8 +17,8 @@ The ASP targetted is:
 stateDiagram-v2
     s1: Check enviroment and user configuration
     s2: Initialize Test
-    s3: Run samples
-    s4: Saves results
+    s3: Run Samples
+    s4: Save and Plot Results
         
         [*] --> s1
         s1 --> s2

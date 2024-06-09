@@ -103,7 +103,8 @@ def throughputs_plot(throughput_pipes, throughput_memch):
 def plots(latency_pipes, latency_memch,throughput_pipes, throughput_memch):
 
     # Define the figure
-    fig, ax = plt.subplots(1,2,figsize=(16,8))    
+    #fig, ax = plt.subplots(1,2,figsize=(16,8))
+    fig, ax = plt.subplots(2,1,figsize=(16,8))       
     ax[0].set_title(latency_plot_title, size = 20) 
     ax[1].set_title(throughputs_plot_title, size = 20)
 
@@ -120,7 +121,7 @@ def plots(latency_pipes, latency_memch,throughput_pipes, throughput_memch):
     ax[1].legend()
 
     # Save plot as image
-    fig.savefig('total_plot.png')
+    fig.savefig('latencies_throughputs_plot2.png')
 
 
 if __name__=='__main__':
