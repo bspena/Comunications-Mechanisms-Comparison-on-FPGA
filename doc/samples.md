@@ -21,10 +21,9 @@ The `Pipes Sample` has two kernels:
 * `Producer Kernel`: Reads data from a `SYCL input buffer` and writes it to a pipe.
 * `Consumer Kernel`: Reads data from the pipe, performs some work on it, and writes the results to a `SYCL output buffer`.
 
-<figure align="center">
+<p align="center">
   <img src="img/img_pipes_model.png" width="500">
-  <figcaption>Pipes Sample Diagram</figcaption>
-</figure>
+</p>
 
 
 
@@ -45,7 +44,6 @@ The `Memory Channel Sample` has:
 * `Producer Function`: Copies data from host memory to device memory.
 * `Consumer Kernel`: Reads data from device memory, performs some work on it and copies the results back to host memory.
 
-<figure align="center">
+<p align="center">
   <img src="img/img_memch_model.png" width="800">
-  <figcaption>Memory Channel Sample Diagram</figcaption>
-</figure>
+</p>
