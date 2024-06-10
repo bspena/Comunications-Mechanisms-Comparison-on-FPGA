@@ -2,30 +2,7 @@ import os
 import pandas
 import numpy as np
 from matplotlib import pyplot as plt
-import matplotlib.gridspec as gridspec 
-
-###################
-# Plot parameters #
-###################
-# x-axis valus
-x_values = [1024,4096,8192,16384,65536,262144,1048576,2097152,8388608,33554432]
-# Axis Labels
-x_label = 'Array Size (B)'
-y_label_latency = 'Latency (ms)'
-y_label_throughput= 'Throughput (MB/s)'
-# Legend Labels
-legend_label_pipes = 'Pipes'
-legend_label_memch = 'Memory Channel'
-# Plots titles
-latency_plot_title = 'Comparison between Latencies'
-throughputs_plot_title = 'Comparison between Throughputs'
-# Number of indipendent factors
-number_if = 10
-
-test_result_columns = ('array_size','latency','throughput')
-sample_names = ['pipes','memory_channel']
-
-
+import oneapi_test_config as config
 
 # Find measurements of central tendency
 def find_measurements_ct(df, df_column, n):
@@ -50,6 +27,9 @@ def line_plot(ax, x, y, x_label, y_label, color ,legend_label):
     # Set the logarithmic scale 
     ax.set_xscale("log", base=2); 
     ax.set_yscale("log", base=10); 
+
+    # Set custom valuse for x axis
+    ax.set_xticks(config.x_values, labels= config.x_custom_values)
     
     # Set labels and grid
     ax.set_xlabel(x_label)                 
@@ -60,75 +40,37 @@ def line_plot(ax, x, y, x_label, y_label, color ,legend_label):
     ax.plot(x, y, marker='o', markerfacecolor ='black', markersize='6', color=color, label = legend_label)
 
 
-# Plot latencies values
-def latencies_plot(latency_pipes, latency_memch):
-
-    # Define the figure
-    fig=plt.figure(figsize=(12,7))   
-    ax = plt.axes()  
-    plt.suptitle(latency_plot_title, size=20)
-
-    # Plot the values
-    line_plot(ax, x_values, latency_pipes, '', '', 'red', legend_label_pipes)
-    line_plot(ax, x_values, latency_memch, x_label, y_label_latency, 'green', legend_label_memch)
-
-    # Show the legend
-    ax.legend()
-
-    # Save plot as image
-    fig.savefig('latencies_plot.png')
-
-
-
-# Plot throughputs values
-def throughputs_plot(throughput_pipes, throughput_memch):
-
-    # Define the figure
-    fig=plt.figure(figsize=(12,7))   
-    ax = plt.axes()  
-    plt.suptitle(throughputs_plot_title, size=20)
-
-    # Plot the values
-    line_plot(ax, x_values, throughput_pipes, '', '', 'red', legend_label_pipes)
-    line_plot(ax, x_values, throughput_memch, x_label, y_label_throughput, 'green', legend_label_memch)
-
-    # Show the legend
-    ax.legend()
-
-    # Save plot as image
-    fig.savefig('throughputs_plot.png')
-
-
 # Plot all values in one figure
 def plots(latency_pipes, latency_memch,throughput_pipes, throughput_memch):
 
     # Define the figure
-    #fig, ax = plt.subplots(1,2,figsize=(16,8))
-    fig, ax = plt.subplots(2,1,figsize=(16,8))       
-    ax[0].set_title(latency_plot_title, size = 20) 
-    ax[1].set_title(throughputs_plot_title, size = 20)
+    fig, ax = plt.subplots(1,2,figsize=(16,8))    
+    ax[0].set_title(config.latency_plot_title, size = 20) 
+    ax[1].set_title(config.throughputs_plot_title, size = 20)
 
     # Plot latency values
-    line_plot(ax[0], x_values, latency_pipes, '', '', 'red', legend_label_pipes)
-    line_plot(ax[0], x_values, latency_memch, '', y_label_latency, 'green', legend_label_memch)
+    line_plot(ax[0], config.x_values, latency_pipes, '', '', 'red', config.legend_label_pipes)
+    line_plot(ax[0], config.x_values, latency_memch, config.x_label, config.y_label_latency, 'green', config.legend_label_memch)
 
     # Plot throughput values
-    line_plot(ax[1], x_values, throughput_pipes, '', '', 'red', legend_label_pipes)
-    line_plot(ax[1], x_values, throughput_memch, x_label, y_label_throughput, 'green', legend_label_memch)
+    line_plot(ax[1], config.x_values, throughput_pipes, '', '', 'red', config.legend_label_pipes)
+    line_plot(ax[1], config.x_values, throughput_memch, config.x_label, config.y_label_throughput, 'green', config.legend_label_memch)
 
     # Show the legend
     ax[0].legend()
     ax[1].legend()
 
+    fig.autofmt_xdate()
+
     # Save plot as image
-    fig.savefig('latencies_throughputs_plot2.png')
+    fig.savefig('latencies_throughputs_plot.png')
 
 
 if __name__=='__main__':
 
     # Define samples csv files paths
-    pipes_path =        os.getcwd() + '/' + sample_names[0] + '_test_result.csv'
-    memchannel_path =   os.getcwd() + '/' + sample_names[1] + '_test_result.csv'
+    pipes_path =        os.getcwd() + '/' + config.sample_names[0] + '_test_result.csv'
+    memchannel_path =   os.getcwd() + '/' + config.sample_names[1] + '_test_result.csv'
 
     # Read results from samples csv files
     pipes_df = pandas.read_csv(pipes_path)
@@ -139,18 +81,12 @@ if __name__=='__main__':
     memchannel_df = memchannel_df.sort_values(by=['array_size'])
 
     # Generate latencies median or mean values
-    latency_pipes = find_measurements_ct(pipes_df,      test_result_columns[1], number_if)
-    latency_memch = find_measurements_ct(memchannel_df, test_result_columns[1], number_if)
+    latency_pipes = find_measurements_ct(pipes_df,      config.test_result_columns[1], config.number_levels)
+    latency_memch = find_measurements_ct(memchannel_df, config.test_result_columns[1], config.number_levels)
 
     # Generate throughputs median or mean values
-    throughput_pipes = find_measurements_ct(pipes_df,      test_result_columns[2], number_if)
-    throughput_memch = find_measurements_ct(memchannel_df, test_result_columns[2], number_if)
-
-    # Plot latencies values
-    #latencies_plot(latency_pipes, latency_memch)
-
-    # Plot throughputs values
-    #throughputs_plot(throughput_pipes, throughput_memch)
+    throughput_pipes = find_measurements_ct(pipes_df,      config.test_result_columns[2], config.number_levels)
+    throughput_memch = find_measurements_ct(memchannel_df, config.test_result_columns[2], config.number_levels)
 
     # Plot all values in one figure
     plots(latency_pipes, latency_memch,throughput_pipes, throughput_memch)

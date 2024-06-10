@@ -1,11 +1,11 @@
 # Architectural Diagram
 
 <p align="center">
-  <img src="img/base_arch_diagram_pipes.png" width="1000">
+  <img src="img/img_base_arch_diagram_pipes.png" width="1000">
 </p>
 
 <p align="center">
-  <img src="img/arch_diagram_pipes.png" width="1000">
+  <img src="img/img_arch_diagram_pipes.png" width="1000">
 </p>
 
 ## Diagram Legend <a name="ch_diagram_l"></a>
@@ -36,14 +36,3 @@
 * `Slave/Agent/Sink`: It has waitrequest, readdatavalid, readdata, writeresponsevalid signals as output.
 * `to_sink/to_slave`: SystemVerilog mopdport identifier, used to identify the connection from source toward sink (the current module is the source).
 * `to_source/to_master`: SystemVerilog mopdport identifier, used to identify the connection from sink toward source (the current module is the sink).
-
-
-# n6001 vs n6001_iopipes
-* afu.sv
-  * Manca il modulo udp_offload_engine ed il relativo #ifdef 
-  * Nell'istanza del modulo kernel_wrapper, manca l'#ifdef con la macro INCLUDE_USM_SUPPORT
-* bsp_logic.sv / kernel_wrapper.sv
-  * Manca l'#ifdef con la macro INCLUDE_UDP_OFFLOAD_ENGINE
-
-
-
