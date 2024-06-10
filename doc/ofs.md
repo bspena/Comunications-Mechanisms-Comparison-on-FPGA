@@ -1,54 +1,37 @@
 # Open FPGA Stack 
-`Open FPGA Stack (OFS)`<sup>[[]](references.md#ref_oneapi_asp_ref)</sup> is a set of `hardware platform components` and `open source software`, it pro
+The `Open FPGA Stack (OFS)`<sup>[[1]](references.md#ref_oneapi_asp_ref)</sup> is a set of `hardware platform components` and `open source software`, ensuring a standard and scalable model for AFU and software developers to optimize and reuse their designs.
 
-A modular collection of hardware platform components, open source software, and broad ecosystem support that provides a standard and scalable model for AFU and software developers to optimize and reuse their designs.
-
-<p align="center">
-  <img src="img/img_OFS_components.png" width="600">
-  <em>image_caption</em>
-</p>
+<figure align="center">
+  <img src="img/img_OFS_components.png" width="400">
+  <figcaption>OFS Components</figcaption>
+</figure>
 
 
 
 ## oneAPI <a name="ch_oneapi"></a>
-`oneAPI` is a multi-architecture cross-indutry open standard `programming model`<sup>[[]](references.md#ref_oneapi)</sup> , which guarantees portability and performance across `heterogeneous architectures` (CPUs, GPUs, FPGAs, etc...).
+`oneAPI` is an open standard `programming model`<sup>[[2]](references.md#ref_oneapi)</sup><sup>[[3]](references.md#ref_oneapi_arch)</sup> , which provides portability and performance across `heterogeneous architectures` (CPUs, GPUs, FPGAs, etc...). It is an implementation of `Khronos SYCL 2020 Specification`<sup>[[4]](references.md#ref_oneapi_sycl)</sup>.
 
-A oneAPI platform<sup>[[]](references.md#ref_oneapi_arch)</sup> includes:
-* `Host`: Tipically a multi-core CPU. It runs the `host Application`.
-* `Devices`: One or more accelerators, each of them has a `command queue`. A device runs a `function Object` (or `kernel`), which contains a function definition and its related variables. In order to run a kernel on the device, the host application submit a command group, with the kernel, to the device's command queue.
+<figure align="center">
+  <img src="img/img_oneapi_architecture.png" width="600">
+  <figcaption>oneAPI Architecture</figcaption>
+</figure>
 
-oneAPI is an implementation of `Khronos SYCL 2020 Specification`<sup>[[]](references.md#ref_oneapi_sycl)</sup>, which is a royalty-free proramming launguage based on `ISO C++ 17` and an evolution of `OpenCL`<sup>[[]](references.md#ref_sycl)</sup>. SYCL allows you to program both CPUs and accelerator devices, by mixing both `host code` and `device code` in the same source file<sup>[[4]](references.md#ref_oneapi_sycl)</sup>.
+A oneAPI platform includes the `host` (the CPU) and `devices` (one or more accelerators); thank to the programming model, is possible to program both, by mixing both `host code` and `device code` in the same source file.
 
-`Intel oneAPI Base Toolkit` (known as `Base Kit`) is an implementation of the oneAPI specification and provides tools and libraries for developing high-performance, data-centric applications across architectures<sup>[[]](references.md#ref_base_kit)</sup>.
+Intel provides the `Intel oneAPI Base Toolkit` (or `Base Kit`) which consists of a compiler and runtime environment<sup>[[1]](references.md#ref_oneapi_asp_ref)</sup>.
 
-<p align="center">
-  <img src="img/img_base_kit.png" width="600">
-</p>
 
 
 ## Accelerator Functional Unit <a name="ch_oneapi_afu"></a>
-Hardware Accelerator implemented in FPGA logic which offloads a computational operation for an application from the CPU to improve performance
-
-neAPI ASP hardware components and oneAPI kernel form the AFU region
+The `Accelerator Functional Unit (AFU)` is a hardware accelerator implemented in FPGA logic which offloads a computational operation for an application from the CPU to improve performance. 
 
 ### oneAPI Accelerator Support Package <a name="ch_oneapi_asp"></a>
-A collection of hardware and software components that enable oneAPI kernel to communicate with oneAPI runtime and other OFS hardware, software components.
+The `oneAPI Accelerator Support Package (ASP)` is a set of hardware and software components which guarantees the comunication between `oneAPI kernel` (converted into a hardware circuit by the compiler) and the `oneAPI runtime` and `other OFS hardware/software components`. The ASP is equivalent to a `Board Support Package (BSP)`<sup>[[5]](references.md#ref_bsp)</sup>, which is a set of software layers and an FPGA hardware design used to target the FPGA through the Intel oneAPI DPC++/C++ Compiler.
 
-The compiler converts a oneAPI/SYCL kernel (FPGA application code) into a hardware circuit. 
+ASP is made up of:
+* `RTL Components`: Represent interface logic (host to kernel interface, etc..) to handle kernel control signals and perform Direct Memory Access (DMA).
+* `XML Files`: To describe hardware interfaces and compilation environment.
+* `Scripts`: To control compile flow.
+* `Utilities`: Used to setup and diagnose the board.
 
-
-`oneAPI Accelerator Support Package (ASP)`<sup>[[]](references.md#ref_oneapi_asp_ref)</sup>  consists of hardware components that ensure communication between `hardware circuit` (generated by the oneAPI compiler from a SYCL kernel) with the oneAPI runtime and FPGA board peripherals. ASP is equivalent to a `Board Support Package (BSP)`<sup>[[7]](references.md#ref_bsp)</sup>, which is a set of software layers and an FPGA hardware  design used to target the FPGA through the Intel oneAPI DPC++/C++ Compiler.
-
-ASP is comprised of:
-* `Hardware Components`: Enable the hardware circuit to communicate with the host processor. The hardware components are divided into:
-  * `RTL Components`: Represent interface logic (host to kernel interface, etc..) to handle kernel control signals and perform Direct Memory Access (DMA).
-  * `XML Files`: To describe hardware interfaces and compilation environment.
-  * `Scripts`: To control compile flow.
-* `Software Components`: Enable the runtime to identify and communicate with the kernel. The software components are divided into:
-  * `oneAPI ASP Utilities`: Used to setup and diagnose the board.
-
-Both ASP hardware components and kernels are placend in the `Accelerator Functional Unit (AFU) region`. The AFU is an hardware accelerator implemented in FPGA logic which offloads a computational operation for an application from the CPU to improve performance. 
-
-<p align="center">
-  <img src="img/img_HLD_IntelOFS_Model.png" width="550">
-</p>
+Both ASP hardware components and kernels are placend in the `AFU region`. 
