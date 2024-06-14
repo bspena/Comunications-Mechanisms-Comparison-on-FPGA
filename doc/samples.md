@@ -22,7 +22,7 @@ The `Pipes Sample` has two kernels:
 * `Consumer Kernel`: Reads data from the pipe, performs some work on it, and writes the results to a `SYCL output buffer`.
 
 <p align="center">
-  <img src="img/img_pipes_model.png" width="500">
+  <img src="img/pipes_model.png" width="500">
 </p>
 
 
@@ -45,5 +45,5 @@ The `Memory Channel Sample` has:
 * `Consumer Kernel`: Reads data from device memory, performs some work on it and copies the results back to host memory.
 
 <p align="center">
-  <img src="img/img_memch_model.png" width="800">
+  <img src="img/memch_model.png" width="800">
 </p>

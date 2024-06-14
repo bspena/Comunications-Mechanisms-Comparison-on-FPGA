@@ -2,7 +2,7 @@
 The `Open FPGA Stack (OFS)`<sup>[[1]](references.md#ref_oneapi_asp_ref)</sup> is a set of `hardware platform components` and `open source software`, ensuring a standard and scalable model for AFU and software developers to optimize and reuse their designs.
 
 <p align="center">
-  <img src="img/img_OFS_components.png" width="400">
+  <img src="img/OFS_components.png" width="400">
 </p>
 
 
@@ -11,7 +11,7 @@ The `Open FPGA Stack (OFS)`<sup>[[1]](references.md#ref_oneapi_asp_ref)</sup> is
 `oneAPI` is an open standard `programming model`<sup>[[2]](references.md#ref_oneapi)</sup><sup>[[3]](references.md#ref_oneapi_arch)</sup> , which provides portability and performance across `heterogeneous architectures` (CPUs, GPUs, FPGAs, etc...). It is an implementation of `Khronos SYCL 2020 Specification`<sup>[[4]](references.md#ref_oneapi_sycl)</sup>.
 
 <p align="center">
-  <img src="img/img_oneapi_architecture.png" width="600">
+  <img src="img/oneapi_architecture.png" width="600">
 </p>
 
 A oneAPI platform includes the `host` (the CPU) and `devices` (one or more accelerators); thank to the programming model, is possible to program both, by mixing both `host code` and `device code` in the same source file.

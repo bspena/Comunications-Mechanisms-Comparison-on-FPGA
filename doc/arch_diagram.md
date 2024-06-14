@@ -1,26 +1,25 @@
 # Architectural Diagram
 
+* ASP variant ofs_n6001_iopipes
 <p align="center">
-  <img src="img/img_pipes_base_archd.png" width="1000">
+  <img src="img/pipes_base_archd.png" width="1000">
 </p>
 
+* ASP variant ofs_n6001_iopipes with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
 <p align="center">
-  <img src="img/img_pipes_archd.png" width="1000">
+  <img src="img/pipes_archd.png" width="1000">
 </p>
 
-
+* ASP variant ofs_n6001_usm_iopipes
 <p align="center">
-  <img src="img/img_usm_pipes_base_archd.png" width="1000">
+  <img src="img/usm_pipes_base_archd.png" width="1000">
 </p>
 
-## Diagram Legend <a name="ch_diagram_l"></a>
-* `Box`: Module
-* `Arrow`: Signal
-* `Thick arrow`: Interface
-* `Dashed Arrow`: Struct
-* `Green box`: Module added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
-* `Green arrow`: Signal added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
-* `Thick green arrow`: Interface added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
+* ASP variant ofs_n6001_usm_iopipes with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
+<p align="center">
+  <img src="img/usm_pipes_archd.png" width="1000">
+</p>
+
 
 ## Modules Description <a name="ch_modules"></a>
 * `mem_if_vpt`: Translates virtual addresses into physical addresses (Virtual to Physical Translation - VTP).
@@ -31,7 +30,7 @@
   * `avmm_wr_ack_gen`: Generates ack in order to guarantee the AVMM bus right behaviour.
 * `kernel_wrapper`:
   * `avmm_pipeline_inst`: Pipeline bridge from the kernel to board.qsys. 
-  * `kernel_system`;: Hardware generated from SYCL, it has four interfaces:
+  * `kernel_system`: Hardware generated from SYCL, it has four interfaces:
     * output interrupt line (kernel_irq).
     * AVMM slave CSR interface used to write parameters and commands (e.g. start, busy, pending interrupt, etc).
     * read/write AVMM master interface for each DDR memory bank.
