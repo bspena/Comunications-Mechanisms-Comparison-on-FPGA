@@ -1,17 +1,23 @@
 # Architectural Diagram
 
 <p align="center">
-  <img src="img/img_base_arch_diagram_pipes.png" width="1000">
+  <img src="img/img_pipes_base_archd.png" width="1000">
 </p>
 
 <p align="center">
-  <img src="img/img_arch_diagram_pipes.png" width="1000">
+  <img src="img/img_pipes_archd.png" width="1000">
+</p>
+
+
+<p align="center">
+  <img src="img/img_usm_pipes_base_archd.png" width="1000">
 </p>
 
 ## Diagram Legend <a name="ch_diagram_l"></a>
 * `Box`: Module
 * `Arrow`: Signal
 * `Thick arrow`: Interface
+* `Dashed Arrow`: Struct
 * `Green box`: Module added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
 * `Green arrow`: Signal added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
 * `Thick green arrow`: Interface added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
