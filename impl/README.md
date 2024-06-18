@@ -11,5 +11,5 @@ How to run the python script:
 ```
 
 <p align="center">
-  <img src="../doc/img/img_test_flow.png" width="600">
+  <img src="../doc/img/test_flow.png" width="1000">
 </p>

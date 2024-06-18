@@ -15,7 +15,7 @@
   <img src="img/usm_pipes_base_archd.png" width="1000">
 </p>
 
-* ASP variant ofs_n6001_usm_iopipes with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
+* ASP variant ofs_n6001_usm_iopipes with INCLUDE_UDP_OFFLOAD_ENGINE macro
 <p align="center">
   <img src="img/usm_pipes_archd.png" width="1000">
 </p>
