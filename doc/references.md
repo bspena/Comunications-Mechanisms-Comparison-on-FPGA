@@ -6,6 +6,8 @@
 1. <a id="ref_bsp"></a> [FPGA BSPs and Boards](https://www.intel.com/content/www/us/en/docs/oneapi/programming-guide/2023-0/fpga-bsps-and-boards.html)
 1. <a id="ref_pipes_sample"></a> [oneAPI Pipes Samples](https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/Features/pipes)
 1. <a id="ref_explicit_sample"></a> [oneAPI Explicit Data Movement Sample](https://github.com/oneapi-src/oneAPI-samples/tree/ccd57a1ff0245bf7b09c2a0b84fa35bce9412d88/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/DesignPatterns/explicit_data_movement)
+1. <a id="ref_aspv_pipes"></a> [oneAPI-ASP variant ofs_n6001_iopipes](https://github.com/OFS/oneapi-asp/tree/ofs-2023.2-1/n6001/hardware/ofs_n6001_iopipes)
+1. <a id="ref_aspv_usm_pipes"></a> [oneAPI-ASP variant ofs_n6001_usm_iopipes](https://github.com/OFS/oneapi-asp/tree/ofs-2023.2-1/n6001/hardware/ofs_n6001_usm_iopipes)
 1. <a id="ref_intel_install"></a> [Intel oneAPI Toolkits and Components Installation Guide for Linux* OS with Command LIne](https://www.intel.com/content/www/us/en/docs/oneapi/installation-guide-linux/2023-0/install-with-command-line.html)
 1. <a id="ref_oneapi_asp_get"></a> [oneAPI Accelerator Support Package (ASP): Getting Started User Guide](https://ofs.github.io/ofs-2023.2/hw/common/user_guides/oneapi_asp/ug_oneapi_asp/)
 
@@ -31,3 +33,4 @@
 * [ofs_plat_avalon_mem_if.sv](https://github.com/OFS/ofs-platform-afu-bbb/blob/ofs-2023.2-1/plat_if_develop/ofs_plat_if/src/rtl/base_ifcs/avalon/ofs_plat_avalon_mem_if.sv)
 * [mpf_vtp_svc_ofs_avalon_mem_rdwr.sv](https://github.com/OPAE/intel-fpga-bbb/blob/ofs-2023.2-1/BBB_mpf_vtp/hw/rtl/svc_shims/mpf_vtp_svc_ofs_avalon_mem_rdwr.sv)
 * [mpf_vtp_translate_ofs_avalon_mem_rdwr.sv](https://github.com/OPAE/intel-fpga-bbb/blob/ofs-2023.2-1/BBB_mpf_vtp/hw/rtl/translate/mpf_vtp_translate_ofs_avalon_mem_rdwr.sv)
+* [ofs_plat_avalon_mem_rdwr_if_mux.sv](https://github.com/OFS/ofs-platform-afu-bbb/blob/master/plat_if_develop/ofs_plat_if/src/rtl/base_ifcs/avalon/prims/ofs_plat_avalon_mem_rdwr_if_mux.sv)

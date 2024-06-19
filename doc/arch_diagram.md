@@ -1,21 +1,21 @@
 # Architectural Diagram
 
-* ASP variant ofs_n6001_iopipes
+* ASP variant ofs_n6001_iopipes<sup>[[8]](references.md#ref_aspv_pipes)</sup>
 <p align="center">
   <img src="img/pipes_base_archd.png" width="1000">
 </p>
 
-* ASP variant ofs_n6001_iopipes with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
+* ASP variant ofs_n6001_iopipes<sup>[[8]](references.md#ref_aspv_pipes)</sup> with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
 <p align="center">
   <img src="img/pipes_archd.png" width="1000">
 </p>
 
-* ASP variant ofs_n6001_usm_iopipes
+* ASP variant ofs_n6001_usm_iopipes<sup>[[9]](references.md#ref_aspv_usm_pipes)</sup>
 <p align="center">
   <img src="img/usm_pipes_base_archd.png" width="1000">
 </p>
 
-* ASP variant ofs_n6001_usm_iopipes with INCLUDE_UDP_OFFLOAD_ENGINE macro
+* ASP variant ofs_n6001_usm_iopipes<sup>[[9]](references.md#ref_aspv_usm_pipes)</sup> with INCLUDE_UDP_OFFLOAD_ENGINE macro
 <p align="center">
   <img src="img/usm_pipes_archd.png" width="1000">
 </p>
@@ -25,7 +25,7 @@
 * `mem_if_vpt`: Translates virtual addresses into physical addresses (Virtual to Physical Translation - VTP).
 * `bsp_logic` : Contains the BSP logic.
   * `dma_top`: DMA.
-  * `board`: Wraps the interfaces, especially DDR memory bank on-baord .
+  * `board`: Wraps the interfaces, especially DDR memory bank on-baord.
   * `bsp_host_mem_if_mux`: Inserts special transactions on the AVMM bus (Avalon Memory-Mapped Interface), which are evaluated as interrupt by the host (linux drivers) when *kernel_irq* signal is high.
   * `avmm_wr_ack_gen`: Generates ack in order to guarantee the AVMM bus right behaviour.
 * `kernel_wrapper`:
@@ -34,7 +34,7 @@
     * output interrupt line (kernel_irq).
     * AVMM slave CSR interface used to write parameters and commands (e.g. start, busy, pending interrupt, etc).
     * read/write AVMM master interface for each DDR memory bank.
-    * read/write AVMM master interface for host memory (Shared/Unified Virtual Memroy SVM/USM).
+    * read/write AVMM master interface for host memory (Shared/Unified Virtual Memory SVM/USM).
 
 ## Standars <a name="ch_standards"></a>
 * `Master/Host/Source`: It has read, write, writedata and address signals as output, to specify slave's operations.
