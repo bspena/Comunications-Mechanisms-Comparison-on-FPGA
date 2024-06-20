@@ -11,11 +11,11 @@ The project has the following strcuture:
 * `impl floder`: Contains the project source files.
 
 ## Table of Contents
-1. [Open FPGA Stack ](doc/ofs.md)
-    * [oneAPI](doc/ofs.md#ch_oneapi)
-    * [Accelerator Functional Unit](doc/ofs.md#ch_oneapi_afu)
-        * [oneAPI Accelerator Support Package](doc/ofs.md#ch_oneapi_asp)
-1. [oneAPI Samples](doc/samples.md)    
+1. [Overall Stack ](doc/ofs.md)
+    * [Open FPGA Stack](doc/ofs.md#ch_ofs)
+    * [Accelerator Functional Unit](doc/ofs.md#ch_afu)
+        * [oneAPI Accelerator Support Package](doc/ofs.md#ch_asp)
+1. [Data movement mechanisms](doc/samples.md)    
     * [Pipes](doc/samples.md#ch_pipes)
         * [Pipes Sample](doc/samples.md#ch_pipes_s)
     * [Unified Shared Memory](doc/samples.md#ch_usm)
@@ -26,9 +26,7 @@ The project has the following strcuture:
 1. [Environment Setup](doc/setup.md)
     * [Tools](doc/setup.md#ch_tools)
     * [Manage oneAPI Samples](doc/setup.md#ch_samples)
-1. [Analysis](doc/analysis.md)
-    * [Report Analysis](doc/analysis.md#ch_ra)
-    * [Performance Analysis](doc/analysis.md#ch_pa)
+1. [Performance Analysis](doc/analysis.md)
 1. [References](doc/references.md)
     * [Further References](doc/references.md#fref)
 

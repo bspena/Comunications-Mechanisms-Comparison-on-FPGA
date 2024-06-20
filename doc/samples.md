@@ -1,12 +1,12 @@
-# oneAPI Samples
-In order to compare the two data movement mechanisms, were usaed to two different samples:
+# Data movement mechanisms
+In order to compare the two `data movement mechanisms`, were usaed to two different samples:
 * `Pipes Sample` wich implemets the `pipes abstraction`.
 * `Memory Channel Sample` wich implemets the `unified shared memory abstraction`.
 
 
 
 ## Pipes <a name="ch_pipes"></a>
-A `pipe`<sup>[[6]](references.md#ref_pipes_sample)</sup> is an `unidirectional FIFO data structure` and allows comunication between two `endpoints`, an endpoint can be a kernel or an external I/O on the FPGA. There are three types of pipes:
+A `pipe`<sup>[[3]](references.md#ref_pipes_sample)</sup> is an `unidirectional FIFO data structure` and allows comunication between two `endpoints`, an endpoint can be a kernel or an external I/O on the FPGA. There are three types of pipes:
 * Kernel-Kernel
 * Kernel-I/O
 * I/O-Kernel
@@ -26,9 +26,14 @@ The `Pipes Sample` has two kernels:
 </p>
 
 
+As follows, there is the report:
+<p align="center">
+  <img src="img/pipes_report.png" width="1000">
+</p>
+
 
 ## Unified Shared Memory <a name="ch_usm"></a>
-The `Unified Shared Memory (USM)`<sup>[[7]](references.md#ref_explicit_sample)</sup> provides a C/C++ pointer-based memory management interfaces in SYCL. 
+The `Unified Shared Memory (USM)`<sup>[[4]](references.md#ref_explicit_sample)</sup> provides a C/C++ pointer-based memory management interfaces in SYCL. 
 
 USM provides three types of allocations:
 * `Device allocation`: Allocates device memory through `malloc_device`, accessible from the device.
@@ -46,4 +51,9 @@ The `Memory Channel Sample` has:
 
 <p align="center">
   <img src="img/memch_model.png" width="800">
+</p>
+
+As follows, there is the report:
+<p align="center">
+  <img src="img/memch_report.png" width="550">
 </p>

@@ -1,8 +1,5 @@
 # References
 1. <a id="ref_oneapi_asp_ref"></a> [oneAPI Accelerator Support Package(ASP) Reference Manual: Open FPGA Stack](https://ofs.github.io/ofs-2023.2/hw/common/reference_manual/oneapi_asp/oneapi_asp_ref_mnl/#14-introduction-to-oneapi-on-open-fpga-stackofs)
-1. <a id="ref_oneapi"></a> [Why oneAPI?](https://www.oneapi.io/)
-1. <a id="ref_oneapi_arch"></a> [oneAPI Software Architecture](https://spec.oneapi.io/versions/latest/architecture.html)
-1. <a id="ref_oneapi_sycl"></a> [SYCL - oneAPI Specification](https://spec.oneapi.io/versions/latest/elements/sycl/source/index.html)
 1. <a id="ref_bsp"></a> [FPGA BSPs and Boards](https://www.intel.com/content/www/us/en/docs/oneapi/programming-guide/2023-0/fpga-bsps-and-boards.html)
 1. <a id="ref_pipes_sample"></a> [oneAPI Pipes Samples](https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/Features/pipes)
 1. <a id="ref_explicit_sample"></a> [oneAPI Explicit Data Movement Sample](https://github.com/oneapi-src/oneAPI-samples/tree/ccd57a1ff0245bf7b09c2a0b84fa35bce9412d88/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/DesignPatterns/explicit_data_movement)

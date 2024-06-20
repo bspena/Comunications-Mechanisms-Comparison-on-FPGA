@@ -1,21 +1,21 @@
 # Architectural Diagram
 
-* ASP variant ofs_n6001_iopipes<sup>[[8]](references.md#ref_aspv_pipes)</sup>
+* ASP variant ofs_n6001_iopipes<sup>[[5]](references.md#ref_aspv_pipes)</sup>
 <p align="center">
   <img src="img/pipes_base_archd.png" width="1000">
 </p>
 
-* ASP variant ofs_n6001_iopipes<sup>[[8]](references.md#ref_aspv_pipes)</sup> with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
+* ASP variant ofs_n6001_iopipes<sup>[[5]](references.md#ref_aspv_pipes)</sup> with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
 <p align="center">
   <img src="img/pipes_archd.png" width="1000">
 </p>
 
-* ASP variant ofs_n6001_usm_iopipes<sup>[[9]](references.md#ref_aspv_usm_pipes)</sup>
+* ASP variant ofs_n6001_usm_iopipes<sup>[[6]](references.md#ref_aspv_usm_pipes)</sup>
 <p align="center">
   <img src="img/usm_pipes_base_archd.png" width="1000">
 </p>
 
-* ASP variant ofs_n6001_usm_iopipes<sup>[[9]](references.md#ref_aspv_usm_pipes)</sup> with INCLUDE_UDP_OFFLOAD_ENGINE macro
+* ASP variant ofs_n6001_usm_iopipes<sup>[[6]](references.md#ref_aspv_usm_pipes)</sup> with INCLUDE_UDP_OFFLOAD_ENGINE macro
 <p align="center">
   <img src="img/usm_pipes_archd.png" width="1000">
 </p>
