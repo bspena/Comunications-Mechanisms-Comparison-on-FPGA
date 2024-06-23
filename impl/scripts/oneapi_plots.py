@@ -60,6 +60,7 @@ def plots(latency_pipes, latency_memch,throughput_pipes, throughput_memch):
     ax[0].legend()
     ax[1].legend()
 
+    # Autoformat data lables
     fig.autofmt_xdate()
 
     # Save plot as image
