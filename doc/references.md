@@ -26,6 +26,8 @@
 * [oneAPI Matrix Multiply Sample](https://github.com/oneapi-src/oneAPI-samples/blob/ccd57a1ff0245bf7b09c2a0b84fa35bce9412d88/DirectProgramming/C%2B%2BSYCL_FPGA/ReferenceDesigns/matmul)
 * [oneAPI kernel_args_restrict Sample](https://github.com/oneapi-src/oneAPI-samples/tree/2024.0.0/DirectProgramming/C++SYCL_FPGA/Tutorials/Features/kernel_args_restrict)
 * [OneAPI-ASP n6001](https://github.com/OFS/oneapi-asp/tree/ofs-2023.2-1/n6001)
+* [Avalon-MM Pipeline Bridge](https://www.intel.com/content/www/us/en/docs/programmable/683364/18-1/mm-pipeline-bridge.html)
+* [FIFO Intel FPGA IP User Guide](https://www.intel.com/content/www/us/en/docs/programmable/683522/18-0/user-guide.html)
 * [afu.sv](https://github.com/OFS/oneapi-asp/blob/ofs-2023.2-1/n6001/hardware/ofs_n6001_iopipes/build/rtl/afu.sv)
 * [ofs_plat_avalon_mem_if.sv](https://github.com/OFS/ofs-platform-afu-bbb/blob/ofs-2023.2-1/plat_if_develop/ofs_plat_if/src/rtl/base_ifcs/avalon/ofs_plat_avalon_mem_if.sv)
 * [mpf_vtp_svc_ofs_avalon_mem_rdwr.sv](https://github.com/OPAE/intel-fpga-bbb/blob/ofs-2023.2-1/BBB_mpf_vtp/hw/rtl/svc_shims/mpf_vtp_svc_ofs_avalon_mem_rdwr.sv)

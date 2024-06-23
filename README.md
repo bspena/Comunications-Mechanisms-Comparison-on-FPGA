@@ -14,7 +14,7 @@ The project has the following strcuture:
 1. [Overall Stack ](doc/ofs.md)
     * [Open FPGA Stack](doc/ofs.md#ch_ofs)
     * [Accelerator Functional Unit](doc/ofs.md#ch_afu)
-        * [oneAPI Accelerator Support Package](doc/ofs.md#ch_asp)
+        * [Accelerator Support Package](doc/ofs.md#ch_asp)
 1. [Data movement mechanisms](doc/samples.md)    
     * [Pipes](doc/samples.md#ch_pipes)
         * [Pipes Sample](doc/samples.md#ch_pipes_s)

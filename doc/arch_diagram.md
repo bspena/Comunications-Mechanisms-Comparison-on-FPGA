@@ -22,19 +22,25 @@
 
 
 ## Modules Description <a name="ch_modules"></a>
-* `mem_if_vpt`: Translates virtual addresses into physical addresses (Virtual to Physical Translation - VTP).
-* `bsp_logic` : Contains the BSP logic.
-  * `dma_top`: DMA.
+* `mem_if_vpt/host_mem_if_vtp`: Translates virtual addresses into physical addresses (Virtual to Physical Translation - VTP). It is located on the host memory datapath.
+* `bsp_logic`
+  * `dma_top`: DMA module provides a controller to execute transfers from host to DDR on the board and vice versa.
   * `board`: Wraps the interfaces, especially DDR memory bank on-baord.
   * `bsp_host_mem_if_mux`: Inserts special transactions on the AVMM bus (Avalon Memory-Mapped Interface), which are evaluated as interrupt by the host (linux drivers) when *kernel_irq* signal is high.
   * `avmm_wr_ack_gen`: Generates ack in order to guarantee the AVMM bus right behaviour.
 * `kernel_wrapper`:
-  * `avmm_pipeline_inst`: Pipeline bridge from the kernel to board.qsys. 
+  * `avmm_pipeline_inst`: Pipeline bridge from the kernel to board. 
+  * `kernel_cra_avalon_mm_bridge_s10`: Pipeline bridge from board to the kernel.
+  * `kernel_mem_acl_avalon_mm_bridge_s10`: Pipeline bridge from kernel to host_mem_if_vtp.
   * `kernel_system`: Hardware generated from SYCL, it has four interfaces:
     * output interrupt line (kernel_irq).
     * AVMM slave CSR interface used to write parameters and commands (e.g. start, busy, pending interrupt, etc).
     * read/write AVMM master interface for each DDR memory bank.
     * read/write AVMM master interface for host memory (Shared/Unified Virtual Memory SVM/USM).
+  * `usm_burstcnt_buffer/usm_avmm_buffer`: Single-clock FIFO functions used for data buffering.
+* `udp_offload_engine`: Allow transmitting UDP/IP packets over HSSI.
+* `ofs_plat_avalon_mem_if_to_rdwr_if`: Convert kernel_svm AVMM interface into host_mem_if.
+* `ofs_plat_avalon_mem_if_async_shim`: Clock crossing bridge for the Avalon memory interface.
 
 ## Standars <a name="ch_standards"></a>
 * `Master/Host/Source`: It has read, write, writedata and address signals as output, to specify slave's operations.
