@@ -1,4 +1,4 @@
-How to run the python script:
+# How to run
 1. Set sample name and indipendent factors in `test_list.csv`.
 1. Set configuration variables in `oneapi_test_config.py`. 
 1. Set environment variables

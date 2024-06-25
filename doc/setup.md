@@ -8,12 +8,12 @@ Virtual machine running `Ubuntu 22.04 LTS` :
 ## Tools <a name="ch_tools"></a>
 ### Intel oneAPI BAse Toolkit 2024.0.1
 * [Download](https://registrationcenter-download.intel.com/akdlm/IRC_NAS/163da6e4-56eb-4948-aba3-debcec61c064/l_BaseKit_p_2024.0.1.46.sh)
-* Install<sup>[[7]](references.md#ref_intel_install)</sup>:
+* Install<sup>[[11]](references.md#ref_intel_install)</sup>:
 ```bash
 sudo sh ./l_BaseKit_p_2024.0.1.46.sh -a --silent --eula accept
 ```
 
-### OneAPI ASP OFS 2023.2-1
+### oneAPI ASP OFS 2023.2-1
 ```bash
 git clone --branch ofs-2023.2-1 https://github.com/OFS/oneapi-asp.git
 ```
@@ -32,7 +32,7 @@ sudo apt install cmake
 ```
 
 ## Manage oneAPI Samples <a name="ch_samples"></a>
-* Clone samples repository<sup>[[8]](references.md#ref_oneapi_asp_get)</sup>:
+* Clone samples repository<sup>[[12]](references.md#ref_oneapi_asp_get)</sup>:
 ```bash
 git clone --branch 2024.0.0 https://github.com/oneapi-src/oneAPI-samples.git
 ```

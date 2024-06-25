@@ -1,11 +1,11 @@
-# Data movement mechanisms
-In order to compare the two `data movement mechanisms`, were usaed to two different samples:
-* `Pipes Sample` wich implemets the `pipes abstraction`.
-* `Memory Channel Sample` wich implemets the `unified shared memory abstraction`.
+# Data Movement Mechanisms
+In order to compare the two `data movement mechanisms`, were used to two different samples:
+* `Pipes Sample` wich implemets the `Pipes abstraction`.
+* `Memory Channel Sample` wich implemets the `Unified Shared Memory`.
 
 
 
-## Pipes <a name="ch_pipes"></a>
+## Pipes Abstraction <a name="ch_pipes"></a>
 A `pipe`<sup>[[3]](references.md#ref_pipes_sample)</sup> is an `unidirectional FIFO data structure` and allows comunication between two `endpoints`, an endpoint can be a kernel or an external I/O on the FPGA. There are three types of pipes:
 * Kernel-Kernel
 * Kernel-I/O
