@@ -1,5 +1,5 @@
 # Data Movement Mechanisms
-In order to compare the two `data movement mechanisms`, were used to two different samples:
+In order to compare the performance of the two `data movement mechanisms`, were used to two different samples:
 * `Pipes Sample` wich implemets the `Pipes abstraction`.
 * `Memory Channel Sample` wich implemets the `Unified Shared Memory`.
 

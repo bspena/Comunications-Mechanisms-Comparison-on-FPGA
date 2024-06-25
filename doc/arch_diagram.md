@@ -62,13 +62,13 @@ As follows, the architectural diagrams of `ofs_n6001_iopipes`<sup>[[1]](referenc
     * AVMM slave CSR interface used to write parameters and commands (e.g. start, busy, pending interrupt, etc).
     * read/write AVMM master interface for each DDR memory bank.
     * read/write AVMM master interface for host memory (Shared/Unified Virtual Memory SVM/USM).
-  * `usm_burstcnt_buffer/usm_avmm_buffer`: Single-clock FIFO functions used for data buffering.
+  * `usm_burstcnt_buffer/usm_avmm_buffer`: Single-clock FIFO functions<sup>[[8]](references.md#ref_scfifo)</sup> used for data buffering.
 * `udp_offload_engine`: Allow transmitting UDP/IP packets over HSSI.
 * `ofs_plat_avalon_mem_if_to_rdwr_if`: Convert kernel_svm AVMM interface into host_mem_if.
 * `ofs_plat_avalon_mem_if_async_shim`: AVMM Clock Crossing Bridge for the Avalon memory interface.
 
 
 ## Terminology <a name="ch_term"></a>
-* `Avalon Memory-Mapped Interface`<sup>[[8]](references.md#ref_avmm)</sup>: Implement read and write interfaces for Host (master) and Agent (slave) components.
-* `Avalon-MM Pipeline Bridge`<sup>[[9]](references.md#ref_avmm_pipebridge)</sup>: accepts commands on its slave port and propagates the commands to its master port, providing parameters to turn on pipelining for command and response signals.
-* `Avalon‑MM Clock Crossing Bridge`<sup>[[10]](references.md#ref_avmm_clockbridge)</sup>: transfers commands and responses between different clock domains.
+* `Avalon Memory-Mapped Interface`<sup>[[9]](references.md#ref_avmm)</sup>: Implement read and write interfaces for Host (master) and Agent (slave) components.
+* `Avalon-MM Pipeline Bridge`<sup>[[10]](references.md#ref_avmm_pipebridge)</sup>: Accepts commands on its slave port and propagates the commands to its master port, providing parameters to turn on pipelining for command and response signals.
+* `Avalon‑MM Clock Crossing Bridge`<sup>[[11]](references.md#ref_avmm_clockbridge)</sup>: Transfers commands and responses between different clock domains.
