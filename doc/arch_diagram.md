@@ -12,38 +12,27 @@
 * `Box`: Module
 * `Arrow`: Signal
 * `Thick arrow`: Interface
-* `Green box`: Module added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
-* `Green arrow`: Signal added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
-* `Thick green arrow`: Interface added with INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
+* `Green box`: Module added using the INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
+* `Green arrow`: Signal added using the INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
+* `Thick green arrow`: Interface added using the INCLUDE_UDP_OFFLOAD_ENGINE and INCLUDE_USM_SUPPORT macros
 
-## Modules Description <a name="ch_modules"></a>
-* `mem_if_vpt`: Translates virtual addresses into physical addresses (Virtual to Physical Translation - VTP).
-* `bsp_logic` : Contains the BSP logic.
-  * `dma_top`: DMA.
-  * `board`: Wraps the interfaces, especially DDR memory bank on-baord .
-  * `bsp_host_mem_if_mux`: Inserts special transactions on the AVMM bus (Avalon Memory-Mapped Interface), which are evaluated as interrupt by the host (linux drivers) when *kernel_irq* signal is high.
-  * `avmm_wr_ack_gen`: Generates ack in order to guarantee the AVMM bus right behaviour.
+## Module Descriptions <a name="ch_modules"></a>
+* `mem_if_vpt`: Translates virtual addresses to physical addresses (Virtual to Physical Translation - VTP).
+* `bsp_logic`: Contains BSP logic.
+  * `dma_top`: Manages DMA.
+  * `board`: Wraps interfaces, especially the onboard DDR memory bank.
+  * `bsp_host_mem_if_mux`: Inserts special transactions on the AVMM bus (Avalon Memory-Mapped Interface) which are evaluated as interrupts by the host (Linux drivers) when the *kernel_irq* signal is high.
+  * `avmm_wr_ack_gen`: Generates an acknowledgment to ensure correct AVMM bus behavior.
 * `kernel_wrapper`:
-  * `avmm_pipeline_inst`: Pipeline bridge from the kernel to board.qsys. 
-  * `kernel_system`;: Hardware generated from SYCL, it has four interfaces:
-    * output interrupt line (kernel_irq).
-    * AVMM slave CSR interface used to write parameters and commands (e.g. start, busy, pending interrupt, etc).
-    * read/write AVMM master interface for each DDR memory bank.
-    * read/write AVMM master interface for host memory (Shared/Unified Virtual Memroy SVM/USM).
+  * `avmm_pipeline_inst`: Pipeline bridge between the kernel and board.qsys.
+  * `kernel_system`: Hardware generated from SYCL, which includes four interfaces:
+    * Output interrupt line (*kernel_irq*).
+    * AVMM slave CSR interface for writing parameters and commands (e.g., start, busy, pending interrupt, etc.).
+    * Read/write AVMM master interface for each DDR memory bank.
+    * Read/write AVMM master interface for host memory (Shared/Unified Virtual Memory SVM/USM).
 
-## Standars <a name="ch_standards"></a>
-* `Master/Host/Source`: It has read, write, writedata and address signals as output, to specify slave's operations.
-* `Slave/Agent/Sink`: It has waitrequest, readdatavalid, readdata, writeresponsevalid signals as output.
-* `to_sink/to_slave`: SystemVerilog mopdport identifier, used to identify the connection from source toward sink (the current module is the source).
-* `to_source/to_master`: SystemVerilog mopdport identifier, used to identify the connection from sink toward source (the current module is the sink).
-
-
-# n6001 vs n6001_iopipes
-* afu.sv
-  * Manca il modulo udp_offload_engine ed il relativo #ifdef 
-  * Nell'istanza del modulo kernel_wrapper, manca l'#ifdef con la macro INCLUDE_USM_SUPPORT
-* bsp_logic.sv / kernel_wrapper.sv
-  * Manca l'#ifdef con la macro INCLUDE_UDP_OFFLOAD_ENGINE
-
-
-
+## Standards <a name="ch_standards"></a>
+* `Master/Host/Source`: Outputs read, write, writedata, and address signals to specify slave operations.
+* `Slave/Agent/Sink`: Outputs waitrequest, readdatavalid, readdata, and writeresponsevalid signals.
+* `to_sink/to_slave`: SystemVerilog modport identifier, used to indicate the connection from source to sink (where the current module is the source).
+* `to_source/to_master`: SystemVerilog modport identifier, used to indicate the connection from sink to source (where the current module is the sink).

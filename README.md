@@ -27,23 +27,5 @@ The project has the following strcuture:
 1. [Implementation in Detail](impl/README.md)
     * [How to Run](impl/README.md#ch_run)
     * [Python Script Control Flow](impl/README.md#ch_flow_control)
-1. [Troubleshooting](doc/troubleshooting.md)
 1. [References](doc/references.md)
     * [Further References](doc/references.md#fref)
-
-
-# Cose da fare
-* Progettare gli esperimenti
-    * Confronto tra meccanismi di comunicazione tra kernel producer e consumer 
-        * Pipe
-        * Memoria device --> i dati sono inviati usando la memoria del device
-    * Fattori
-        * dimensioni del pacchetto (per pipes e memory_channel): 2^0,....,2^15
-        * nmero di ripetizioni : 10
-    * Variabili di risposta
-        * latenza (numero di pacchetti)
-        * throughput (numero di pacchetti/s)
-
-* Fare gli esperimenti
-
-* Vedere nell'RTL generato (ProducerConsumerPipedId) come sono implementate le interfacce (producer,consumer e pipe) e sviluppare un diagramma
