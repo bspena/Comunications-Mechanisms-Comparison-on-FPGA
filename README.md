@@ -1,5 +1,5 @@
-# Comparison between two comunication mechanisms used to transfer data between SYCL kernels on Intel FPGAs
-The project aims at analysing and evaluating the implementation of `two comunication mechanisms`:
+# Comparison between two communication mechanisms used to transfer data between SYCL kernels on Intel FPGAs
+The project aims at analysing and evaluating the implementation of `two communication mechanisms`:
 * `Pipe`
 * `Unified Shared Memory (USM) device allocation`
 
